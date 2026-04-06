@@ -1,0 +1,104 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.auth-container {
+  @include flex-center();
+  justify-content: center;
+  background-color: $bg-page;
+  min-height: 100svh;
+  width: 100%;
+  padding: 2rem;
+}
+
+app-card {
+  @include flex-column();
+  width: 420px;
+
+  h2 {
+    @include flex-center();
+    justify-content: center;
+    margin-bottom: 32px;
+    gap: 16px;
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(2px 2px 0px $ink);
+    }
+  }
+
+  .form-field-container {
+    @include flex-column();
+    position: relative;
+    margin-bottom: 24px;
+    width: 100%;
+
+    input {
+      @include neubrutal-input();
+    }
+
+    .show-password-button {
+      position: absolute;
+      right: 16px;
+      top: 6px;
+    }
+  }
+
+  .divider {
+    @include flex-center();
+    margin: 24px 0;
+    color: $ink;
+    width: 100%;
+    font-weight: 800;
+
+    color: $gray;
+    font-size: 16px;
+    font-weight: 500;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: $ink;
+    }
+
+    span {
+      padding: 0 16px;
+    }
+  }
+
+  .google-button {
+    margin-bottom: 32px;
+  }
+
+  .bottom-text {
+    @include flex-center();
+    gap: 8px;
+    justify-content: center;
+    font-weight: 600;
+    margin-top: 32px;
+
+    strong {
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: 900;
+      transition: $transition-main;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

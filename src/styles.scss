@@ -1,0 +1,28 @@
+@use 'styles/variables' as *;
+@use 'styles/fonts' as *;
+@use 'styles/form.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: 'Geom', 'Helvetica', sans-serif;
+  background-color: $bg-page;
+  scroll-behavior: smooth;
+  font-style: normal;
+  font-weight: 400;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}

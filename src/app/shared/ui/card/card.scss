@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+.neubrutal-card {
+  background-color: $bg-page;
+  color: $ink;
+  border: $brutal-border solid $ink;
+  border-radius: 32px;
+  box-shadow: 8px 8px 0px 0px $ink;
+
+  @media (max-width: 480px) {
+    box-shadow: 6px 6px 0px 0px $ink;
+    border-radius: 24px;
+  }
+}

@@ -1,0 +1,21 @@
+@use 'variables' as *;
+
+:host {
+  display: flex;
+  width: 100%;
+  min-height: 100dvh;
+
+  @media (max-width: 660px) {
+    flex-direction: column;
+  }
+}
+
+main {
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+
+  @media (max-width: 660px) {
+    padding: 16px;
+  }
+}
