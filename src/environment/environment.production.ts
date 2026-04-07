@@ -1,12 +1,12 @@
 export const environment = {
 	production: true,
 	firebase: {
-		apiKey: 'AIzaSyAvE_r3icCatjoIFeEl6GPy90XYdY2swYk',
-		authDomain: 'autolog-c9d1f.firebaseapp.com',
-		projectId: 'autolog-c9d1f',
-		storageBucket: 'autolog-c9d1f.firebasestorage.app',
-		messagingSenderId: '666203278286',
-		appId: '1:666203278286:web:c12ef5b12f6884957bb99f',
+		apiKey: 'AIzaSyAbBA1k6o9wPL7e13PZVC1fNfDZ7VfMRxA',
+		authDomain: 'vroomie-e602e.firebaseapp.com',
+		projectId: 'vroomie-e602e',
+		storageBucket: 'vroomie-e602e.firebasestorage.app',
+		messagingSenderId: '956316730523',
+		appId: '1:956316730523:web:4843c2a5220e0b0c68b23e',
 	},
 	cloudinary: {
 		cloudName: 'dvgrkgwgs',

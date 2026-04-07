@@ -1,59 +1,131 @@
-# Vroomie
+## Название проекта: Vroomie
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+## Тип приложения: Web Single Page Application (SPA), Mobile-first подход.
 
-## Development server
+### 1. Описание проблемы и решения
 
-To start a local development server, run:
+Проблема: Автовладельцам сложно систематизировать историю ремонтов, планировать будущее обслуживание, хранить чеки/фотографии запчастей и ссылки на полезные материалы в одном месте.
 
-```bash
-ng serve
+Решение: Vroomie — это цифровой гараж. Приложение позволяет пользователям регистрироваться, добавлять свои автомобили, вести подробный лог выполненных работ (с ценами, пробегом и фото) и создавать список запланированных ремонтов (с прикреплением ссылок на запчасти и видео-инструкции).
+
+### 2. Технологический стек
+
+- Фреймворк: Angular 21 (Standalone components, Signals для локального стейта).
+- Управление состоянием (Global State): NgRx (Store, Effects, Entity).
+- Реактивность: RxJS.
+- Аутентификация: Firebase Authentication (Email/Password, Google Auth).
+- База данных: Firebase Firestore (NoSQL).
+- Хранилище медиа: Cloudinary (хранение изображений автомобилей и чеков/запчастей). Примечание: в Firestore сохраняются только URL-адреса изображений из Cloudinary.
+- Инструментарий: Biome (быстрый линтинг и форматирование кода).
+
+### 3. Основные сущности и функционал MVP
+
+#### Модуль "Авторизация" (Auth):
+
+- Регистрация, вход, сброс пароля.
+- Защита роутов (AuthGuard) для неавторизованных пользователей.
+
+#### Модуль "Гараж" (Garage):
+
+- Просмотр: Список автомобилей пользователя (карточки с фото и базовой инфой).
+- Добавление/Редактирование автомобиля:
+- Поля: Марка, Модель, Год выпуска, Тип кузова, VIN-номер.
+- Медиа: Загрузка главного фото автомобиля.
+
+#### Модуль "История и Планы" (Service History & Plans):
+
+У каждого автомобиля есть своя изолированная лента событий, разделенная на две категории:
+
+История (Done):
+
+- Поля: Название работ, Дата, Показания одометра, Итоговая стоимость, Описание.
+- Медиа: Возможность загрузить несколько фото (чеки, старые/новые запчасти).
+
+Планы (To-Do):
+
+- Поля: Название планируемых работ, Ожидаемый пробег/дата (опционально), Описание.
+- Медиа/Ссылки: URL на YouTube-видео по замене, URL на покупку запчастей в магазинах.
+
+Действие: Кнопка "Перевести в Историю" (при завершении ремонта открывает модалку для ввода финальной цены, реальной даты и фото).
+
+### 4. Вектор развития (V2 - Задел на будущее)
+
+Добавление системы "Друзья" (поиск по email/ID).
+
+Уровни приватности (возможность сделать гараж публичным для друзей, чтобы они могли читать историю ремонтов).
+
+## Структура базы данных
+
+```
+users/{userId}
+{
+  "uid": "string",
+  "email": "string",
+  "displayName": "string",
+  "photoURL": "string",
+  "createdAt": "timestamp",
+  "friends": ["userId1", "userId2"]
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+cars/{carId}
+{
+  "id": "string",
+  "ownerId": "string",      // id владельца
+  "make": "string",         // марка
+  "model": "string",        // модель
+  "year": "number",         // год выпуска
+  "boughtDate": "timestamp" // дата приобретения
+  "bodyType": "string",     // тип кузова (BodyTypes будет лежать локально на фронте в константе)
+  "vin": "string",          // VIN-номер
+  "currentOdometer": "number" // текущее показание одометра (может обновляться вручную или по последним ремонтам)
+  "photoUrl": "string",     // ссылка на картинку
+  "lastServiceDate": "timestamp" // дата последнего ремонта
+  "createdAt": "timestamp"  // дата добавления в гараж
+}
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+```
+repairRecords/{recordId} {
+  "id": "string",
+  "carId": "string",
+  "ownerId": "string",
+  "categoryId": "string",
+  "categoryName": "string",     // "Замена радиатора" -> будут браится из отдельной таблицы
+  "notes": "string",          // Текстовые заметки
+  "odometer": "number",
+  "totalCost": "number",
+  "currency": "string",       // "USD", "RUB", "EUR"
+  "photoUrls": ["string"],    // Массив URL из Cloudinary
+  "completedAt": "timestamp", // дата ремонта
+  "createdAt": "timestamp"    // дата добавления записи
+}
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
+```
+plans/{planId} {
+  "id": "string",
+  "carId": "string",
+  "ownerId": "string",
+  "categoryId": "string",   // категория ремонта
+  "notes": "string",        // Текстовые заметки
+  "priority": "number"      // приоритет планирования ремонта (0-3)
+  "photoUrls": ["string"],  // Массив URL из Cloudinary
+  "links": [
+    {
+      "url": "string",
+      "title": "string", // Например: "Радиатор на Exist"
+      "type": "string"   // 'part' | 'video' | 'other'
+    }
+  ],
+  "createdAt": "timestamp"  // дата добавления записи
+}
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+repairCategory/{categoryId} {
+  "id": "string",
+  "name": "string", // наименование категории ремонта (все названия записей ремонтов будут выбираться из этой таблицы + есть возможность добавлять записи)
+}
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
