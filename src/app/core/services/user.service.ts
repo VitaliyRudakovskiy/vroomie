@@ -109,9 +109,8 @@ export class UserService {
 			email: user.email ?? '',
 			displayName: user.displayName ?? 'New user',
 			photoUrl: user.photoURL ?? null,
-			status: '',
 			createdAt: serverTimestamp() as Timestamp,
-			updatedAt: serverTimestamp() as Timestamp,
+			friends: [],
 		};
 	}
 }

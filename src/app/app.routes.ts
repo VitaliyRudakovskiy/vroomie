@@ -6,7 +6,7 @@ import { MainLayout } from './layout/main-layout';
 export const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'home',
+		redirectTo: 'garage',
 		pathMatch: 'full',
 	},
 	{
@@ -15,28 +15,20 @@ export const routes: Routes = [
 		canActivate: [authGuard],
 		children: [
 			{
-				path: 'home',
-				loadComponent: () => import('./features/home/home').then((m) => m.Home),
+				path: 'garage',
+				loadComponent: () => import('./features/garage/garage').then((m) => m.Garage),
 			},
 			{
-				path: 'pair',
-				loadComponent: () => import('./features/pair/pair').then((m) => m.Pair),
+				path: 'services',
+				loadComponent: () => import('./features/services/services').then((m) => m.Services),
 			},
 			{
-				path: 'friends',
-				loadComponent: () => import('./features/friends/friends').then((m) => m.Friends),
-			},
-			{
-				path: 'chat',
-				loadComponent: () => import('./features/chat/chat').then((m) => m.Chat),
+				path: 'plans',
+				loadComponent: () => import('./features/plans/plans').then((m) => m.Plans),
 			},
 			{
 				path: 'profile',
 				loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
-			},
-			{
-				path: 'settings',
-				loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
 			},
 		],
 	},
@@ -46,6 +38,6 @@ export const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'home',
+		redirectTo: 'garage',
 	},
 ];

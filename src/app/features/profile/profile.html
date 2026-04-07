@@ -46,29 +46,10 @@
 					{{ profileForm.name().errors()[0].message }}
 				</p>
 			}
-			@if (editingField() === 'status') {
-				<textarea
-					#userStatus
-					class="edit-status"
-					[formField]="profileForm.status"
-					[style.width.px]="textareaSize()?.width"
-					[style.height.px]="textareaSize()?.height"
-					(blur)="stopEditing('status')"
-					(keydown.enter)="stopEditing('status')"
-				></textarea>
-			} @else {
-				<p
-					#userStatusText
-					class="profile-info__status"
-					role="button"
-					tabindex="-1"
-					(click)="startEditing('status')"
-				>
-					{{ profileModel().status || 'Add status' }}
-				</p>
-			}
 		</div>
 	</div>
+
+	<app-button label="Logout" (clicked)="logout()" />
 
 	<app-button
 		label="Save"

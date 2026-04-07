@@ -10,6 +10,6 @@ export const environment = {
 	},
 	cloudinary: {
 		cloudName: 'dvgrkgwgs',
-		uploadPreset: 'Avatar-preset',
+		uploadPreset: 'unsigned-preset',
 	},
 };

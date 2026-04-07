@@ -23,6 +23,8 @@ import { TEXTAREA_SIZE } from '@shared/constants/textarea-size';
 import { Button, ConfirmModal, Loader } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
 import type { EditingField, ProfileForm, TextareaSize } from './types';
+import { AuthService } from '@core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-profile',
@@ -31,8 +33,10 @@ import type { EditingField, ProfileForm, TextareaSize } from './types';
 	styleUrl: './profile.scss',
 })
 export class Profile {
+	private readonly router = inject(Router);
 	private readonly logger = inject(LoggerService);
 	private readonly userService = inject(UserService);
+	private readonly authService = inject(AuthService);
 	private readonly notificator = inject(NotificationService);
 	private readonly cloudinaryService = inject(CloudinaryService);
 
@@ -52,7 +56,6 @@ export class Profile {
 	defaultForm = signal<ProfileForm | null>(null);
 	profileModel = signal<ProfileForm>({
 		name: '',
-		status: '',
 	});
 
 	hasNameError = computed(
@@ -81,12 +84,20 @@ export class Profile {
 
 			const profileData = {
 				name: user.displayName,
-				status: user.status ?? '',
 			};
 
 			this.defaultForm.set(profileData);
 			this.profileModel.set(profileData);
 		});
+	}
+
+	async logout(): Promise<void> {
+		try {
+			await this.authService.logout();
+			this.router.navigate(['auth']);
+		} catch (err) {
+			console.error('Logout failed', err);
+		}
 	}
 
 	async onRemoveAvatar(): Promise<void> {
@@ -151,7 +162,6 @@ export class Profile {
 		try {
 			this.userService.updateUserProfile({
 				displayName: this.profileForm.name().value(),
-				status: this.profileForm.status().value(),
 			});
 			this.notificator.success('Success', 'Profile updated!');
 		} catch (error: unknown) {
@@ -166,36 +176,17 @@ export class Profile {
 		const initial = this.defaultForm();
 		const current = {
 			name: this.profileForm.name().value(),
-			status: this.profileForm.status().value(),
 		};
 
-		return initial?.name !== current.name || initial.status !== current.status;
+		return initial?.name !== current.name;
 	}
 
 	startEditing(field: EditingField): void {
-		if (field === 'status') {
-			const statusSize = this.userStatusText()?.nativeElement.getBoundingClientRect();
-
-			this.textareaSize.set({
-				width: statusSize?.width ?? TEXTAREA_SIZE.width,
-				height: statusSize?.height ?? TEXTAREA_SIZE.height,
-			});
-		}
-
 		this.editingField.set(field);
 
 		setTimeout(() => {
 			if (field === 'name') {
 				this.userName()?.nativeElement.focus();
-			}
-
-			if (field === 'status') {
-				const textarea = this.userStatus()?.nativeElement;
-				if (!textarea) {
-					return;
-				}
-
-				textarea.focus();
 			}
 		});
 	}
