@@ -1,0 +1,21 @@
+@use 'mixins' as *;
+
+:host {
+	@include flex-column();
+	flex: 1;
+}
+
+.garage-section {
+	@include flex-column();
+	flex: 1;
+
+	.main-content {
+		@include flex-column();
+		flex: 1;
+	}
+
+	.add-car-button {
+		display: flex;
+		justify-content: flex-end;
+	}
+}

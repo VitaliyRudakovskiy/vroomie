@@ -1,13 +1,14 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 :host {
-	display: flex;
-	flex-direction: column;
+	@include flex-column();
 	width: 100%;
 	min-height: 100dvh;
 }
 
 main {
+	@include flex-column();
 	flex: 1;
 	min-width: 0;
 	padding: 24px;
