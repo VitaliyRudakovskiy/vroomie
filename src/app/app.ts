@@ -3,11 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { Notification } from '@core/notification/notification';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, Notification],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+	selector: 'app-root',
+	imports: [RouterOutlet, Notification],
+	templateUrl: './app.html',
+	styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('vroomie');
+	protected readonly title = signal('vroomie');
 }

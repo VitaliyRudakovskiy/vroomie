@@ -1,91 +1,88 @@
 @let avatar = userAvatarDetails();
 
 <section class="profile-page">
-  <div class="top-section">
-    <div class="avatar-container" [class.loading]="photoLoading()">
-      <input
-        #fileInput
-        class="select-photo-input"
-        type="file"
-        [accept]="AVAILABLE_FORMATS"
-        (change)="onFileSelected($event)"
-      />
+	<div class="top-section">
+		<div class="avatar-container" [class.loading]="photoLoading()">
+			<input
+				#fileInput
+				class="select-photo-input"
+				type="file"
+				[accept]="AVAILABLE_FORMATS"
+				(change)="onFileSelected($event)"
+			/>
 
-      @if (photoLoading()) {
-        <app-loader />
-      }
+			@if (photoLoading()) {
+				<app-loader />
+			}
+			@if (avatar?.isImage) {
+				<img class="avatar" [src]="avatar?.details" alt="user avatar" />
+				<div tabindex="-1" role="button" class="overlay delete-mode" (click)="onOpenConfirmModal()">
+					<img class="icon" src="/assets/icons/delete.svg" alt="delete avatar icon" />
+				</div>
+			} @else {
+				<div class="avatar default-bg">{{ avatar?.details }}</div>
+				<div tabindex="-1" role="button" class="overlay add-mode" (click)="onAddAvatar()">
+					<span class="icon">+</span>
+				</div>
+			}
+		</div>
 
-      @if (avatar?.isImage) {
-        <img class="avatar" [src]="avatar?.details" alt="user avatar" />
-        <div tabindex="-1" role="button" class="overlay delete-mode" (click)="onOpenConfirmModal()">
-          <img class="icon" src="/assets/icons/delete.svg" alt="delete avatar icon" />
-        </div>
-      } @else {
-        <div class="avatar default-bg">{{ avatar?.details }}</div>
-        <div tabindex="-1" role="button" class="overlay add-mode" (click)="onAddAvatar()">
-          <span class="icon">+</span>
-        </div>
-      }
-    </div>
+		<div class="profile-info">
+			@if (editingField() === 'name') {
+				<input
+					#userName
+					class="edit-name"
+					[formField]="profileForm.name"
+					(blur)="stopEditing('name')"
+					(keydown.enter)="stopEditing('name')"
+				/>
+			} @else {
+				<h1 class="profile-info__name" role="button" tabindex="-1" (click)="startEditing('name')">
+					{{ profileModel().name || 'Input name' }}
+				</h1>
+			}
+			@if (hasNameError()) {
+				<p class="form-error" [class.visible]="hasNameError()">
+					{{ profileForm.name().errors()[0].message }}
+				</p>
+			}
+			@if (editingField() === 'status') {
+				<textarea
+					#userStatus
+					class="edit-status"
+					[formField]="profileForm.status"
+					[style.width.px]="textareaSize()?.width"
+					[style.height.px]="textareaSize()?.height"
+					(blur)="stopEditing('status')"
+					(keydown.enter)="stopEditing('status')"
+				></textarea>
+			} @else {
+				<p
+					#userStatusText
+					class="profile-info__status"
+					role="button"
+					tabindex="-1"
+					(click)="startEditing('status')"
+				>
+					{{ profileModel().status || 'Add status' }}
+				</p>
+			}
+		</div>
+	</div>
 
-    <div class="profile-info">
-      @if (editingField() === 'name') {
-        <input
-          #userName
-          class="edit-name"
-          [formField]="profileForm.name"
-          (blur)="stopEditing('name')"
-          (keydown.enter)="stopEditing('name')"
-        />
-      } @else {
-        <h1 class="profile-info__name" role="button" tabindex="-1" (click)="startEditing('name')">
-          {{ profileModel().name || 'Input name' }}
-        </h1>
-      }
-
-      @if (hasNameError()) {
-        <p class="form-error" [class.visible]="hasNameError()">
-          {{ profileForm.name().errors()[0].message }}
-        </p>
-      }
-
-      @if (editingField() === 'status') {
-        <textarea
-          #userStatus
-          class="edit-status"
-          [formField]="profileForm.status"
-          [style.width.px]="textareaSize()?.width"
-          [style.height.px]="textareaSize()?.height"
-          (blur)="stopEditing('status')"
-          (keydown.enter)="stopEditing('status')"
-        ></textarea>
-      } @else {
-        <p
-          #userStatusText
-          class="profile-info__status"
-          role="button"
-          tabindex="-1"
-          (click)="startEditing('status')"
-        >
-          {{ profileModel().status || 'Add status' }}
-        </p>
-      }
-    </div>
-  </div>
-
-  <app-button
-    label="Save"
-    [disabled]="!hasChanges() || profileForm().invalid()"
-    [loading]="loading()"
-    (clicked)="saveUserProfile()"
-  />
+	<app-button
+		label="Save"
+		[disabled]="!hasChanges() || profileForm().invalid()"
+		[loading]="loading()"
+		(clicked)="saveUserProfile()"
+	/>
 </section>
 
 <app-confirm-modal
-  modalTitle="Delete avatar"
-  description="Are you sure you want to delete your profile picture?"
-  [visible]="isConfirmModalOpen()"
-  [loading]="deleteLoading()"
-  (confirm)="onRemoveAvatar()"
-  (cancelEvent)="onCloseConfirmModal()"
+	modalTitle="Delete avatar"
+	description="Are you sure you want to delete your profile picture?"
+	[visible]="isConfirmModalOpen()"
+	[loading]="deleteLoading()"
+	(confirm)="onRemoveAvatar()"
+	(cancelEvent)="onCloseConfirmModal()"
 />

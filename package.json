@@ -1,41 +1,42 @@
 {
-  "name": "vroomie",
-  "version": "1.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "check": "biome check ./src",
-    "check:fix": "biome check --write --unsafe ./src",
-    "format": "biome format --write ./src",
-    "lint": "biome lint ./src"
-  },
-  "private": true,
-  "packageManager": "bun@1.3.2",
-  "dependencies": {
-    "@angular/common": "^21.2.0",
-    "@angular/compiler": "^21.2.0",
-    "@angular/core": "^21.2.0",
-    "@angular/fire": "^20.0.1",
-    "@angular/forms": "^21.2.0",
-    "@angular/platform-browser": "^21.2.0",
-    "@angular/router": "^21.2.0",
-    "@ngrx/effects": "^21.1.0",
-    "@ngrx/store": "^21.1.0",
-    "@ngrx/store-devtools": "^21.1.0",
-    "firebase": "^12.11.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "@angular/build": "^21.2.6",
-    "@angular/cli": "^21.2.6",
-    "@angular/compiler-cli": "^21.2.0",
-    "@biomejs/biome": "^2.4.10",
-    "jsdom": "^29.0.1",
-    "typescript": "^6.0.2",
-    "vitest": "^4.0.8"
-  }
+	"name": "vroomie",
+	"version": "1.0.0",
+	"scripts": {
+		"ng": "ng",
+		"start": "ng serve",
+		"build": "ng build",
+		"watch": "ng build --watch --configuration development",
+		"test": "ng test",
+		"check": "biome check ./src",
+		"check:fix": "biome check --write --unsafe ./src && prettier --write \"src/**/*.html\"",
+		"format": "biome format --write ./src && prettier --write \"src/**/*.html\"",
+		"lint": "biome lint ./src"
+	},
+	"private": true,
+	"packageManager": "bun@1.3.2",
+	"dependencies": {
+		"@angular/common": "^21.2.0",
+		"@angular/compiler": "^21.2.0",
+		"@angular/core": "^21.2.0",
+		"@angular/fire": "^20.0.1",
+		"@angular/forms": "^21.2.0",
+		"@angular/platform-browser": "^21.2.0",
+		"@angular/router": "^21.2.0",
+		"@ngrx/effects": "^21.1.0",
+		"@ngrx/store": "^21.1.0",
+		"@ngrx/store-devtools": "^21.1.0",
+		"firebase": "^12.11.0",
+		"rxjs": "~7.8.0",
+		"tslib": "^2.3.0"
+	},
+	"devDependencies": {
+		"@angular/build": "^21.2.6",
+		"@angular/cli": "^21.2.6",
+		"@angular/compiler-cli": "^21.2.0",
+		"@biomejs/biome": "^2.4.10",
+		"jsdom": "^29.0.1",
+		"prettier": "^3.8.1",
+		"typescript": "^6.0.2",
+		"vitest": "^4.0.8"
+	}
 }

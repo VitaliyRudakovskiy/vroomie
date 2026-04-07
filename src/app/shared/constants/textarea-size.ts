@@ -1,4 +1,4 @@
 export const TEXTAREA_SIZE = {
-  width: 300,
-  height: 200,
+	width: 300,
+	height: 200,
 };

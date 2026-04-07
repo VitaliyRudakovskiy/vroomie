@@ -1,26 +1,26 @@
 import {
-  ApplicationConfig,
-  provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
+	type ApplicationConfig,
+	provideBrowserGlobalErrorListeners,
+	provideZonelessChangeDetection,
 } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideRouter } from '@angular/router';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getDatabase, provideDatabase } from '@angular/fire/database';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
-    provideZonelessChangeDetection(),
+	providers: [
+		provideBrowserGlobalErrorListeners(),
+		provideRouter(routes),
+		provideZonelessChangeDetection(),
 
-    // Firebase providers
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideDatabase(() => getDatabase()),
-  ],
+		// Firebase providers
+		provideFirebaseApp(() => initializeApp(environment.firebase)),
+		provideAuth(() => getAuth()),
+		provideFirestore(() => getFirestore()),
+		provideDatabase(() => getDatabase()),
+	],
 };

@@ -1,9 +1,9 @@
 export const ALLOWED_IMAGE_FORMATS = [
-  'image/png',
-  'image/jpeg',
-  'image/jpg',
-  'image/webp',
-  'image/avif',
+	'image/png',
+	'image/jpeg',
+	'image/jpg',
+	'image/webp',
+	'image/avif',
 ];
 
 export const IMAGE_ACCEPT_FORMATS_STR = ALLOWED_IMAGE_FORMATS.join(',');

@@ -1,35 +1,32 @@
 <button
-  class="custom-button"
-  [class.secondary]="variant() === 'secondary'"
-  [class.danger]="variant() === 'danger'"
-  [class.icon-only]="iconOnly() !== null"
-  [class.loading]="loading()"
-  [class.sm]="size() === 'sm'"
-  [class.md]="size() === 'md'"
-  [class.lg]="size() === 'lg'"
-  [class.full-width]="fullWidth()"
-  [disabled]="disabled() || loading()"
-  [attr.aria-busy]="loading()"
-  [type]="type()"
-  (click)="onClick($event)"
+	class="custom-button"
+	[class.secondary]="variant() === 'secondary'"
+	[class.danger]="variant() === 'danger'"
+	[class.icon-only]="iconOnly() !== null"
+	[class.loading]="loading()"
+	[class.sm]="size() === 'sm'"
+	[class.md]="size() === 'md'"
+	[class.lg]="size() === 'lg'"
+	[class.full-width]="fullWidth()"
+	[disabled]="disabled() || loading()"
+	[attr.aria-busy]="loading()"
+	[type]="type()"
+	(click)="onClick($event)"
 >
-  <span class="button-main">
-    @if (iconOnly()) {
-      <img [src]="`/assets/icons/${iconOnly()}`" [alt]="iconAlt()" />
-    }
+	<span class="button-main">
+		@if (iconOnly()) {
+			<img [src]="`/assets/icons/${iconOnly()}`" [alt]="iconAlt()" />
+		}
+		@if (iconBefore()) {
+			<img [src]="`/assets/icons/${iconBefore()}`" [alt]="`Icon before text, ${iconAlt()}`" />
+		}
+		{{ label() }}
+		@if (iconAfter()) {
+			<img [src]="`/assets/icons/${iconAfter()}`" [alt]="`Icon after text, ${iconAlt()}`" />
+		}
+	</span>
 
-    @if (iconBefore()) {
-      <img [src]="`/assets/icons/${iconBefore()}`" [alt]="`Icon before text, ${iconAlt()}`" />
-    }
-
-    {{ label() }}
-
-    @if (iconAfter()) {
-      <img [src]="`/assets/icons/${iconAfter()}`" [alt]="`Icon after text, ${iconAlt()}`" />
-    }
-  </span>
-
-  <span class="button-spinner" aria-hidden="true">
-    <span class="spinner"></span>
-  </span>
+	<span class="button-spinner" aria-hidden="true">
+		<span class="spinner"></span>
+	</span>
 </button>

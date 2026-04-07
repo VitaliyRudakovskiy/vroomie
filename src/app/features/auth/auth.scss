@@ -1,11 +1,11 @@
-@use 'mixins' as *;
-@use 'variables' as *;
+@use "mixins" as *;
+@use "variables" as *;
 
 .auth-container {
   @include flex-center();
   justify-content: center;
   background-color: $bg-page;
-  min-height: 100svh;
+  min-height: 100dvh;
   width: 100%;
   padding: 2rem;
 }
@@ -23,7 +23,8 @@ app-card {
     .logo {
       width: 48px;
       height: 48px;
-      filter: drop-shadow(2px 2px 0px $ink);
+      user-select: none;
+      filter: drop-shadow(3px 3px 0px $ink);
     }
   }
 
@@ -57,7 +58,7 @@ app-card {
 
     &::before,
     &::after {
-      content: '';
+      content: "";
       flex: 1;
       height: 1px;
       background: $ink;

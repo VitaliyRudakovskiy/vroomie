@@ -1,20 +1,20 @@
 <div class="modal-overlay" [class.is-visible]="visible()">
-  <div class="modal-content" role="modal" aria-modal="true">
-    <h3>{{ modalTitle() }}</h3>
-    <p>{{ description() }}</p>
+	<div class="modal-content" role="modal" aria-modal="true">
+		<h3>{{ modalTitle() }}</h3>
+		<p>{{ description() }}</p>
 
-    <button type="button" class="close-button" aria-label="Close notification" (click)="onClose()">
-      ✕
-    </button>
+		<button type="button" class="close-button" aria-label="Close notification" (click)="onClose()">
+			✕
+		</button>
 
-    <div class="buttons">
-      <app-button variant="secondary" [label]="cancelLabel()" (clicked)="onClose()" />
-      <app-button
-        variant="danger"
-        [label]="confirmLabel()"
-        [loading]="loading()"
-        (clicked)="onApply()"
-      />
-    </div>
-  </div>
+		<div class="buttons">
+			<app-button variant="secondary" [label]="cancelLabel()" (clicked)="onClose()" />
+			<app-button
+				variant="danger"
+				[label]="confirmLabel()"
+				[loading]="loading()"
+				(clicked)="onApply()"
+			/>
+		</div>
+	</div>
 </div>

@@ -1,0 +1,7 @@
+# Игнорируем системные папки
+.angular/
+dist/
+node_modules/
+
+# Prettier будет править только HTML, остальным займется biome
+!src/**/*.html

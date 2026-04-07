@@ -1,73 +1,73 @@
 <section class="auth-container">
-  <app-card maxWidth="420px" padding="32px 20px 40px">
-    <h2>
-      {{ isLoginForm() ? 'Login' : 'Register' }} to Autolog
-      <img class="logo" src="assets/images/pairly-logo.svg" alt="pairly logo" />
-    </h2>
+	<app-card maxWidth="420px" padding="32px 20px 40px">
+		<h2>
+			<img class="logo" src="assets/images/logo.svg" alt="vroomie logo" />
+			{{ isLoginForm() ? 'Login' : 'Register' }} to Vroomie
+		</h2>
 
-    <!-- Login -->
-    <div class="form-field-container">
-      <input id="email" type="text" placeholder="email" [formField]="loginForm.email" />
+		<!-- Login -->
+		<div class="form-field-container">
+			<input id="email" type="text" placeholder="email" [formField]="loginForm.email" />
 
-      @if (hasEmailError()) {
-        <p class="form-error" [class.visible]="hasEmailError()">
-          {{ loginForm.email().errors()[0].message }}
-        </p>
-      }
-    </div>
+			@if (hasEmailError()) {
+				<p class="form-error" [class.visible]="hasEmailError()">
+					{{ loginForm.email().errors()[0].message }}
+				</p>
+			}
+		</div>
 
-    <!-- Password -->
-    <div class="form-field-container">
-      <input
-        id="password"
-        placeholder="password"
-        [formField]="loginForm.password"
-        [type]="isPasswordVisible() ? 'text' : 'password'"
-      />
+		<!-- Password -->
+		<div class="form-field-container">
+			<input
+				id="password"
+				placeholder="password"
+				[formField]="loginForm.password"
+				[type]="isPasswordVisible() ? 'text' : 'password'"
+			/>
 
-      @if (hasPasswordError()) {
-        <p class="form-error" [class.visible]="hasPasswordError()">
-          {{ loginForm.password().errors()[0].message }}
-        </p>
-      }
+			@if (hasPasswordError()) {
+				<p class="form-error" [class.visible]="hasPasswordError()">
+					{{ loginForm.password().errors()[0].message }}
+				</p>
+			}
 
-      <app-button
-        class="show-password-button"
-        [iconOnly]="isPasswordVisible() ? 'auth/eye-closed.svg' : 'auth/eye.svg'"
-        [iconAlt]="isPasswordVisible() ? 'Hide password' : 'Show password'"
-        (clicked)="togglePassword()"
-      />
-    </div>
+			<app-button
+				class="show-password-button"
+				[iconOnly]="isPasswordVisible() ? 'auth/eye-closed.svg' : 'auth/eye.svg'"
+				[iconAlt]="isPasswordVisible() ? 'Hide password' : 'Show password'"
+				(clicked)="togglePassword()"
+			/>
+		</div>
 
-    <app-button
-      fullWidth
-      [label]="isLoginForm() ? 'Login' : 'Create account'"
-      [disabled]="!loginForm().valid()"
-      [loading]="loading()"
-      (clicked)="signInApp()"
-    />
+		<app-button
+			fullWidth
+			[label]="isLoginForm() ? 'Login' : 'Create account'"
+			[disabled]="!loginForm().valid()"
+			[loading]="loading()"
+			(clicked)="signInApp()"
+		/>
 
-    <div class="divider">
-      <span>or</span>
-    </div>
+		<div class="divider">
+			<span>or</span>
+		</div>
 
-    <app-button
-      variant="secondary"
-      fullWidth
-      class="google-button"
-      iconBefore="google.svg"
-      [label]="'Sign ' + (isLoginForm() ? 'in' : 'up') + ' with Google'"
-      (clicked)="loginWithGoogle()"
-    />
+		<app-button
+			variant="secondary"
+			fullWidth
+			class="google-button"
+			iconBefore="google.svg"
+			[label]="'Sign ' + (isLoginForm() ? 'in' : 'up') + ' with Google'"
+			(clicked)="loginWithGoogle()"
+		/>
 
-    <span class="bottom-text">
-      @if (isLoginForm()) {
-        Don't have an account?
-        <strong role="button" tabindex="-1" (click)="toggleForm()"> Register</strong>
-      } @else {
-        Already have an account?
-        <strong role="button" tabindex="-1" (click)="toggleForm()"> Login</strong>
-      }
-    </span>
-  </app-card>
+		<span class="bottom-text">
+			@if (isLoginForm()) {
+				Don't have an account?
+				<strong role="button" tabindex="-1" (click)="toggleForm()">Register</strong>
+			} @else {
+				Already have an account?
+				<strong role="button" tabindex="-1" (click)="toggleForm()">Login</strong>
+			}
+		</span>
+	</app-card>
 </section>

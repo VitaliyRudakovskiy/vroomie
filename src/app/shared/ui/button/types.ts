@@ -3,6 +3,6 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface IconSize {
-  width: string;
-  height: string;
+	width: string;
+	height: string;
 }
