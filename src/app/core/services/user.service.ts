@@ -8,11 +8,11 @@ import {
 	setDoc,
 	type Timestamp,
 } from '@angular/fire/firestore';
+import { COLLECTIONS } from '@core/api/dbCollections';
 import type { User } from 'firebase/auth';
 import type { UserProfile } from 'models/user-profile';
 import { AuthService } from './auth.service';
 import { LoggerService } from './logger.service';
-import { COLLECTIONS } from '@core/api/dbCollections';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

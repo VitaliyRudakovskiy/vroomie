@@ -1,12 +1,12 @@
 import { Component, inject, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
-import { Button } from '@shared/ui';
-import { CarWithoutId } from 'models/car';
-import { serverTimestamp, Timestamp } from 'firebase/firestore';
 import { Store } from '@ngrx/store';
-import { GarageActions } from 'store/garage/actions';
 import { BODY_TYPES_LIST } from '@shared/constants/body-types';
+import { Button } from '@shared/ui';
+import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
+import { serverTimestamp, type Timestamp } from 'firebase/firestore';
+import type { CarWithoutId } from 'models/car';
+import { GarageActions } from 'store/garage/actions';
 
 @Component({
 	selector: 'app-car-modal',
@@ -40,10 +40,14 @@ export class CarModal {
 	}
 
 	onSave(): void {
-		if (!this.userId()) return;
+		if (!this.userId()) {
+			return;
+		}
 
 		const { make, model, year, bodyType, vin, currentOdometer } = this.form.value;
-		if (!make || !model || !year || !bodyType || !vin || !currentOdometer) return;
+		if (!make || !model || !year || !bodyType || !vin || !currentOdometer) {
+			return;
+		}
 
 		const car: CarWithoutId = {
 			ownerId: this.userId(),

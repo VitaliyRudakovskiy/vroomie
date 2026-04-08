@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { Card } from '@shared/ui';
-import { type Car as TCar } from 'models/car';
+import type { Car as TCar } from 'models/car';
 
 @Component({
 	selector: 'app-car',

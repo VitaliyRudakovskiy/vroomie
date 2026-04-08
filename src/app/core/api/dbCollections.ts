@@ -1,4 +1,4 @@
-export const enum COLLECTIONS {
+export enum COLLECTIONS {
 	Users = 'users',
 	Cars = 'cars',
 }

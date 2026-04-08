@@ -1,12 +1,12 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { Button, Loader } from '@shared/ui';
-import { CarModal } from './components/car-modal/car-modal';
-import { Store } from '@ngrx/store';
-import { selectCars, selectLoading } from 'store/garage/selectors';
-import { GarageActions } from 'store/garage/actions';
-import { UserService } from '@core/services/user.service';
 import { AsyncPipe } from '@angular/common';
-import { Car } from "./components/car/car";
+import { Component, effect, inject, signal } from '@angular/core';
+import { UserService } from '@core/services/user.service';
+import { Store } from '@ngrx/store';
+import { Button, Loader } from '@shared/ui';
+import { GarageActions } from 'store/garage/actions';
+import { selectCars, selectLoading } from 'store/garage/selectors';
+import { Car } from './components/car/car';
+import { CarModal } from './components/car-modal/car-modal';
 
 @Component({
 	selector: 'app-garage',

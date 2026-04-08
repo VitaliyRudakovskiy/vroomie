@@ -1,11 +1,11 @@
 import { Component, effect, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationService } from '@core/notification/notification.service';
 import { AuthService } from '@core/services/auth.service';
 import { LoggerService } from '@core/services/logger.service';
 import { Button, Card } from '@shared/ui';
 import { getErrorMessage } from './helpers/getAuthErrorMessage';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-auth',

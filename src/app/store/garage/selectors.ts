@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { GarageState } from './types';
+import type { GarageState } from './types';
 
 export const selectGarageState = createFeatureSelector<GarageState>('garage');
 

@@ -1,8 +1,8 @@
-import { inject, Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { GarageActions } from './actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
 import { GarageService } from '@core/services/garage.service';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { GarageActions } from './actions';
 
 @Injectable({ providedIn: 'root' })
 export class GarageEffects {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NAVBAR_ITEMS } from './constants';
 import { RouterLink, RouterModule } from '@angular/router';
+import { NAVBAR_ITEMS } from './constants';
 
 @Component({
 	selector: 'app-navbar',

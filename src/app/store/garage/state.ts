@@ -1,4 +1,4 @@
-import { GarageState } from './types';
+import type { GarageState } from './types';
 
 export const initialState: GarageState = {
 	cars: [],

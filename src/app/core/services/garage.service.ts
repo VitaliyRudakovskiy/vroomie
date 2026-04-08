@@ -1,16 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import {
-	addDoc,
-	collection,
-	collectionData,
-	Firestore,
-	query,
-	where,
-} from '@angular/fire/firestore';
+import { Injectable, inject } from '@angular/core';
+import { addDoc, collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import { carsByOwnerId } from '@core/api/queries/cars';
-import { Car, CarWithoutId } from 'models/car';
-import { from, map, Observable } from 'rxjs';
+import type { Car, CarWithoutId } from 'models/car';
+import { from, map, type Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GarageService {

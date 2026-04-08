@@ -11,7 +11,7 @@ import { Component, input } from '@angular/core';
 })
 export class Loader {
 	withBlur = input(true);
-  spinnerSize = input(40);
-  spinnerThikness = input(5);
+	spinnerSize = input(40);
+	spinnerThikness = input(5);
 	description = input('');
 }

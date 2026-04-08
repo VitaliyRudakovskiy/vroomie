@@ -1,6 +1,8 @@
 import { Component, type ElementRef, effect, inject, signal, viewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { NotificationService } from '@core/notification/notification.service';
+import { AuthService } from '@core/services/auth.service';
 import { CloudinaryService } from '@core/services/cloudinary.service';
 import { LoggerService } from '@core/services/logger.service';
 import { UserService } from '@core/services/user.service';
@@ -12,9 +14,7 @@ import {
 } from '@shared/constants/avatar-config';
 import { Button, ConfirmModal, Loader } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
-import type { EditingField, ProfileForm, TextareaSize } from './types';
-import { AuthService } from '@core/services/auth.service';
-import { Router } from '@angular/router';
+import type { EditingField } from './types';
 
 @Component({
 	selector: 'app-profile',
