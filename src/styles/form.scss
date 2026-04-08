@@ -7,8 +7,23 @@
 	margin-bottom: 24px;
 	width: 100%;
 
-	input {
+	input,
+	select {
 		@include neubrutal-input();
+	}
+
+	select {
+		cursor: pointer;
+
+		&::-ms-expand {
+			display: none;
+		}
+	}
+
+	option {
+		background: $white;
+		color: $ink;
+		font-family: 'Geom', sans-serif;
 	}
 }
 

@@ -1,3 +1,13 @@
+@let text = description();
+
 <div class="ui-loader-overlay">
-	<div class="spinner"></div>
+	<div
+		class="spinner"
+		[style.width.px]="spinnerSize()"
+		[style.height.px]="spinnerSize()"
+		[style.borderWidth.px]="spinnerThikness()"
+	></div>
+	@if (text) {
+		<p class="description">{{ description() }}</p>
+	}
 </div>

@@ -3,26 +3,57 @@
 @use 'styles/form.scss';
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 html,
 body {
-  font-family: 'Geom', 'Helvetica', sans-serif;
-  background-color: $bg-page;
-  scroll-behavior: smooth;
-  font-style: normal;
-  font-weight: 400;
-  width: 100%;
-  height: 100%;
+	font-family: 'Geom', 'Helvetica', sans-serif;
+	background-color: $bg-page;
+	scroll-behavior: smooth;
+	font-style: normal;
+	font-weight: 400;
+	width: 100%;
+	height: 100%;
+}
+
+/* Кастомный скролл */
+main {
+	scrollbar-width: auto;
+	scrollbar-color: $ink $bg-page;
+
+	&::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $bg-page;
+		border-left: $brutal-border solid $ink;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $color-primary;
+		border: $brutal-border solid $ink;
+		border-radius: 4px;
+
+		box-shadow: inset -2px -2px 0px $ink;
+
+		&:hover {
+			background-color: $color-primary;
+		}
+
+		&:active {
+			background-color: $color-primary;
+		}
+	}
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 ul {
-  list-style: none;
+	list-style: none;
 }

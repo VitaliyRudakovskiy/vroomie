@@ -5,7 +5,6 @@ import { AuthService } from '@core/services/auth.service';
 import { LoggerService } from '@core/services/logger.service';
 import { Button, Card } from '@shared/ui';
 import { getErrorMessage } from './helpers/getAuthErrorMessage';
-import type { LoginData } from './types';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -53,15 +52,6 @@ export class Auth {
 			this.loginForm.reset();
 		});
 	}
-
-	// loginForm = form(this.loginModel, (schema) => {
-	// 	debounce(schema.email, 200);
-	// 	required(schema.email, { message: 'Email is required' });
-	// 	email(schema.email, { message: 'Enter a valid email address' });
-	// 	required(schema.password, { message: 'Password is required' });
-	// 	minLength(schema.password, 6, { message: 'Password must have at least 6 symbols' });
-	// 	maxLength(schema.password, 50, { message: 'Password is too long' });
-	// });
 
 	async signInApp(): Promise<void> {
 		if (this.loginForm.invalid) {

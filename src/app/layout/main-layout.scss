@@ -4,12 +4,14 @@
 :host {
 	@include flex-column();
 	width: 100%;
-	min-height: 100dvh;
+	height: 100dvh;
+	overflow: hidden;
 }
 
 main {
 	@include flex-column();
 	flex: 1;
 	min-width: 0;
-	padding: 24px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 }

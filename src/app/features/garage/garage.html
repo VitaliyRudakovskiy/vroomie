@@ -1,20 +1,30 @@
 <section class="garage-section">
 	<div class="main-content">
-		<h2 class="main-content__title">My cars</h2>
-		<app-card padding="12px 16px">
-			<div class="card-content">
-				<img class="card-content__image" src="assets/images/test.jpg" alt="asdasdasd" />
-				<div class="card-content__info">
-					<p>Peugeot 307 (2006) - хэтчбэк</p>
-				</div>
-			</div>
-		</app-card>
+		<div class="main-content__header">
+			<h2>My cars</h2>
+			<app-button class="add-car-button" label="+ Add car" (clicked)="showCarModal()" />
+		</div>
+
+		<div class="main-content__container">
+			@if (loading$ | async) {
+				<app-loader
+					description="Loading your cars..."
+					[spinnerSize]="64"
+					[spinnerThikness]="7"
+					[withBlur]="false"
+				/>
+			} @else {
+				@for (car of cars$ | async; track car.id) {
+					<app-car [car]="car" />
+				}
+			}
+		</div>
 	</div>
-	<app-button class="add-car-button" label="+ Add car" (clicked)="showCarModal()" />
 </section>
 
 <app-car-modal
 	modalTitle="Adding a car"
+	[userId]="userProfile()?.uid ?? ''"
 	[visible]="isCarModalOpen()"
 	(closeModal)="closeCarModal()"
 />

@@ -22,4 +22,22 @@ export const garageReducer = createReducer(
 		error,
 		loading: false,
 	})),
+
+	on(GarageActions.addCar, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(GarageActions.addCarSuccess, (state, { car }) => ({
+		...state,
+		cars: [...state.cars, car],
+		loading: false,
+	})),
+
+	on(GarageActions.addCarFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
 );

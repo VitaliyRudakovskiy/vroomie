@@ -20,4 +20,16 @@ export class GarageEffects {
 			),
 		),
 	);
+
+	addCar$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(GarageActions.addCar),
+			switchMap(({ car }) =>
+				this.garageService.addCar(car).pipe(
+					map((newCar) => GarageActions.addCarSuccess({ car: newCar })),
+					catchError((err) => of(GarageActions.addCarFailure({ error: err.message }))),
+				),
+			),
+		),
+	);
 }
