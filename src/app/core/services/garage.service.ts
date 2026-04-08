@@ -1,5 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { addDoc, collection, collectionData, Firestore } from '@angular/fire/firestore';
+import {
+	addDoc,
+	collection,
+	collectionData,
+	Firestore,
+	serverTimestamp,
+} from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import { carsByOwnerId } from '@core/api/queries/cars';
 import type { Car, CarWithoutId } from 'models/car';
@@ -17,6 +23,12 @@ export class GarageService {
 
 	addCar(car: CarWithoutId): Observable<Car> {
 		const cars = collection(this.firestore, COLLECTIONS.Cars);
+
+		const _carWithTimestamps = {
+			...car,
+			createdAt: serverTimestamp(),
+		};
+
 		return from(addDoc(cars, car)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
 	}
 }

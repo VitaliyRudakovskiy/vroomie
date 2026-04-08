@@ -6,13 +6,13 @@ export interface Car {
 	make: string;
 	model: string;
 	year: number;
-	boughtDate: Timestamp | null;
 	bodyType: string;
 	vin: string | null;
 	currentOdometer: number;
 	photoUrl: string | null;
+	boughtDate: Timestamp | null;
 	lastServiceDate: Timestamp | null;
-	createdAt: Timestamp;
+	createdAt: Timestamp | null;
 }
 
 export type CarWithoutId = Omit<Car, 'id'>;

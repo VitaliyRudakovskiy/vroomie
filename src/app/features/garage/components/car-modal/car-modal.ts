@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { BODY_TYPES_LIST } from '@shared/constants/body-types';
 import { Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
-import { serverTimestamp, type Timestamp } from 'firebase/firestore';
 import type { CarWithoutId } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
 
@@ -58,9 +57,9 @@ export class CarModal {
 			vin,
 			currentOdometer,
 			photoUrl: null,
+			boughtDate: null,
 			lastServiceDate: null,
-			boughtDate: serverTimestamp() as Timestamp,
-			createdAt: serverTimestamp() as Timestamp,
+			createdAt: null,
 		};
 
 		this.store.dispatch(GarageActions.addCar({ car }));
