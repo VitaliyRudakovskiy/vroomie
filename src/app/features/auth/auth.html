@@ -6,18 +6,18 @@
 		</h2>
 
 		<!-- Login -->
-		<div class="form-field-container">
+		<div class="global-form-field-container">
 			<input id="email" type="text" placeholder="email" [formField]="loginForm.email" />
 
 			@if (hasEmailError()) {
-				<p class="form-error" [class.visible]="hasEmailError()">
+				<p class="global-form-error" [class.visible]="hasEmailError()">
 					{{ loginForm.email().errors()[0].message }}
 				</p>
 			}
 		</div>
 
 		<!-- Password -->
-		<div class="form-field-container">
+		<div class="global-form-field-container">
 			<input
 				id="password"
 				placeholder="password"
@@ -26,7 +26,7 @@
 			/>
 
 			@if (hasPasswordError()) {
-				<p class="form-error" [class.visible]="hasPasswordError()">
+				<p class="global-form-error" [class.visible]="hasPasswordError()">
 					{{ loginForm.password().errors()[0].message }}
 				</p>
 			}

@@ -1,0 +1,9 @@
+<div class="modal-overlay" [class.is-visible]="visible()">
+	<div class="modal-content" role="modal" aria-modal="true">
+		<h3>{{ modalTitle() }}</h3>
+		<button type="button" class="close-button" aria-label="Close notification" (click)="onClose()">
+			✕
+		</button>
+		<ng-content></ng-content>
+	</div>
+</div>

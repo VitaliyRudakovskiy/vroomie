@@ -15,13 +15,13 @@
 	"private": true,
 	"packageManager": "bun@1.3.2",
 	"dependencies": {
-		"@angular/common": "^21.2.0",
-		"@angular/compiler": "^21.2.0",
-		"@angular/core": "^21.2.0",
+		"@angular/common": "^20.3.18",
+		"@angular/compiler": "^20.3.18",
+		"@angular/core": "^20.3.18",
 		"@angular/fire": "^20.0.1",
-		"@angular/forms": "^21.2.0",
-		"@angular/platform-browser": "^21.2.0",
-		"@angular/router": "^21.2.0",
+		"@angular/forms": "^20.3.18",
+		"@angular/platform-browser": "^20.3.18",
+		"@angular/router": "^20.3.18",
 		"@ngrx/effects": "^21.1.0",
 		"@ngrx/store": "^21.1.0",
 		"@ngrx/store-devtools": "^21.1.0",
@@ -30,13 +30,13 @@
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
-		"@angular/build": "^21.2.6",
-		"@angular/cli": "^21.2.6",
-		"@angular/compiler-cli": "^21.2.0",
+		"@angular/build": "^20.3.18",
+		"@angular/cli": "^20.3.18",
+		"@angular/compiler-cli": "^20.3.18",
 		"@biomejs/biome": "^2.4.10",
 		"jsdom": "^29.0.1",
 		"prettier": "^3.8.1",
-		"typescript": "^6.0.2",
+		"typescript": "^5.9.2",
 		"vitest": "^4.0.8"
 	}
 }

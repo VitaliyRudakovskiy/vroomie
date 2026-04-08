@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { Button } from '@shared/ui';
+import { ModalWrapper } from "../modal-wrapper/modal-wrapper";
 
 @Component({
 	selector: 'app-confirm-modal',
-	imports: [Button],
+	imports: [Button, ModalWrapper],
 	templateUrl: './confirm-modal.html',
 	styleUrl: './confirm-modal.scss',
 })

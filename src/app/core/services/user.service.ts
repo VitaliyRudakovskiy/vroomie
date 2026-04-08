@@ -12,6 +12,7 @@ import type { User } from 'firebase/auth';
 import type { UserProfile } from 'models/user-profile';
 import { AuthService } from './auth.service';
 import { LoggerService } from './logger.service';
+import { COLLECTIONS } from '@core/api/dbCollections';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -20,7 +21,6 @@ export class UserService {
 	private readonly logger = inject(LoggerService);
 
 	userProfile = signal<UserProfile | null>(null);
-	private readonly USERS_COLLECTION = 'users';
 
 	constructor() {
 		effect(() => {
@@ -100,7 +100,7 @@ export class UserService {
 	}
 
 	private getUserDocRef(uid: string): DocumentReference {
-		return doc(this.firestore, this.USERS_COLLECTION, uid);
+		return doc(this.firestore, COLLECTIONS.Users, uid);
 	}
 
 	private createUser(user: User): UserProfile {

@@ -1,0 +1,28 @@
+<app-modal-wrapper [visible]="visible()" [modalTitle]="modalTitle()" (closeModal)="onClose()">
+	<div class="form-container" [formGroup]="form">
+		<div class="global-form-field-container">
+			<input id="make" type="text" placeholder="make" formControlName="make" required />
+		</div>
+		<div class="global-form-field-container">
+			<input id="model" type="text" placeholder="model" formControlName="model" />
+		</div>
+		<div class="global-form-field-container">
+			<input id="year" type="number" placeholder="release year" formControlName="year" />
+		</div>
+		<div class="global-form-field-container">
+			<input id="vin" type="text" placeholder="VIN number" formControlName="vin" />
+		</div>
+		<div class="global-form-field-container">
+			<input
+				id="currentOdometer"
+				type="number"
+				placeholder="odometer value"
+				formControlName="currentOdometer"
+			/>
+		</div>
+	</div>
+	<div class="buttons">
+		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
+		<app-button label="Add" />
+	</div>
+</app-modal-wrapper>
