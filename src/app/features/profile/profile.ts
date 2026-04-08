@@ -1,13 +1,4 @@
-import {
-	Component,
-	computed,
-	type ElementRef,
-	effect,
-	inject,
-	signal,
-	viewChild,
-} from '@angular/core';
-import { FormField, form, maxLength, minLength, required } from '@angular/forms/signals';
+import { Component, type ElementRef, effect, inject, signal, viewChild } from '@angular/core';
 import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { NotificationService } from '@core/notification/notification.service';
 import { CloudinaryService } from '@core/services/cloudinary.service';
@@ -19,7 +10,6 @@ import {
 	MAX_FILE_SIZE_BYTES,
 	MAX_FILE_SIZE_MB,
 } from '@shared/constants/avatar-config';
-import { TEXTAREA_SIZE } from '@shared/constants/textarea-size';
 import { Button, ConfirmModal, Loader } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
 import type { EditingField, ProfileForm, TextareaSize } from './types';
@@ -28,7 +18,7 @@ import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-profile',
-	imports: [Loader, ConfirmModal, Button, FormField],
+	imports: [Loader, ConfirmModal, Button],
 	templateUrl: './profile.html',
 	styleUrl: './profile.scss',
 })
@@ -52,21 +42,6 @@ export class Profile {
 	isConfirmModalOpen = signal(false);
 	deleteLoading = signal(false);
 	loading = signal(false);
-	textareaSize = signal<TextareaSize | null>(null);
-	defaultForm = signal<ProfileForm | null>(null);
-	profileModel = signal<ProfileForm>({
-		name: '',
-	});
-
-	hasNameError = computed(
-		() => this.profileForm.name().touched() && this.profileForm.name().errors().length,
-	);
-
-	profileForm = form(this.profileModel, (schema) => {
-		required(schema.name, { message: 'Name is required' });
-		minLength(schema.name, 2, { message: 'Name is too short' });
-		maxLength(schema.name, 38, { message: 'Name is too long' });
-	});
 
 	AVAILABLE_FORMATS = IMAGE_ACCEPT_FORMATS_STR;
 
@@ -74,20 +49,6 @@ export class Profile {
 		effect(() => {
 			const avatarData = getUserAvatar(this.currentUser());
 			this.userAvatarDetails.set(avatarData);
-		});
-
-		effect(() => {
-			const user = this.currentUser();
-			if (!user) {
-				return;
-			}
-
-			const profileData = {
-				name: user.displayName,
-			};
-
-			this.defaultForm.set(profileData);
-			this.profileModel.set(profileData);
 		});
 	}
 
@@ -153,34 +114,6 @@ export class Profile {
 		}
 	}
 
-	async saveUserProfile(): Promise<void> {
-		if (!this.hasChanges()) {
-			return;
-		}
-
-		this.loading.set(true);
-		try {
-			this.userService.updateUserProfile({
-				displayName: this.profileForm.name().value(),
-			});
-			this.notificator.success('Success', 'Profile updated!');
-		} catch (error: unknown) {
-			this.logger.error(`Update profile failed: ${error}`);
-			this.notificator.error('Error', 'Failed to update profile');
-		} finally {
-			this.loading.set(false);
-		}
-	}
-
-	hasChanges(): boolean {
-		const initial = this.defaultForm();
-		const current = {
-			name: this.profileForm.name().value(),
-		};
-
-		return initial?.name !== current.name;
-	}
-
 	startEditing(field: EditingField): void {
 		this.editingField.set(field);
 
@@ -196,12 +129,6 @@ export class Profile {
 		if (!field) {
 			return;
 		}
-
-		const newValue = this.profileModel()[field];
-		this.profileModel.update((model) => ({
-			...model,
-			[field]: newValue,
-		}));
 	}
 
 	onAddAvatar(): void {

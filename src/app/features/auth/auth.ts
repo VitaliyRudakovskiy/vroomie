@@ -1,13 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import {
-	debounce,
-	email,
-	FormField,
-	form,
-	maxLength,
-	minLength,
-	required,
-} from '@angular/forms/signals';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from '@core/notification/notification.service';
 import { AuthService } from '@core/services/auth.service';
@@ -15,10 +6,11 @@ import { LoggerService } from '@core/services/logger.service';
 import { Button, Card } from '@shared/ui';
 import { getErrorMessage } from './helpers/getAuthErrorMessage';
 import type { LoginData } from './types';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-auth',
-	imports: [FormField, Button, Card, FormField],
+	imports: [ReactiveFormsModule, Button, Card],
 	templateUrl: './auth.html',
 	styleUrl: './auth.scss',
 })
@@ -32,41 +24,48 @@ export class Auth {
 	isLoginForm = signal(true);
 	isPasswordVisible = signal(false);
 	errorMessage = signal('Something went wrong. Please try again.');
-	loginModel = signal<LoginData>({
-		email: '',
-		password: '',
+
+	loginForm = new FormGroup({
+		email: new FormControl('', {
+			nonNullable: true,
+			validators: [Validators.required, Validators.email],
+		}),
+		password: new FormControl('', {
+			nonNullable: true,
+			validators: [Validators.required, Validators.minLength(6), Validators.maxLength(50)],
+		}),
 	});
 
-	loginForm = form(this.loginModel, (schema) => {
-		debounce(schema.email, 200);
-		required(schema.email, { message: 'Email is required' });
-		email(schema.email, { message: 'Enter a valid email address' });
-		required(schema.password, { message: 'Password is required' });
-		minLength(schema.password, 6, { message: 'Password must have at least 6 symbols' });
-		maxLength(schema.password, 50, { message: 'Password is too long' });
-	});
+	get hasPasswordError(): boolean {
+		const control = this.loginForm.controls.password;
+		return control.touched && control.invalid;
+	}
 
-	hasPasswordError = computed(
-		() => this.loginForm.password().touched() && this.loginForm.password().errors().length,
-	);
-	hasEmailError = computed(
-		() => this.loginForm.email().touched() && this.loginForm.email().errors().length,
-	);
+	get hasEmailError(): boolean {
+		const control = this.loginForm.controls.email;
+		return control.touched && control.invalid;
+	}
 
 	constructor() {
-		// сброс полей и ошибок при смене формы с регистрации на вход и обратно
+		// Сброс полей и ошибок при переключении между Login и Register
 		effect(() => {
 			this.isLoginForm();
-			this.loginForm().reset();
-			this.loginModel.set({
-				email: '',
-				password: '',
-			});
+			this.loginForm.reset();
 		});
 	}
 
+	// loginForm = form(this.loginModel, (schema) => {
+	// 	debounce(schema.email, 200);
+	// 	required(schema.email, { message: 'Email is required' });
+	// 	email(schema.email, { message: 'Enter a valid email address' });
+	// 	required(schema.password, { message: 'Password is required' });
+	// 	minLength(schema.password, 6, { message: 'Password must have at least 6 symbols' });
+	// 	maxLength(schema.password, 50, { message: 'Password is too long' });
+	// });
+
 	async signInApp(): Promise<void> {
-		if (!this.loginForm().valid()) {
+		if (this.loginForm.invalid) {
+			this.loginForm.markAllAsTouched();
 			return;
 		}
 
@@ -74,12 +73,15 @@ export class Auth {
 			? this.authService.login.bind(this.authService)
 			: this.authService.register.bind(this.authService);
 
+		const { email, password } = this.loginForm.getRawValue();
+
 		try {
 			this.loading.set(true);
-			await callMethod(this.loginModel().email, this.loginModel().password);
+			await callMethod(email, password);
 			this.router.navigate(['']);
 		} catch (err: unknown) {
 			this.logger.error(`Auth error: ${err}`);
+			this.loginForm.patchValue({ password: '' });
 			this.showAuthError(err);
 		} finally {
 			this.loading.set(false);
@@ -92,6 +94,7 @@ export class Auth {
 			this.router.navigate(['']);
 		} catch (err: unknown) {
 			this.logger.error(`Auth error with Google: ${err}`);
+			this.loginForm.patchValue({ password: '' });
 			this.showAuthError(err);
 		}
 	}

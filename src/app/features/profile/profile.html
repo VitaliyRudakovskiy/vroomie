@@ -32,19 +32,9 @@
 				<input
 					#userName
 					class="edit-name"
-					[formField]="profileForm.name"
 					(blur)="stopEditing('name')"
 					(keydown.enter)="stopEditing('name')"
 				/>
-			} @else {
-				<h1 class="profile-info__name" role="button" tabindex="-1" (click)="startEditing('name')">
-					{{ profileModel().name || 'Input name' }}
-				</h1>
-			}
-			@if (hasNameError()) {
-				<p class="global-form-error" [class.visible]="hasNameError()">
-					{{ profileForm.name().errors()[0].message }}
-				</p>
 			}
 		</div>
 	</div>
@@ -53,9 +43,7 @@
 
 	<app-button
 		label="Save"
-		[disabled]="!hasChanges() || profileForm().invalid()"
 		[loading]="loading()"
-		(clicked)="saveUserProfile()"
 	/>
 </section>
 

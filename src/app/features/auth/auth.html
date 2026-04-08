@@ -1,5 +1,5 @@
 <section class="auth-container">
-	<app-card maxWidth="420px" padding="32px 20px 40px">
+	<app-card maxWidth="420px" padding="32px 20px 40px" [formGroup]="loginForm">
 		<h2>
 			<img class="logo" src="assets/images/logo.svg" alt="vroomie logo" />
 			{{ isLoginForm() ? 'Login' : 'Register' }} to Vroomie
@@ -7,11 +7,15 @@
 
 		<!-- Login -->
 		<div class="global-form-field-container">
-			<input id="email" type="text" placeholder="email" [formField]="loginForm.email" />
+			<input id="email" type="text" placeholder="email" formControlName="email" />
 
-			@if (hasEmailError()) {
-				<p class="global-form-error" [class.visible]="hasEmailError()">
-					{{ loginForm.email().errors()[0].message }}
+			@if (hasEmailError) {
+				<p class="global-form-error" [class.visible]="hasEmailError">
+					@if (loginForm.controls.email.hasError('required')) {
+						Email is required
+					} @else if (loginForm.controls.email.hasError('email')) {
+						Enter a valid email address
+					}
 				</p>
 			}
 		</div>
@@ -21,13 +25,19 @@
 			<input
 				id="password"
 				placeholder="password"
-				[formField]="loginForm.password"
+				formControlName="password"
 				[type]="isPasswordVisible() ? 'text' : 'password'"
 			/>
 
-			@if (hasPasswordError()) {
-				<p class="global-form-error" [class.visible]="hasPasswordError()">
-					{{ loginForm.password().errors()[0].message }}
+			@if (hasPasswordError) {
+				<p class="global-form-error" [class.visible]="hasPasswordError">
+					@if (loginForm.controls.password.hasError('required')) {
+						Password is required
+					} @else if (loginForm.controls.password.hasError('minlength')) {
+						Password must have at least 6 symbols
+					} @else if (loginForm.controls.password.hasError('maxlength')) {
+						Password is too long
+					}
 				</p>
 			}
 
@@ -42,7 +52,7 @@
 		<app-button
 			fullWidth
 			[label]="isLoginForm() ? 'Login' : 'Create account'"
-			[disabled]="!loginForm().valid()"
+			[disabled]="loginForm.invalid"
 			[loading]="loading()"
 			(clicked)="signInApp()"
 		/>
