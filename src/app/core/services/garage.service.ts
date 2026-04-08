@@ -24,11 +24,11 @@ export class GarageService {
 	addCar(car: CarWithoutId): Observable<Car> {
 		const cars = collection(this.firestore, COLLECTIONS.Cars);
 
-		const _carWithTimestamps = {
+		const carWithTimestamps = {
 			...car,
 			createdAt: serverTimestamp(),
 		};
 
-		return from(addDoc(cars, car)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
+		return from(addDoc(cars, carWithTimestamps)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
 	}
 }
