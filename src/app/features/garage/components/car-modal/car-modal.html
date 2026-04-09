@@ -5,14 +5,20 @@
 	(closeModal)="onClose()"
 >
 	<div class="form-container" [formGroup]="form">
-		<div class="global-form-field-container">
+		<div class="global-form-field-container required">
 			<input id="make" type="text" placeholder="make" formControlName="make" required />
 		</div>
 		<div class="global-form-field-container">
 			<input id="model" type="text" placeholder="model" formControlName="model" />
 		</div>
 		<div class="global-form-field-container">
-			<input id="year" type="number" placeholder="release year" formControlName="year" />
+			<input
+				id="year"
+				type="text"
+				placeholder="release year"
+				formControlName="year"
+				appOnlyNumbers
+			/>
 		</div>
 		<div class="global-form-field-container">
 			<input id="vin" type="text" placeholder="VIN number" formControlName="vin" />

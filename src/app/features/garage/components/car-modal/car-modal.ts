@@ -6,12 +6,13 @@ import { Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
 import type { CarWithoutId } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
+import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 
 @Component({
 	selector: 'app-car-modal',
 	templateUrl: './car-modal.html',
 	styleUrl: './car-modal.scss',
-	imports: [ModalWrapper, ReactiveFormsModule, Button],
+	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective],
 })
 export class CarModal {
 	private readonly store = inject(Store);
@@ -24,8 +25,8 @@ export class CarModal {
 	closeModal = output();
 
 	protected form = new FormGroup({
-		make: new FormControl('', Validators.required),
-		model: new FormControl('', Validators.required),
+		make: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+		model: new FormControl('', [Validators.required, Validators.maxLength(50)]),
 		year: new FormControl(null, Validators.required),
 		bodyType: new FormControl('', Validators.required),
 		vin: new FormControl('', [Validators.maxLength(17), Validators.maxLength(17)]),

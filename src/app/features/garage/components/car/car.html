@@ -1,10 +1,11 @@
 @let carInfo = car();
 
-<app-card padding="12px 16px">
+<app-card class="app-card" padding="12px" isInteractive>
 	<div class="card-content">
 		<img class="card-content__image" src="assets/images/test.jpg" alt="asdasdasd" />
 		<div class="card-content__info">
-			<p>{{ carInfo.make }} {{ carInfo.model }} ({{ carInfo.year }}) - {{ carInfo.bodyType }}</p>
+			<p class="brand">{{ carInfo.make }} {{ carInfo.model }}</p>
+      <p>{{ carInfo.year }}</p>
 		</div>
 	</div>
 </app-card>

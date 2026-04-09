@@ -4,10 +4,11 @@ import {
 	collection,
 	collectionData,
 	Firestore,
+	query,
 	serverTimestamp,
+	where,
 } from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
-import { carsByOwnerId } from '@core/api/queries/cars';
 import type { Car, CarWithoutId } from 'models/car';
 import { from, map, type Observable } from 'rxjs';
 
@@ -17,7 +18,7 @@ export class GarageService {
 
 	getCarsByOwnerId(ownerId: string): Observable<Car[]> {
 		const cars = collection(this.firestore, COLLECTIONS.Cars);
-		const carsQuery = carsByOwnerId(cars, ownerId);
+		const carsQuery = query(cars, where('ownerId', '==', ownerId));
 		return collectionData(carsQuery, { idField: 'id' }) as Observable<Car[]>;
 	}
 

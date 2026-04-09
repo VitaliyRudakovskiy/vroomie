@@ -1,17 +1,25 @@
 @use 'mixins' as *;
 
+:host {
+	margin-top: 2px;
+}
+
 .card-content {
 	display: flex;
-	gap: 24px;
+	gap: 16px;
 
 	&__image {
-		border-radius: 20px;
-		width: 200px;
+		border-radius: 16px;
+		width: 100px;
 		object-fit: cover;
 	}
 
 	&__info {
 		@include flex-column();
 		gap: 8px;
+
+		.brand {
+			font-weight: 700;
+		}
 	}
 }

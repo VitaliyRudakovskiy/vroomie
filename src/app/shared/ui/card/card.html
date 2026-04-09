@@ -1,3 +1,8 @@
-<div class="neubrutal-card" [style.max-width]="maxWidth()" [style.padding]="padding()">
+<div
+	class="neubrutal-card"
+	[style.max-width]="maxWidth()"
+	[style.padding]="padding()"
+	[class.interactive]="isInteractive()"
+>
 	<ng-content></ng-content>
 </div>

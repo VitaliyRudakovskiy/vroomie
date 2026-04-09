@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { booleanAttribute, Component, input } from '@angular/core';
 
 @Component({
 	selector: 'app-card',
@@ -8,4 +8,5 @@ import { Component, input } from '@angular/core';
 export class Card {
 	maxWidth = input('100%');
 	padding = input('24px');
+	isInteractive = input(false, { transform: booleanAttribute });
 }
