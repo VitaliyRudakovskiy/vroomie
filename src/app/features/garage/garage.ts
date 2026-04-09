@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
@@ -12,7 +11,7 @@ import { CarModal } from './components/car-modal/car-modal';
 	selector: 'app-garage',
 	templateUrl: './garage.html',
 	styleUrl: './garage.scss',
-	imports: [Button, CarModal, AsyncPipe, Loader, Car],
+	imports: [Button, CarModal, Loader, Car],
 })
 export class Garage {
 	private readonly store = inject(Store);
@@ -21,8 +20,8 @@ export class Garage {
 	isCarModalOpen = signal(false);
 	userProfile = this.userService.userProfile;
 
-	readonly cars$ = this.store.select(selectCars);
-	readonly loading$ = this.store.select(selectLoading);
+	readonly cars = this.store.selectSignal(selectCars);
+	readonly loading = this.store.selectSignal(selectLoading);
 
 	constructor() {
 		effect(() => {

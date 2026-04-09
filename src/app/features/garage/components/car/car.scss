@@ -8,12 +8,6 @@
 	display: flex;
 	gap: 16px;
 
-	&__image {
-		border-radius: 16px;
-		width: 100px;
-		object-fit: cover;
-	}
-
 	&__info {
 		@include flex-column();
 		gap: 8px;

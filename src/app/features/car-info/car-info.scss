@@ -6,9 +6,8 @@
 	flex: 1;
 }
 
-.garage-section {
+.car-info-section {
 	@include flex-column();
-	position: relative;
 	flex: 1;
 
 	.main-content {

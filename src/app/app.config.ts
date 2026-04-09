@@ -6,8 +6,10 @@ import {
 	provideZonelessChangeDetection,
 } from '@angular/core';
 
-import { initializeApp } from '@angular/fire/app';
-import { provideRouter } from '@angular/router';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -15,23 +17,22 @@ import { GarageEffects } from 'store/garage/effects';
 import { garageReducer } from 'store/garage/reducers';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
-
-if (typeof window !== 'undefined') {
-	initializeApp(environment.firebase);
-}
+import { carInfoReducer } from 'store/car-info/reducers';
+import { CarInfoEffects } from 'store/car-info/effects';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideBrowserGlobalErrorListeners(),
-		provideRouter(routes),
+		provideRouter(routes, withComponentInputBinding()),
 		provideHttpClient(),
 		provideZonelessChangeDetection(),
 
 		// NgRx
 		provideStore({
 			garage: garageReducer,
+			carInfo: carInfoReducer,
 		}),
-		provideEffects([GarageEffects]),
+		provideEffects([GarageEffects, CarInfoEffects]),
 		provideStoreDevtools({
 			maxAge: 25,
 			logOnly: !isDevMode(),
@@ -40,9 +41,9 @@ export const appConfig: ApplicationConfig = {
 			traceLimit: 75,
 		}),
 
-		// Firebase providers
-		// provideFirebaseApp(() => initializeApp(environment.firebase)),
-		// provideAuth(() => getAuth()),
-		// provideFirestore(() => getFirestore()),
+		// Firebase
+		provideFirebaseApp(() => initializeApp(environment.firebase)),
+		provideAuth(() => getAuth()),
+		provideFirestore(() => getFirestore()),
 	],
 };

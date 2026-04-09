@@ -19,6 +19,10 @@ export const routes: Routes = [
 				loadComponent: () => import('./features/garage/garage').then((m) => m.Garage),
 			},
 			{
+				path: 'garage/:carId',
+				loadComponent: () => import('./features/car-info/car-info').then((m) => m.CarInfo),
+			},
+			{
 				path: 'services',
 				loadComponent: () => import('./features/services/services').then((m) => m.Services),
 			},

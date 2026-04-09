@@ -6,7 +6,7 @@
 		</div>
 
 		<div class="main-content__container">
-			@if (loading$ | async) {
+			@if (loading()) {
 				<app-loader
 					description="Loading your cars..."
 					[spinnerSize]="64"
@@ -14,7 +14,7 @@
 					[withBlur]="false"
 				/>
 			} @else {
-				@for (car of cars$ | async; track car.id) {
+				@for (car of cars(); track car.id) {
 					<app-car [car]="car" />
 				}
 			}

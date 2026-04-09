@@ -8,6 +8,10 @@ export const GarageActions = createActionGroup({
 		'Load Cars Success': props<{ cars: Car[] }>(),
 		'Load Cars Failure': props<{ error: string }>(),
 
+		'Load Car Info': props<{ carid: string }>(),
+		'Load Car Success': props<{ car: Car }>(),
+		'Load Car Failure': props<{ error: string }>(),
+
 		'Add Car': props<{ car: CarWithoutId }>(),
 		'Add Car Success': props<{ car: Car }>(),
 		'Add Car Failure': props<{ error: string }>(),

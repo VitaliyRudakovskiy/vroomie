@@ -3,6 +3,7 @@
 	[style.max-width]="maxWidth()"
 	[style.padding]="padding()"
 	[class.interactive]="isInteractive()"
+	(click)="onClick()"
 >
 	<ng-content></ng-content>
 </div>

@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input } from '@angular/core';
+import { booleanAttribute, Component, input, output } from '@angular/core';
 
 @Component({
 	selector: 'app-card',
@@ -9,4 +9,10 @@ export class Card {
 	maxWidth = input('100%');
 	padding = input('24px');
 	isInteractive = input(false, { transform: booleanAttribute });
+
+	clicked = output();
+
+	onClick(): void {
+		this.clicked.emit();
+	}
 }
