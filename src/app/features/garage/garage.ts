@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
+import { afterNextRender, Component, effect, Injector, inject, signal } from '@angular/core';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
 import { Button, Loader } from '@shared/ui';
@@ -25,11 +25,16 @@ export class Garage {
 	readonly loading$ = this.store.select(selectLoading);
 
 	constructor() {
-		effect(() => {
-			const user = this.userProfile();
-			if (user?.uid) {
-				this.store.dispatch(GarageActions.loadCars({ userId: user.uid }));
-			}
+		afterNextRender(() => {
+			effect(
+				() => {
+					const user = this.userProfile();
+					if (user?.uid) {
+						this.store.dispatch(GarageActions.loadCars({ userId: user.uid }));
+					}
+				},
+				{ injector: inject(Injector) },
+			);
 		});
 	}
 
@@ -40,6 +45,4 @@ export class Garage {
 	closeCarModal(): void {
 		this.isCarModalOpen.set(false);
 	}
-
-	saveCar(): void {}
 }
