@@ -8,7 +8,6 @@ import {
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -41,6 +40,6 @@ export const appConfig: ApplicationConfig = {
 		// Firebase providers
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		provideAuth(() => getAuth()),
-		provideFirestore(() => getFirestore()),
+		// provideFirestore(() => getFirestore()),
 	],
 };
