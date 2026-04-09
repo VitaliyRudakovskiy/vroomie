@@ -5,7 +5,6 @@ import {
 	collectionData,
 	Firestore,
 	query,
-	serverTimestamp,
 	where,
 } from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
@@ -25,11 +24,11 @@ export class GarageService {
 	addCar(car: CarWithoutId): Observable<Car> {
 		const cars = collection(this.firestore, COLLECTIONS.Cars);
 
-		const carWithTimestamps = {
+		const carWithDate = {
 			...car,
-			createdAt: serverTimestamp(),
+			createdAt: new Date(),
 		};
 
-		return from(addDoc(cars, carWithTimestamps)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
+		return from(addDoc(cars, carWithDate)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
 	}
 }

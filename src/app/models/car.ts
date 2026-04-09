@@ -1,5 +1,3 @@
-import type { Timestamp } from '@angular/fire/firestore';
-
 export interface Car {
 	id: string;
 	ownerId: string;
@@ -10,9 +8,9 @@ export interface Car {
 	vin: string | null;
 	currentOdometer: number;
 	photoUrl: string | null;
-	boughtDate: Timestamp | null;
-	lastServiceDate: Timestamp | null;
-	createdAt: Timestamp | null;
+	boughtDate: Date | null;
+	lastServiceDate: Date | null;
+	createdAt: Date | null;
 }
 
 export type CarWithoutId = Omit<Car, 'id'>;

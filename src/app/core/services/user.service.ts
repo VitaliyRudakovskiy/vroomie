@@ -1,13 +1,5 @@
 import { effect, Injectable, inject, signal } from '@angular/core';
-import {
-	type DocumentReference,
-	doc,
-	Firestore,
-	getDoc,
-	serverTimestamp,
-	setDoc,
-	type Timestamp,
-} from '@angular/fire/firestore';
+import { type DocumentReference, doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import type { User } from 'firebase/auth';
 import type { UserProfile } from 'models/user-profile';
@@ -62,16 +54,11 @@ export class UserService {
 		try {
 			const userRef = this.getUserDocRef(userId);
 
-			const dataToUpdate = {
-				...updatedData,
-				updatedAt: serverTimestamp() as Timestamp,
-			};
-
-			await setDoc(userRef, dataToUpdate, { merge: true });
+			await setDoc(userRef, updatedData, { merge: true });
 			const currentProfile = this.userProfile();
 
 			if (currentProfile) {
-				this.userProfile.set({ ...currentProfile, ...dataToUpdate });
+				this.userProfile.set({ ...currentProfile, ...updatedData });
 			}
 			this.logger.info(`User profile updated for UID: ${userId}`);
 		} catch (error) {
@@ -109,7 +96,7 @@ export class UserService {
 			email: user.email ?? '',
 			displayName: user.displayName ?? 'New user',
 			photoUrl: user.photoURL ?? null,
-			createdAt: serverTimestamp() as Timestamp,
+			createdAt: new Date(),
 			friends: [],
 		};
 	}
