@@ -1,5 +1,14 @@
-import { effect, Injectable, inject, signal } from '@angular/core';
-import { type DocumentReference, doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { isPlatformBrowser } from '@angular/common';
+import { effect, Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
+import { getApp } from '@angular/fire/app';
+import {
+	type DocumentReference,
+	doc,
+	type Firestore,
+	getDoc,
+	getFirestore,
+	setDoc,
+} from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import type { User } from 'firebase/auth';
 import type { UserProfile } from 'models/user-profile';
@@ -8,9 +17,27 @@ import { LoggerService } from './logger.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-	private readonly firestore = inject(Firestore);
+	// private readonly firestore = inject(Firestore);
 	private readonly authService = inject(AuthService);
+	private readonly platformId = inject(PLATFORM_ID);
 	private readonly logger = inject(LoggerService);
+
+	private _db: Firestore | null = null;
+
+	// Геттер для безопасного получения инстанса
+	private get db(): Firestore | null {
+		if (isPlatformBrowser(this.platformId)) {
+			if (!this._db) {
+				try {
+					this._db = getFirestore(getApp());
+				} catch (_e) {
+					return null;
+				}
+			}
+			return this._db;
+		}
+		return null;
+	}
 
 	userProfile = signal<UserProfile | null>(null);
 
@@ -31,6 +58,10 @@ export class UserService {
 	}
 
 	async createUserProfile(user: User): Promise<void> {
+		if (!isPlatformBrowser(this.platformId)) {
+			return;
+		}
+
 		const userRef = this.getUserDocRef(user.uid);
 		const userSnapshot = await getDoc(userRef);
 
@@ -45,6 +76,10 @@ export class UserService {
 	}
 
 	async updateUserProfile(updatedData: Partial<UserProfile>): Promise<void> {
+		if (!isPlatformBrowser(this.platformId)) {
+			return;
+		}
+
 		const userId = this.userProfile()?.uid;
 		if (!userId) {
 			this.logger.error('No user is currently logged in.');
@@ -87,7 +122,11 @@ export class UserService {
 	}
 
 	private getUserDocRef(uid: string): DocumentReference {
-		return doc(this.firestore, COLLECTIONS.Users, uid);
+		const db = this.db;
+		if (!db) {
+			throw new Error('Firestore is not available (Server Side)');
+		}
+		return doc(db, COLLECTIONS.Users, uid);
 	}
 
 	private createUser(user: User): UserProfile {

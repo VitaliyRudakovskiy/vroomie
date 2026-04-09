@@ -83,15 +83,15 @@ export class GarageService {
 		const cars = collection(db, COLLECTIONS.Cars);
 		const carsQuery = query(cars, where('ownerId', '==', ownerId));
 
-		return (collectionData(carsQuery, { idField: 'id' }) as Observable<any[]>).pipe(
+		return (collectionData(carsQuery, { idField: 'id' }) as Observable<Car[]>).pipe(
 			map((cars) =>
 				cars.map(
 					(car) =>
 						({
 							...car,
-							boughtDate: car.boughtDate?.toMillis?.() || car.boughtDate || null,
-							lastServiceDate: car.lastServiceDate?.toMillis?.() || car.lastServiceDate || null,
-							createdAt: car.createdAt?.toMillis?.() || car.createdAt || null,
+							boughtDate: car.boughtDate || null,
+							lastServiceDate: car.lastServiceDate || null,
+							createdAt: car.createdAt || null,
 						}) as Car,
 				),
 			),

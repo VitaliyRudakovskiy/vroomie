@@ -6,8 +6,7 @@ import {
 	provideZonelessChangeDetection,
 } from '@angular/core';
 
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
+import { initializeApp } from '@angular/fire/app';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -16,6 +15,10 @@ import { GarageEffects } from 'store/garage/effects';
 import { garageReducer } from 'store/garage/reducers';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
+
+if (typeof window !== 'undefined') {
+	initializeApp(environment.firebase);
+}
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -38,8 +41,8 @@ export const appConfig: ApplicationConfig = {
 		}),
 
 		// Firebase providers
-		provideFirebaseApp(() => initializeApp(environment.firebase)),
-		provideAuth(() => getAuth()),
+		// provideFirebaseApp(() => initializeApp(environment.firebase)),
+		// provideAuth(() => getAuth()),
 		// provideFirestore(() => getFirestore()),
 	],
 };
