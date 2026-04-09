@@ -8,9 +8,9 @@ export interface Car {
 	vin: string | null;
 	currentOdometer: number;
 	photoUrl: string | null;
-	boughtDate: Date | null;
-	lastServiceDate: Date | null;
-	createdAt: Date | null;
+	boughtDate: number | null;
+	lastServiceDate: number | null;
+	createdAt: number | null;
 }
 
 export type CarWithoutId = Omit<Car, 'id'>;

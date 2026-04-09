@@ -96,7 +96,7 @@ export class UserService {
 			email: user.email ?? '',
 			displayName: user.displayName ?? 'New user',
 			photoUrl: user.photoURL ?? null,
-			createdAt: new Date(),
+			createdAt: Date.now(),
 			friends: [],
 		};
 	}

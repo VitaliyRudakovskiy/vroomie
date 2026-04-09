@@ -3,6 +3,6 @@ export interface UserProfile {
 	email: string;
 	displayName: string;
 	photoUrl: string | null;
-	createdAt: Date;
+	createdAt: number;
 	friends: string[];
 }

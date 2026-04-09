@@ -18,7 +18,20 @@ export class GarageService {
 	getCarsByOwnerId(ownerId: string): Observable<Car[]> {
 		const cars = collection(this.firestore, COLLECTIONS.Cars);
 		const carsQuery = query(cars, where('ownerId', '==', ownerId));
-		return collectionData(carsQuery, { idField: 'id' }) as Observable<Car[]>;
+
+		return (collectionData(carsQuery, { idField: 'id' }) as Observable<Car[]>).pipe(
+			map((cars) =>
+				cars.map(
+					(car) =>
+						({
+							...car,
+							boughtDate: car.boughtDate ?? null,
+							lastServiceDate: car.lastServiceDate ?? null,
+							createdAt: car.createdAt ?? null,
+						}) as Car,
+				),
+			),
+		);
 	}
 
 	addCar(car: CarWithoutId): Observable<Car> {
@@ -26,7 +39,7 @@ export class GarageService {
 
 		const carWithDate = {
 			...car,
-			createdAt: new Date(),
+			createdAt: Date.now(),
 		};
 
 		return from(addDoc(cars, carWithDate)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
