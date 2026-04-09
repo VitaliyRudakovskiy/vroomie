@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Button, Loader } from '@shared/ui';
 import { GarageActions } from 'store/garage/actions';
 import { selectCars, selectLoading } from 'store/garage/selectors';
+import { CarModal } from '../../shared/ui/car-modal/car-modal';
 import { Car } from './components/car/car';
-import { CarModal } from './components/car-modal/car-modal';
 
 @Component({
 	selector: 'app-garage',

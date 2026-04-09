@@ -1,0 +1,19 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.general-info-section {
+	@include flex-column();
+	padding: 0 14px 14px;
+	border-bottom: 2px solid $ink;
+
+	&__content {
+		@include flex-column();
+		gap: 4px;
+		margin-bottom: 8px;
+
+		.brand {
+			font-size: 20px;
+			font-weight: 700;
+		}
+	}
+}

@@ -1,5 +1,5 @@
 import { effect, Injectable, inject, signal } from '@angular/core';
-import { type DocumentReference, doc, getDoc, setDoc, Firestore } from '@angular/fire/firestore';
+import { type DocumentReference, doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import type { User } from 'firebase/auth';
 import type { UserProfile } from 'models/user-profile';

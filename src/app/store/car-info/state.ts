@@ -1,4 +1,4 @@
-import { CarInfoState } from './types';
+import type { CarInfoState } from './types';
 
 export const initialState: CarInfoState = {
 	carInfo: null,

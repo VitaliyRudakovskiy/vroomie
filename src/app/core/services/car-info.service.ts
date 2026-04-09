@@ -1,8 +1,8 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
-import { Car } from 'models/car';
-import { Observable } from 'rxjs';
+import type { Car } from 'models/car';
+import type { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CarinfoService {

@@ -1,6 +1,7 @@
 <section class="car-info-section">
 	<div class="main-content">
 		<div class="main-content__header">
+			<app-button [label]="'< Back'" variant="secondary" size="sm" (clicked)="goBack()" />
 			<h2>Car info</h2>
 		</div>
 
@@ -12,8 +13,8 @@
 					[spinnerThikness]="7"
 					[withBlur]="false"
 				/>
-			} @else {
-				<p>Загружено {{ carInfo()?.make }}</p>
+			} @else if (carInfo()) {
+				<app-general-info [carInfo]="carInfo()!" />
 			}
 		</div>
 	</div>

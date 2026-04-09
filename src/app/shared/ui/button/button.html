@@ -1,5 +1,6 @@
 <button
 	class="custom-button"
+	[class.primary]="variant() === 'primary'"
 	[class.secondary]="variant() === 'secondary'"
 	[class.danger]="variant() === 'danger'"
 	[class.icon-only]="iconOnly() !== null"

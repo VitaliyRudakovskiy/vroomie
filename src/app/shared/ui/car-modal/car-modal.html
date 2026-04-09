@@ -1,0 +1,54 @@
+<app-modal-wrapper
+	[visible]="visible()"
+	[modalTitle]="selectedCar() ? 'Editing' : 'Adding' + ' car'"
+	[innerPadding]="20"
+	(closeModal)="onClose()"
+>
+	<div class="form-container" [formGroup]="form">
+		<div class="global-form-field-container required">
+			<input
+				id="make"
+				type="text"
+				placeholder="make"
+				formControlName="make"
+				[maxlength]="config.make.max"
+			/>
+		</div>
+		<div class="global-form-field-container">
+			<input
+				id="model"
+				type="text"
+				placeholder="model"
+				formControlName="model"
+				[maxlength]="config.model.max"
+			/>
+		</div>
+		<div class="global-form-field-container">
+			<input
+				id="vin"
+				type="text"
+				placeholder="VIN number"
+				formControlName="vin"
+				[maxlength]="config.vin.max"
+			/>
+		</div>
+		<div class="global-form-field-container">
+			<input
+				id="currentOdometer"
+				type="text"
+				placeholder="odometer value"
+				formControlName="currentOdometer"
+				appOnlyNumbers
+				[maxlength]="config.odometer.max"
+			/>
+		</div>
+	</div>
+	<div class="buttons">
+		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
+		<app-button
+			[label]="selectedCar() ? 'Edit' : 'Add'"
+			(clicked)="onSave()"
+			[disabled]="isSubmitDisabled()"
+		/>
+	</div>
+</app-modal-wrapper>

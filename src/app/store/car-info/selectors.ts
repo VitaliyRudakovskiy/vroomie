@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CarInfoState } from './types';
+import type { CarInfoState } from './types';
 
 export const selectCarInfoState = createFeatureSelector<CarInfoState>('carInfo');
 

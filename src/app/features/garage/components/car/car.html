@@ -3,13 +3,10 @@
 <app-card class="app-card" padding="12px" isInteractive (clicked)="clickCard()">
 	<div class="card-content">
 		<div class="card-content__info">
-			<p class="brand">{{ carInfo.make }} {{ carInfo.model }} - {{ carInfo.year }}</p>
-			<p class="year">{{ carInfo.currentOdometer }} km</p>
+			<p class="brand">{{ carInfo.make }} {{ carInfo.model }}</p>
+			<p class="odometer">{{ carInfo.currentOdometer }} km</p>
 			@if (carInfo.vin) {
 				<p class="vin">VIN: {{ carInfo.vin }}</p>
-			}
-			@if (carInfo.lastServiceDate) {
-				<p>Last service: {{ carInfo.lastServiceDate }}</p>
 			}
 		</div>
 	</div>

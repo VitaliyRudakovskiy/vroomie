@@ -1,0 +1,22 @@
+<section class="general-info-section">
+	<div class="general-info-section__content">
+		<p class="brand">{{ carInfo().make }} {{ carInfo().model }}</p>
+		<p>
+			<b>Odometer:</b>
+			{{ carInfo().currentOdometer }} km
+		</p>
+		<p>
+			<b>VIN:</b>
+			{{ carInfo().vin ?? 'vin' }}
+		</p>
+	</div>
+
+	<app-button label="Change" size="sm" (clicked)="openEditModal()" />
+</section>
+
+<app-car-modal
+	[userId]="userProfile()?.uid ?? ''"
+	[visible]="isEditModalOpen()"
+	[selectedCar]="carInfo()"
+	(closeModal)="closeEditModal()"
+/>

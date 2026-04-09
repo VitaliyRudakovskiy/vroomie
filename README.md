@@ -75,13 +75,9 @@ cars/{carId}
   "ownerId": "string",      // id владельца
   "make": "string",         // марка
   "model": "string",        // модель
-  "year": "number",         // год выпуска
-  "boughtDate": "timestamp" // дата приобретения
-  "bodyType": "string",     // тип кузова (BodyTypes будет лежать локально на фронте в константе)
   "vin": "string",          // VIN-номер
   "currentOdometer": "number" // текущее показание одометра (может обновляться вручную или по последним ремонтам)
   "photoUrl": "string",     // ссылка на картинку
-  "lastServiceDate": "timestamp" // дата последнего ремонта
   "createdAt": "timestamp"  // дата добавления в гараж
 }
 ```

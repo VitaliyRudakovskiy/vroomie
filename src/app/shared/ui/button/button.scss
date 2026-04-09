@@ -2,135 +2,142 @@
 @use 'variables' as *;
 
 .custom-button {
-  @include inline-flex-center();
-  @include brutal-interactive();
-  max-width: 100%;
-  position: relative;
-  appearance: none;
-  outline: none;
-  user-select: none;
-  border: $brutal-border solid $ink;
-  border-radius: $radius-main;
-  background-color: $color-primary;
-  color: $ink;
-  padding: 12px 24px;
-  box-shadow: $brutal-shadow-offset $brutal-shadow-offset 0px 0px $ink;
+	@include inline-flex-center();
+	@include brutal-interactive();
+	max-width: 100%;
+	position: relative;
+	appearance: none;
+	outline: none;
+	user-select: none;
+	border: $brutal-border solid $ink;
+	border-radius: $radius-main;
+	color: $ink;
+	box-shadow: $brutal-shadow-offset $brutal-shadow-offset 0px 0px $ink;
 
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 1rem;
-  white-space: nowrap;
-  line-height: 1;
+	font-family: inherit;
+	font-weight: 500;
+	white-space: nowrap;
+	line-height: 1;
 
-  .button-main {
-    @include inline-flex-center();
-    gap: 16px;
-    white-space: normal;
-    word-break: break-word;
-    transition: $transition-main;
-  }
+	.button-main {
+		@include inline-flex-center();
+		gap: 16px;
+		white-space: normal;
+		word-break: break-word;
+		transition: $transition-main;
+	}
 
-  .button-spinner {
-    @include inline-flex-center();
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: $transition-main;
-  }
+	.button-spinner {
+		@include inline-flex-center();
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		pointer-events: none;
+		transition: $transition-main;
+	}
 
-  &.secondary {
-    background-color: $color-secondary;
-    color: $ink;
-  }
+	&.primary {
+		background-color: $color-primary;
+		color: $ink;
+	}
 
-  &.danger {
-    background-color: $color-danger;
-    color: $ink;
-  }
+	&.secondary {
+		background-color: $color-secondary;
+		color: $ink;
+	}
 
-  &.icon-only {
-    @include inline-flex-center();
-    all: unset;
-    cursor: pointer;
-    padding: 8px;
-  }
+	&.danger {
+		background-color: $color-danger;
+		color: $ink;
+	}
 
-  &.sm {
-    padding: 8px 18px;
-    font-size: 12px;
-  }
+	&.icon-only {
+		@include inline-flex-center();
+		all: unset;
+		cursor: pointer;
+		padding: 8px;
+	}
 
-  &.lg {
-    padding: 16px 32px;
-    font-size: 18px;
-  }
+	&.md {
+		padding: 12px 24px;
+		font-size: 16px;
+	}
 
-  &.full-width {
-    width: 100%;
-  }
+	&.sm {
+		padding: 8px 18px;
+		font-size: 12px;
+	}
 
-  &:disabled {
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: 2px 2px 0px 0px $ink;
-    opacity: 0.6;
-  }
+	&.lg {
+		padding: 16px 32px;
+		font-size: 18px;
+	}
 
-  img {
-    width: 18px;
-    height: 18px;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    image-rendering: -webkit-optimize-contrast;
-    pointer-events: none;
-  }
+	&.full-width {
+		width: 100%;
+	}
 
-  &.loading {
-    pointer-events: none;
-    opacity: 0.8;
+	&:disabled {
+		cursor: not-allowed;
+		transform: none;
+		box-shadow: 2px 2px 0px 0px $ink;
+		opacity: 0.6;
+	}
 
-    .button-main {
-      opacity: 0;
-    }
+	img {
+		width: 18px;
+		height: 18px;
+		backface-visibility: hidden;
+		transform: translateZ(0);
+		image-rendering: -webkit-optimize-contrast;
+		pointer-events: none;
+	}
 
-    .button-spinner {
-      opacity: 1;
-    }
-  }
+	&.loading {
+		pointer-events: none;
+		opacity: 0.8;
 
-  .spinner {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid $spinner;
-    border-top-color: $white;
-    animation: spin 0.7s linear infinite;
-  }
+		.button-main {
+			opacity: 0;
+		}
 
-  &.secondary .spinner {
-    border-color: $spinner-secondary;
-    border-top-color: $gray;
-  }
+		.button-spinner {
+			opacity: 1;
+		}
+	}
 
-  &.danger .spinner {
-    border-color: $spinner;
-    border-top-color: $white;
-  }
+	.spinner {
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		border: 2px solid $spinner;
+		border-top-color: $white;
+		animation: spin 0.7s linear infinite;
+	}
 
-  &.sm .spinner {
-    width: 14px;
-    height: 14px;
-  }
+	&.secondary .spinner {
+		border-color: $spinner-secondary;
+		border-top-color: $gray;
+	}
 
-  &.lg .spinner {
-    width: 18px;
-    height: 18px;
-  }
+	&.danger .spinner {
+		border-color: $spinner;
+		border-top-color: $white;
+	}
+
+	&.sm .spinner {
+		width: 14px;
+		height: 14px;
+	}
+
+	&.lg .spinner {
+		width: 18px;
+		height: 18px;
+	}
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }

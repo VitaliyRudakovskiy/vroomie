@@ -13,12 +13,12 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { CarInfoEffects } from 'store/car-info/effects';
+import { carInfoReducer } from 'store/car-info/reducers';
 import { GarageEffects } from 'store/garage/effects';
 import { garageReducer } from 'store/garage/reducers';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
-import { carInfoReducer } from 'store/car-info/reducers';
-import { CarInfoEffects } from 'store/car-info/effects';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
