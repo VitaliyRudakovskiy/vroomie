@@ -10,7 +10,7 @@ export interface Car {
 	photoUrl: string | null;
 	boughtDate: number | null;
 	lastServiceDate: number | null;
-	createdAt: number | null;
+	createdAt: number;
 }
 
 export type CarWithoutId = Omit<Car, 'id'>;

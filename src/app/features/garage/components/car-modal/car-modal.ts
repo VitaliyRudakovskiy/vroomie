@@ -60,7 +60,7 @@ export class CarModal {
 			photoUrl: null,
 			boughtDate: null,
 			lastServiceDate: null,
-			createdAt: null,
+			createdAt: Date.now(),
 		};
 
 		this.store.dispatch(GarageActions.addCar({ car }));
