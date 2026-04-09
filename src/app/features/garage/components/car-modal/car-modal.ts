@@ -1,12 +1,12 @@
 import { Component, inject, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { Store } from '@ngrx/store';
 import { BODY_TYPES_LIST } from '@shared/constants/body-types';
 import { Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
 import type { CarWithoutId } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
-import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 
 @Component({
 	selector: 'app-car-modal',
