@@ -1,20 +1,20 @@
-import { Component, computed, effect, inject, input, output } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { Store } from '@ngrx/store';
 import { CAR_INFO_CONFIG } from '@shared/constants/car-info-config';
-import { CAR_MAKES } from '@shared/constants/car-makes';
 import { Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
 import type { Car, CarFormOnly, CarWithoutId } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
+import { AutocompleteDropdown } from './autocomplete-dropdown/autocomplete-dropdown';
 
 @Component({
 	selector: 'app-car-modal',
 	templateUrl: './car-modal.html',
 	styleUrl: './car-modal.scss',
-	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective],
+	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective, AutocompleteDropdown],
 })
 export class CarModal {
 	private readonly store = inject(Store);
@@ -26,8 +26,9 @@ export class CarModal {
 	confirm = output();
 	closeModal = output();
 
+	isMakeDropdownOpen = signal(false);
+
 	protected config = CAR_INFO_CONFIG;
-	protected carMakes = CAR_MAKES;
 
 	protected form = new FormGroup({
 		make: new FormControl('', [
@@ -53,6 +54,7 @@ export class CarModal {
 
 	private formValue = toSignal(this.form.valueChanges, { initialValue: this.form.value });
 	private formStatus = toSignal(this.form.statusChanges, { initialValue: this.form.status });
+	makeSearchTerm = toSignal(this.form.controls.make.valueChanges, { initialValue: '' });
 
 	protected isSubmitDisabled = computed(() => {
 		if (this.formStatus() === 'INVALID') return true;
@@ -78,6 +80,18 @@ export class CarModal {
 			const { make, model, vin, currentOdometer } = car;
 			this.form.patchValue({ make, model, vin, currentOdometer });
 		});
+
+		this.form.controls.make.valueChanges.subscribe((val) => {
+			const searchTerm = val || '';
+
+			if (searchTerm.trim().length > 0) this.isMakeDropdownOpen.set(true);
+			else this.isMakeDropdownOpen.set(false);
+		});
+	}
+
+	selectMake(make: string) {
+		this.form.controls.make.setValue(make, { emitEvent: false });
+		this.isMakeDropdownOpen.set(false);
 	}
 
 	onClose(): void {

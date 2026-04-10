@@ -13,11 +13,16 @@
 		top: 3px;
 		right: 8px;
 		color: red;
+		transition: $transition-main;
 	}
 
 	input,
 	select {
 		@include neubrutal-input();
+
+		&:focus + .required-mark {
+			transform: translate(-2px, -2px);
+		}
 	}
 
 	select {

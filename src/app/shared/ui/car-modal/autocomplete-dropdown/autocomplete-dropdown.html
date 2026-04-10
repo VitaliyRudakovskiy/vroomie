@@ -1,0 +1,7 @@
+@if (filteredMakes().length > 0) {
+	<ul class="autocomplete-dropdown">
+		@for (make of filteredMakes(); track make) {
+			<li class="option" (mousedown)="onSelect(make)">{{ make }}</li>
+		}
+	</ul>
+}

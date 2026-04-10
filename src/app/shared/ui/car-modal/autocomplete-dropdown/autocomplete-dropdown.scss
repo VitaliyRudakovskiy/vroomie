@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.autocomplete-dropdown {
+	@include flex-column();
+	margin-top: 16px;
+	max-height: 151px;
+	overflow-y: auto;
+
+	.option {
+		cursor: pointer;
+		padding: 5px;
+		transition: $transition-main;
+
+		&:hover {
+			background-color: $color-primary;
+		}
+	}
+}
