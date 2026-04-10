@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { CAR_INFO_CONFIG } from '@shared/constants/car-info-config';
 import { Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
-import type { Car, CarWithoutId } from 'models/car';
+import type { Car, CarFormOnly, CarWithoutId } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
 
 @Component({
@@ -52,14 +52,10 @@ export class CarModal {
 	private formStatus = toSignal(this.form.statusChanges, { initialValue: this.form.status });
 
 	protected isSubmitDisabled = computed(() => {
-		if (this.formStatus() === 'INVALID') {
-			return true;
-		}
+		if (this.formStatus() === 'INVALID') return true;
 
 		const car = this.selectedCar();
-		if (!car) {
-			return false;
-		}
+		if (!car) return false;
 
 		const current = this.formValue();
 		const isChanged =
@@ -73,10 +69,11 @@ export class CarModal {
 
 	constructor() {
 		effect(() => {
-			if (this.selectedCar()) {
-				const { make, model, vin, currentOdometer } = this.selectedCar()!;
-				this.form.patchValue({ make, model, vin, currentOdometer });
-			}
+			const car = this.selectedCar();
+			if (!car) return;
+
+			const { make, model, vin, currentOdometer } = car;
+			this.form.patchValue({ make, model, vin, currentOdometer });
 		});
 	}
 
@@ -85,22 +82,37 @@ export class CarModal {
 	}
 
 	onSave(): void {
-		const { make, model, vin, currentOdometer } = this.form.value;
-		if (!make || !model || !vin || !currentOdometer) {
+		if (this.form.invalid) {
 			return;
 		}
 
-		const car: CarWithoutId = {
-			ownerId: this.userId(),
+		const { make, model, vin, currentOdometer } = this.form.getRawValue();
+		const selectedCar = this.selectedCar();
+
+		if (!make || !model || !currentOdometer) {
+			return;
+		}
+
+		const carData: CarFormOnly = {
 			make,
 			model,
-			vin,
+			vin: vin ?? null,
 			currentOdometer,
-			photoUrl: null,
-			createdAt: Date.now(),
 		};
 
-		this.store.dispatch(GarageActions.addCar({ car }));
+		if (selectedCar) {
+			this.store.dispatch(GarageActions.updateCar({ carId: selectedCar.id, car: carData }));
+		} else {
+			const newCar: CarWithoutId = {
+				...carData,
+				ownerId: this.userId(),
+				photoUrl: null,
+				createdAt: Date.now(),
+			};
+
+			this.store.dispatch(GarageActions.addCar({ car: newCar }));
+		}
+
 		this.onClose();
 	}
 }

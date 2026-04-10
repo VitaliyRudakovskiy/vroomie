@@ -55,9 +55,7 @@ export class NotificationService {
 
 	private startFadeOut(callback?: () => void): void {
 		const current = this.notification();
-		if (!current) {
-			return;
-		}
+		if (!current) return;
 
 		this.notification.set({ ...current, fadingOut: true });
 

@@ -40,4 +40,22 @@ export const garageReducer = createReducer(
 		error,
 		loading: false,
 	})),
+
+	on(GarageActions.updateCar, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(GarageActions.updateCarSuccess, (state, { car }) => ({
+		...state,
+		cars: state.cars.map((c) => (c.id === car.id ? car : c)),
+		loading: false,
+	})),
+
+	on(GarageActions.updateCarFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
 );

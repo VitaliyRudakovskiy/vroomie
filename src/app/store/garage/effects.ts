@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { GarageService } from '@core/services/garage.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import type { Car } from 'models/car';
 import { catchError, exhaustMap, map, of, switchMap, take } from 'rxjs';
 import { GarageActions } from './actions';
 
@@ -29,6 +30,18 @@ export class GarageEffects {
 				this.garageService.addCar(car).pipe(
 					map((newCar) => GarageActions.addCarSuccess({ car: newCar })),
 					catchError((err) => of(GarageActions.addCarFailure({ error: err.message }))),
+				),
+			),
+		),
+	);
+
+	updateCar$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(GarageActions.updateCar),
+			exhaustMap(({ carId, car }) =>
+				this.garageService.updateCar(carId, car).pipe(
+					map(() => GarageActions.updateCarSuccess({ car: { ...car, id: carId } as Car })),
+					catchError((error) => of(GarageActions.updateCarFailure({ error: error.message }))),
 				),
 			),
 		),

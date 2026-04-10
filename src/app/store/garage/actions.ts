@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import type { Car, CarWithoutId } from 'models/car';
+import type { Car, CarFormOnly, CarWithoutId } from 'models/car';
 
 export const GarageActions = createActionGroup({
 	source: 'Garage',
@@ -15,5 +15,9 @@ export const GarageActions = createActionGroup({
 		'Add Car': props<{ car: CarWithoutId }>(),
 		'Add Car Success': props<{ car: Car }>(),
 		'Add Car Failure': props<{ error: string }>(),
+
+		'Update Car': props<{ carId: string; car: CarFormOnly }>(),
+		'Update Car Success': props<{ car: Car }>(),
+		'Update Car Failure': props<{ error: string }>(),
 	},
 });

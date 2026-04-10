@@ -17,9 +17,7 @@ export class UserService {
 	constructor() {
 		effect(() => {
 			const user = this.authService.currentUser();
-			if (!user) {
-				return;
-			}
+			if (!user) return;
 
 			if (!this.authService.currentUser()) {
 				this.userProfile.set(null);

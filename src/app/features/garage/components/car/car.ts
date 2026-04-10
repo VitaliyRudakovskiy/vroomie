@@ -17,9 +17,7 @@ export class Car {
 
 	clickCard(): void {
 		const id = this.car().id;
-		if (!id) {
-			return;
-		}
+		if (!id) return;
 
 		this.router.navigate([id], { relativeTo: this.route });
 	}

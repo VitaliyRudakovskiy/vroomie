@@ -19,27 +19,21 @@ export class LoggerService {
 	private logs = signal<LogEntry[]>([]);
 
 	debug(message: unknown): void {
-		if (environment.production) {
-			return;
-		}
+		if (environment.production) return;
 
 		console.log('[DEBUGGING]', message);
 		this.logs.update((old) => [...old, { message, timestamp: new Date(), type: LogEnum.DEBUG }]);
 	}
 
 	info(message: unknown): void {
-		if (environment.production) {
-			return;
-		}
+		if (environment.production) return;
 
 		console.warn('[INFO]', message);
 		this.logs.update((old) => [...old, { message, timestamp: new Date(), type: LogEnum.INFO }]);
 	}
 
 	error(message: unknown): void {
-		if (environment.production) {
-			return;
-		}
+		if (environment.production) return;
 
 		console.error('[ERROR]', message);
 		this.logs.update((old) => [...old, { message, timestamp: new Date(), type: LogEnum.ERROR }]);
@@ -50,9 +44,7 @@ export class LoggerService {
 	}
 
 	clearHistory(): void {
-		if (environment.production) {
-			return;
-		}
+		if (environment.production) return;
 		this.logs.set([]);
 	}
 }

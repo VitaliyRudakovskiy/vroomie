@@ -10,3 +10,5 @@ export interface Car {
 }
 
 export type CarWithoutId = Omit<Car, 'id'>;
+
+export type CarFormOnly = Pick<Car, 'make' | 'model' | 'vin' | 'currentOdometer'>;

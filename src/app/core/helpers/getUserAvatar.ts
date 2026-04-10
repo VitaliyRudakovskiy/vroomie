@@ -6,9 +6,7 @@ export interface UserAvatarDetails {
 }
 
 export const getUserAvatar = (user: UserProfile | null): UserAvatarDetails => {
-	if (!user) {
-		return { isImage: false, details: '' };
-	}
+	if (!user) return { isImage: false, details: '' };
 
 	if (user?.photoUrl) {
 		return {

@@ -9,9 +9,7 @@ export class OnlyNumbersDirective {
 	onKeyDown(event: KeyboardEvent) {
 		const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Delete'];
 
-		if (allowedKeys.indexOf(event.key) !== -1) {
-			return;
-		}
+		if (allowedKeys.indexOf(event.key) !== -1) return;
 
 		const isNumber = /[0-9]/.test(event.key);
 		if (!isNumber) {
