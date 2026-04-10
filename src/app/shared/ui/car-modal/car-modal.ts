@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { Store } from '@ngrx/store';
 import { CAR_INFO_CONFIG } from '@shared/constants/car-info-config';
+import { CAR_MAKES } from '@shared/constants/car-makes';
 import { Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
 import type { Car, CarFormOnly, CarWithoutId } from 'models/car';
@@ -26,6 +27,7 @@ export class CarModal {
 	closeModal = output();
 
 	protected config = CAR_INFO_CONFIG;
+	protected carMakes = CAR_MAKES;
 
 	protected form = new FormGroup({
 		make: new FormControl('', [
@@ -79,6 +81,7 @@ export class CarModal {
 	}
 
 	onClose(): void {
+		this.resetForm();
 		this.closeModal.emit();
 	}
 
@@ -116,5 +119,16 @@ export class CarModal {
 	protected hasValidationError(formControl: keyof typeof this.form.controls): boolean {
 		const control = this.form.controls[formControl];
 		return !!(control?.touched && control?.invalid);
+	}
+
+	private resetForm() {
+		const carInfo = this.selectedCar();
+
+		if (carInfo) {
+			const { make, model, vin, currentOdometer } = carInfo;
+			this.form.patchValue({ make, model, vin, currentOdometer });
+		} else {
+			this.form.reset();
+		}
 	}
 }

@@ -11,9 +11,16 @@
 				type="text"
 				placeholder="make"
 				formControlName="make"
+				list="car-makes-list"
 				[maxlength]="config.make.max"
 			/>
 			<span class="required-mark">*</span>
+
+			<datalist id="car-makes-list">
+				@for (make of carMakes; track make) {
+					<option [value]="make"></option>
+				}
+			</datalist>
 
 			@if (hasValidationError('make')) {
 				<p class="global-form-error" [class.visible]="hasValidationError('make')">
