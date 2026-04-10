@@ -4,8 +4,8 @@
 	[innerPadding]="20"
 	(closeModal)="onClose()"
 >
-	<div class="form-container" [formGroup]="form">
-		<div class="global-form-field-container required">
+	<div [formGroup]="form">
+		<div class="global-form-field-container">
 			<input
 				id="make"
 				type="text"
@@ -13,7 +13,19 @@
 				formControlName="make"
 				[maxlength]="config.make.max"
 			/>
+			<span class="required-mark">*</span>
+
+			@if (hasValidationError('make')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('make')">
+					@if (form.controls.make.hasError('required')) {
+						Car make is required
+					} @else if (form.controls.make.hasError('minlength')) {
+						Car make must have at least 2 symbols
+					}
+				</p>
+			}
 		</div>
+
 		<div class="global-form-field-container">
 			<input
 				id="model"
@@ -22,16 +34,19 @@
 				formControlName="model"
 				[maxlength]="config.model.max"
 			/>
+			<span class="required-mark">*</span>
+
+			@if (hasValidationError('model')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('model')">
+					@if (form.controls.model.hasError('required')) {
+						Car model is required
+					} @else if (form.controls.model.hasError('minlength')) {
+						Car model must have at least 2 symbols
+					}
+				</p>
+			}
 		</div>
-		<div class="global-form-field-container">
-			<input
-				id="vin"
-				type="text"
-				placeholder="VIN number"
-				formControlName="vin"
-				[maxlength]="config.vin.max"
-			/>
-		</div>
+
 		<div class="global-form-field-container">
 			<input
 				id="currentOdometer"
@@ -41,8 +56,38 @@
 				appOnlyNumbers
 				[maxlength]="config.odometer.max"
 			/>
+			<span class="required-mark">*</span>
+
+			@if (hasValidationError('currentOdometer')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('currentOdometer')">
+					@if (form.controls.currentOdometer.hasError('required')) {
+						Odometer value is required
+					} @else if (form.controls.currentOdometer.hasError('minlength')) {
+						Odometer value is very low
+					}
+				</p>
+			}
+		</div>
+
+		<div class="global-form-field-container">
+			<input
+				id="vin"
+				type="text"
+				placeholder="VIN number"
+				formControlName="vin"
+				[maxlength]="config.vin.max"
+			/>
+
+			@if (hasValidationError('vin')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('vin')">
+					@if (form.controls.vin.hasError('minlength')) {
+						VIN should have exactly 17 symbols
+					}
+				</p>
+			}
 		</div>
 	</div>
+
 	<div class="buttons">
 		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
 		<app-button

@@ -38,13 +38,14 @@ export class CarModal {
 			Validators.minLength(this.config.model.min),
 			Validators.maxLength(this.config.model.max),
 		]),
+		currentOdometer: new FormControl<number | null>(null, [
+			Validators.required,
+			Validators.minLength(this.config.odometer.min),
+			Validators.maxLength(this.config.odometer.max),
+		]),
 		vin: new FormControl('', [
 			Validators.minLength(this.config.vin.min),
 			Validators.maxLength(this.config.vin.max),
-		]),
-		currentOdometer: new FormControl<number | null>(null, [
-			Validators.minLength(this.config.odometer.min),
-			Validators.maxLength(this.config.odometer.max),
 		]),
 	});
 
@@ -61,8 +62,8 @@ export class CarModal {
 		const isChanged =
 			current.make !== car.make ||
 			current.model !== car.model ||
-			current.vin !== car.vin ||
-			current.currentOdometer !== car.currentOdometer;
+			current.currentOdometer !== car.currentOdometer ||
+			current.vin !== car.vin;
 
 		return !isChanged;
 	});
@@ -82,16 +83,12 @@ export class CarModal {
 	}
 
 	onSave(): void {
-		if (this.form.invalid) {
-			return;
-		}
+		if (this.form.invalid) return;
 
 		const { make, model, vin, currentOdometer } = this.form.getRawValue();
 		const selectedCar = this.selectedCar();
 
-		if (!make || !model || !currentOdometer) {
-			return;
-		}
+		if (!make || !model || !currentOdometer) return;
 
 		const carData: CarFormOnly = {
 			make,
@@ -114,5 +111,10 @@ export class CarModal {
 		}
 
 		this.onClose();
+	}
+
+	protected hasValidationError(formControl: keyof typeof this.form.controls): boolean {
+		const control = this.form.controls[formControl];
+		return !!(control?.touched && control?.invalid);
 	}
 }
