@@ -1,10 +1,10 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
+import { CarModal } from '@shared/modals';
 import { Button, Loader } from '@shared/ui';
 import { GarageActions } from 'store/garage/actions';
 import { selectCars, selectLoading } from 'store/garage/selectors';
-import { CarModal } from '../../shared/ui/car-modal/car-modal';
 import { Car } from './components/car/car';
 
 @Component({

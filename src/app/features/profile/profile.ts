@@ -12,7 +12,8 @@ import {
 	MAX_FILE_SIZE_BYTES,
 	MAX_FILE_SIZE_MB,
 } from '@shared/constants/avatar-config';
-import { Button, ConfirmModal, Loader } from '@shared/ui';
+import { ConfirmModal } from '@shared/modals';
+import { Button, Loader } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
 import type { EditingField } from './types';
 

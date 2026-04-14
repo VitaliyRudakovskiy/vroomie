@@ -4,11 +4,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { Store } from '@ngrx/store';
 import { CAR_INFO_CONFIG } from '@shared/constants/car-info-config';
-import { Button } from '@shared/ui';
+import { AutocompleteDropdown, Button } from '@shared/ui';
 import { ModalWrapper } from '@shared/ui/modal-wrapper/modal-wrapper';
 import type { Car, CarFormOnly, CarWithoutId } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
-import { AutocompleteDropdown } from './autocomplete-dropdown/autocomplete-dropdown';
 
 @Component({
 	selector: 'app-car-modal',

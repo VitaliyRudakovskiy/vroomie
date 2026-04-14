@@ -1,7 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { UserService } from '@core/services/user.service';
+import { CarModal } from '@shared/modals';
 import { Button } from '@shared/ui';
-import { CarModal } from '@shared/ui/car-modal/car-modal';
 import type { Car } from 'models/car';
 
 @Component({
