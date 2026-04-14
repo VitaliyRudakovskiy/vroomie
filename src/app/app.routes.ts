@@ -23,6 +23,14 @@ export const routes: Routes = [
 				loadComponent: () => import('./features/car-info/car-info').then((m) => m.CarInfo),
 			},
 			{
+				path: 'garage/:carId/services',
+				loadComponent: () => import('./features/services-page/services').then((m) => m.Services),
+			},
+			{
+				path: 'garage/:carId/plans',
+				loadComponent: () => import('./features/plans-page/plans').then((m) => m.Plans),
+			},
+			{
 				path: 'profile',
 				loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
 			},

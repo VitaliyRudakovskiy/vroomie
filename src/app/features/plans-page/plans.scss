@@ -1,0 +1,7 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+	@include flex-column();
+	flex: 1;
+}

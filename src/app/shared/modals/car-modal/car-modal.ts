@@ -62,12 +62,16 @@ export class CarModal {
 		if (!car) return false;
 
 		const current = this.formValue();
-		const isChanged =
-			current.make !== car.make ||
-			current.model !== car.model ||
-			current.currentOdometer !== car.currentOdometer ||
-			current.vin !== car.vin;
 
+		const isMakeChanged = current.make?.trim() !== car.make?.trim();
+		const isModelChanged = current.model?.trim() !== car.model?.trim();
+		const isOdometerChanged = Number(current.currentOdometer) !== Number(car.currentOdometer);
+
+		const currentVin = current.vin?.trim() || null;
+		const carVin = car.vin?.trim() || null;
+		const isVinChanged = currentVin !== carVin;
+
+		const isChanged = isMakeChanged || isModelChanged || isOdometerChanged || isVinChanged;
 		return !isChanged;
 	});
 
@@ -83,7 +87,8 @@ export class CarModal {
 		this.form.controls.make.valueChanges.subscribe((val) => {
 			const searchTerm = val || '';
 
-			if (searchTerm.trim().length > 0) this.isMakeDropdownOpen.set(true);
+			if (searchTerm.trim().length > 0 && this.form.controls.make.dirty)
+				this.isMakeDropdownOpen.set(true);
 			else this.isMakeDropdownOpen.set(false);
 		});
 	}

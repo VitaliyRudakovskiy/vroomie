@@ -2,25 +2,21 @@
 	<div class="global-main-content">
 		<div class="global-main-content__header">
 			<app-button label="< Back" variant="secondary" size="sm" (clicked)="goBack()" />
-			<h2>Car info</h2>
+			<h2>Services</h2>
 		</div>
 
 		<div class="global-main-content__container">
 			@if (loading()) {
 				<app-loader
-					description="Loading car info..."
+					description="Loading services..."
 					[spinnerSize]="64"
 					[spinnerThikness]="7"
 					[withBlur]="false"
 				/>
-			} @else if (carInfo()) {
-				<div class="full-page-content">
-					<app-general-info [carInfo]="carInfo()!" />
-				</div>
-				<div class="buttons">
-					<app-button label="Plans" fullWidth (clicked)="goToPlans()" />
-					<app-button label="Services" fullWidth (clicked)="goToServices()" />
-				</div>
+			} @else {
+				@for (service of services(); track service.id) {
+					<span>Service</span>
+				}
 			}
 		</div>
 	</div>

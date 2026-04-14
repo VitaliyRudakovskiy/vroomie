@@ -17,6 +17,8 @@ import { CarInfoEffects } from 'store/car-info/effects';
 import { carInfoReducer } from 'store/car-info/reducers';
 import { GarageEffects } from 'store/garage/effects';
 import { garageReducer } from 'store/garage/reducers';
+import { ServicesEffects } from 'store/services/effects';
+import { servicesReducer } from 'store/services/reducers';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
 
@@ -31,8 +33,9 @@ export const appConfig: ApplicationConfig = {
 		provideStore({
 			garage: garageReducer,
 			carInfo: carInfoReducer,
+			services: servicesReducer,
 		}),
-		provideEffects([GarageEffects, CarInfoEffects]),
+		provideEffects([GarageEffects, CarInfoEffects, ServicesEffects]),
 		provideStoreDevtools({
 			maxAge: 25,
 			logOnly: !isDevMode(),

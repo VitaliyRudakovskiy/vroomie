@@ -86,13 +86,14 @@ cars/{carId}
 repairRecords/{recordId} {
   "id": "string",
   "carId": "string",
+  "carName": "string",
+  "carModel": "string",
   "ownerId": "string",
   "categoryId": "string",
   "categoryName": "string",     // "Замена радиатора" -> будут браится из отдельной таблицы
   "notes": "string",          // Текстовые заметки
   "odometer": "number",
-  "totalCost": "number",
-  "currency": "string",       // "USD", "RUB", "EUR"
+  "cost": "number",
   "photoUrls": ["string"],    // Массив URL из Cloudinary
   "completedAt": "timestamp", // дата ремонта
   "createdAt": "timestamp"    // дата добавления записи

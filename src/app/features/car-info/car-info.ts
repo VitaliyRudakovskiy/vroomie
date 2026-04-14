@@ -29,4 +29,12 @@ export class CarInfo implements OnInit {
 	goBack(): void {
 		this.router.navigate(['..'], { relativeTo: this.route });
 	}
+
+	goToPlans(): void {
+		this.router.navigate(['plans'], { relativeTo: this.route });
+	}
+
+	goToServices(): void {
+		this.router.navigate(['services'], { relativeTo: this.route });
+	}
 }
