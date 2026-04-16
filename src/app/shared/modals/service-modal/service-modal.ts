@@ -1,16 +1,14 @@
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ModalWrapper, Button } from '@shared/ui';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
-import { SERVICE_CONFIG } from '@shared/constants/service-config';
 import { dateValidator } from '@core/helpers/date-validator';
-import { ServiceRecordWithoutId } from 'models/service-record';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
-import { selectCarInfo } from 'store/car-info/selectors';
-import { CarInfoActions } from 'store/car-info/actions';
+import { SERVICE_CONFIG } from '@shared/constants/service-config';
+import { Button, ModalWrapper } from '@shared/ui';
+import type { Car } from 'models/car';
+import type { ServiceRecordWithoutId } from 'models/service-record';
 import { ServicesActions } from 'store/services/actions';
-import { Car } from 'models/car';
 
 @Component({
 	selector: 'app-service-modal',
@@ -69,7 +67,7 @@ export class ServiceModal {
 			make: this.carInfo()?.make ?? '',
 			model: this.carInfo()?.model ?? '',
 			date: ms,
-			ownerId: this.currentUser()?.uid!,
+			ownerId: this.currentUser()?.uid || '',
 			photoUrls: null,
 			createdAt: Date.now(),
 		};
@@ -86,8 +84,8 @@ export class ServiceModal {
 		let value = this.serviceForm.controls.date.value || '';
 		value = value.replace(/\D/g, '');
 
-		if (value.length > 2) value = value.slice(0, 2) + '.' + value.slice(2);
-		if (value.length > 5) value = value.slice(0, 5) + '.' + value.slice(5);
+		if (value.length > 2) value = `${value.slice(0, 2)}.${value.slice(2)}`;
+		if (value.length > 5) value = `${value.slice(0, 5)}.${value.slice(5)}`;
 
 		this.serviceForm.controls.date.setValue(value, { emitEvent: false });
 	}

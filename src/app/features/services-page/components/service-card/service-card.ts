@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
-import { ServiceRecord } from 'models/service-record';
-import { Card } from '@shared/ui';
 import { DatePipe } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { Card } from '@shared/ui';
+import type { ServiceRecord } from 'models/service-record';
 
 @Component({
 	selector: 'app-service-card',
