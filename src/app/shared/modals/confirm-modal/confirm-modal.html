@@ -1,7 +1,7 @@
 <app-modal-wrapper [visible]="visible()" [modalTitle]="modalTitle()" (closeModal)="onClose()">
 	<p class="description">{{ description() }}</p>
 
-	<div class="buttons">
+	<div class="global-form-buttons-end">
 		<app-button variant="secondary" [label]="cancelLabel()" (clicked)="onClose()" />
 		<app-button
 			variant="danger"

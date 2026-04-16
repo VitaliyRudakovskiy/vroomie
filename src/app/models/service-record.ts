@@ -4,12 +4,10 @@ export interface ServiceRecord {
 	ownerId: string;
 	make: string;
 	model: string;
-	categoryId: string;
-	categoryName: string;
+	title: string;
 	notes: string;
 	odometer: number;
-	cost: number | null;
+	date: number;
 	photoUrls: string[] | null;
 	createdAt: number;
-	completedAt: number;
 }

@@ -1,15 +1,16 @@
-import { Component, inject, input, type OnInit } from '@angular/core';
+import { Component, inject, input, signal, type OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Button, Loader } from '@shared/ui';
 import { ServicesActions } from 'store/services/actions';
 import { selectLoading, selectServices } from 'store/services/selectors';
+import { ServiceModal } from "@shared/modals";
 
 @Component({
 	selector: 'app-services',
 	templateUrl: './services.html',
 	styleUrl: './services.scss',
-	imports: [Button, Loader],
+	imports: [Button, Loader, ServiceModal],
 })
 export class Services implements OnInit {
 	private readonly store = inject(Store);
@@ -17,6 +18,8 @@ export class Services implements OnInit {
 	private readonly route = inject(ActivatedRoute);
 
 	carId = input.required<string>();
+
+	isServiceModalOpen = signal(false);
 
 	services = this.store.selectSignal(selectServices);
 	loading = this.store.selectSignal(selectLoading);
@@ -27,5 +30,13 @@ export class Services implements OnInit {
 
 	goBack(): void {
 		this.router.navigate(['..'], { relativeTo: this.route });
+	}
+
+	openServiceModal(): void {
+		this.isServiceModalOpen.set(true);
+	}
+
+	closeServiceModal(): void {
+		this.isServiceModalOpen.set(false);
 	}
 }

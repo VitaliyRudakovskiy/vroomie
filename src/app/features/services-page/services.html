@@ -16,8 +16,13 @@
 			} @else {
 				@for (service of services(); track service.id) {
 					<span>Service</span>
+				} @empty {
+					<span class="no-services">It's time to add some service</span>
 				}
+				<app-button class="add-button" label="+ Add Service" (clicked)="openServiceModal()" />
 			}
 		</div>
 	</div>
 </section>
+
+<app-service-modal [visible]="isServiceModalOpen()" (closeModal)="closeServiceModal()" />

@@ -53,3 +53,9 @@
 		display: block;
 	}
 }
+
+.global-form-buttons-end {
+	display: flex;
+	justify-content: flex-end;
+	gap: 16px;
+}

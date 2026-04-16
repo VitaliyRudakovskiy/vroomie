@@ -1,0 +1,79 @@
+<app-modal-wrapper
+	modalTitle="New Service"
+	[visible]="visible()"
+	[innerPadding]="20"
+	(closeModal)="onClose()"
+>
+	<div [formGroup]="serviceForm">
+		<div class="global-form-field-container">
+			<input
+				id="title"
+				type="text"
+				placeholder="title"
+				formControlName="title"
+				[maxlength]="config.title.max"
+			/>
+			<span class="required-mark">*</span>
+
+			@if (hasValidationError('title')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('title')">
+					@if (serviceForm.controls.title.hasError('required')) {
+						Title is required
+					} @else if (serviceForm.controls.title.hasError('minlength')) {
+						Title must have at least 5 symbols
+					}
+				</p>
+			}
+		</div>
+
+		<div class="global-form-field-container">
+			<input id="notes" type="text" placeholder="some notes" formControlName="notes" />
+		</div>
+
+		<div class="global-form-field-container">
+			<input
+				id="odometer"
+				type="text"
+				placeholder="odometer value"
+				formControlName="odometer"
+				appOnlyNumbers
+				[maxlength]="config.odometer.max"
+			/>
+			<span class="required-mark">*</span>
+
+			@if (hasValidationError('odometer')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('odometer')">
+					@if (serviceForm.controls.odometer.hasError('required')) {
+						Odometer is required
+					}
+				</p>
+			}
+		</div>
+
+		<div class="global-form-field-container">
+			<input
+				id="date"
+				type="text"
+				placeholder="date (DD.MM.YYYY)"
+				formControlName="date"
+				appOnlyNumbers
+				[maxlength]="config.date.max"
+        (input)="onFormatDate()"
+			/>
+			<span class="required-mark">*</span>
+
+			@if (hasValidationError('date')) {
+				<p class="global-form-error" [class.visible]="hasValidationError('date')">
+					@if (serviceForm.controls.date.hasError('required')) {
+						Date is required
+					}
+				</p>
+			}
+		</div>
+	</div>
+
+	<div class="global-form-buttons-end">
+		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
+		<app-button label="Add" [disabled]="!serviceForm.valid" (clicked)="onSave()" />
+	</div>
+</app-modal-wrapper>
