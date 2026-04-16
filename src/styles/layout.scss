@@ -30,6 +30,7 @@
 		&__container {
 			@include flex-column();
 			gap: 16px;
+			padding: 0 14px;
 			flex: 1;
 			overflow-y: auto;
 			position: relative;

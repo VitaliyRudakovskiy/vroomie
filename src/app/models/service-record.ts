@@ -11,3 +11,5 @@ export interface ServiceRecord {
 	photoUrls: string[] | null;
 	createdAt: number;
 }
+
+export type ServiceRecordWithoutId = Omit<ServiceRecord, 'id'>;

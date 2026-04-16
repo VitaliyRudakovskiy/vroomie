@@ -58,14 +58,25 @@
 				formControlName="date"
 				appOnlyNumbers
 				[maxlength]="config.date.max"
-        (input)="onFormatDate()"
+				(input)="onFormatDate()"
 			/>
 			<span class="required-mark">*</span>
 
 			@if (hasValidationError('date')) {
+				@let date = serviceForm.controls.date;
 				<p class="global-form-error" [class.visible]="hasValidationError('date')">
-					@if (serviceForm.controls.date.hasError('required')) {
+					@if (date.hasError('required')) {
 						Date is required
+					} @else if (date.hasError('invalidFormat')) {
+						Invalid date format, should be DD.MM.YYYY
+					} @else if (date.hasError('invalidYear')) {
+						Year value is invalid
+					} @else if (date.hasError('invalidMonth')) {
+						Month value is invalid
+					} @else if (date.hasError('invalidDay')) {
+						Day value is invalid
+					} @else if (date.hasError('invalidDate')) {
+						Date doesn't exist
 					}
 				</p>
 			}

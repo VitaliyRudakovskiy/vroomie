@@ -4,13 +4,16 @@ import { Store } from '@ngrx/store';
 import { Button, Loader } from '@shared/ui';
 import { ServicesActions } from 'store/services/actions';
 import { selectLoading, selectServices } from 'store/services/selectors';
-import { ServiceModal } from "@shared/modals";
+import { ServiceModal } from '@shared/modals';
+import { ServiceCard } from './components/service-card/service-card';
+import { CarInfoActions } from 'store/car-info/actions';
+import { selectCarInfo } from 'store/car-info/selectors';
 
 @Component({
 	selector: 'app-services',
 	templateUrl: './services.html',
 	styleUrl: './services.scss',
-	imports: [Button, Loader, ServiceModal],
+	imports: [Button, Loader, ServiceModal, ServiceCard],
 })
 export class Services implements OnInit {
 	private readonly store = inject(Store);
@@ -23,9 +26,11 @@ export class Services implements OnInit {
 
 	services = this.store.selectSignal(selectServices);
 	loading = this.store.selectSignal(selectLoading);
+	carInfo = this.store.selectSignal(selectCarInfo);
 
 	ngOnInit(): void {
 		this.store.dispatch(ServicesActions.loadServices({ carId: this.carId() }));
+		this.store.dispatch(CarInfoActions.loadCarInfo({ carId: this.carId() }));
 	}
 
 	goBack(): void {

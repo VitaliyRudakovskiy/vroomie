@@ -1,0 +1,12 @@
+@let service = serviceInfo();
+
+<app-card padding="12px" isInteractive (clicked)="clickCard()">
+	<div class="card-content">
+		<div class="card-content__info">
+			<p class="title">{{ service.title }}</p>
+			<p class="notes">{{ service.notes }}</p>
+			<p class="odometer">{{ service.odometer }} km</p>
+			<p class="date">{{ convertDate(service.date) | date: 'EEE dd.MM.yyyy' : '' : 'ru-RU' }}</p>
+		</div>
+	</div>
+</app-card>

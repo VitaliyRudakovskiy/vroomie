@@ -1,11 +1,11 @@
-<section class="garage-section">
-	<div class="main-content">
-		<div class="main-content__header">
+<section class="global-page-section">
+	<div class="global-main-content">
+		<div class="global-main-content__header">
 			<h2>My cars</h2>
 			<app-button class="add-car-button" label="+ Add car" (clicked)="showCarModal()" />
 		</div>
 
-		<div class="main-content__container">
+		<div class="global-main-content__container">
 			@if (loading()) {
 				<app-loader
 					description="Loading your cars..."

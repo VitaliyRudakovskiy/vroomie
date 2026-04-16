@@ -1,8 +1,16 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalWrapper, Button } from '@shared/ui';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { SERVICE_CONFIG } from '@shared/constants/service-config';
+import { dateValidator } from '@core/helpers/date-validator';
+import { ServiceRecordWithoutId } from 'models/service-record';
+import { UserService } from '@core/services/user.service';
+import { Store } from '@ngrx/store';
+import { selectCarInfo } from 'store/car-info/selectors';
+import { CarInfoActions } from 'store/car-info/actions';
+import { ServicesActions } from 'store/services/actions';
+import { Car } from 'models/car';
 
 @Component({
 	selector: 'app-service-modal',
@@ -11,9 +19,16 @@ import { SERVICE_CONFIG } from '@shared/constants/service-config';
 	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective],
 })
 export class ServiceModal {
+	private readonly userService = inject(UserService);
+	private readonly store = inject(Store);
+
 	visible = input.required<boolean>();
+	carId = input.required<string>();
+	carInfo = input.required<Car>();
 
 	closeModal = output();
+
+	currentUser = this.userService.userProfile;
 
 	protected config = SERVICE_CONFIG;
 
@@ -29,7 +44,7 @@ export class ServiceModal {
 			Validators.minLength(SERVICE_CONFIG.odometer.min),
 			Validators.maxLength(SERVICE_CONFIG.odometer.max),
 		]),
-		date: new FormControl('', Validators.required),
+		date: new FormControl('', [Validators.required, dateValidator]),
 	});
 
 	protected hasValidationError(formControl: keyof typeof this.serviceForm.controls): boolean {
@@ -38,10 +53,32 @@ export class ServiceModal {
 	}
 
 	onSave(): void {
-		console.log(this.serviceForm.value);
+		if (this.serviceForm.invalid) return;
+
+		const { title, notes, odometer, date } = this.serviceForm.value;
+		if (!title || !odometer || !date) return;
+
+		const [day, month, year] = date.split('.').map(Number);
+		const ms = new Date(year, month - 1, day).getTime();
+
+		const newService: ServiceRecordWithoutId = {
+			title,
+			carId: this.carId(),
+			notes: notes ?? '',
+			odometer: Number(odometer),
+			make: this.carInfo()?.make ?? '',
+			model: this.carInfo()?.model ?? '',
+			date: ms,
+			ownerId: this.currentUser()?.uid!,
+			photoUrls: null,
+			createdAt: Date.now(),
+		};
+
+		this.store.dispatch(ServicesActions.addService({ service: newService }));
 	}
 
 	onClose(): void {
+		this.serviceForm.reset();
 		this.closeModal.emit();
 	}
 
@@ -50,7 +87,6 @@ export class ServiceModal {
 		value = value.replace(/\D/g, '');
 
 		if (value.length > 2) value = value.slice(0, 2) + '.' + value.slice(2);
-
 		if (value.length > 5) value = value.slice(0, 5) + '.' + value.slice(5);
 
 		this.serviceForm.controls.date.setValue(value, { emitEvent: false });

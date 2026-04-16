@@ -22,4 +22,22 @@ export const servicesReducer = createReducer(
 		error,
 		loading: false,
 	})),
+
+	on(ServicesActions.addService, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(ServicesActions.addServiceSuccess, (state, { service }) => ({
+		...state,
+		services: [...state.services, service],
+		loading: false,
+	})),
+
+	on(ServicesActions.addServiceFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
 );

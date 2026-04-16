@@ -3,8 +3,7 @@
 
 .general-info-section {
 	@include flex-column();
-	padding: 0 14px 14px;
-	border-bottom: 2px solid $ink;
+	padding: 0 14px;
 
 	&__content {
 		@include flex-column();

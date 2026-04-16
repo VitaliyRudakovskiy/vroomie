@@ -14,10 +14,13 @@
 					[withBlur]="false"
 				/>
 			} @else {
+				@let car = carInfo();
+				<h3>{{ car?.make }} {{ car?.model }}</h3>
+
 				@for (service of services(); track service.id) {
-					<span>Service</span>
+					<app-service-card [serviceInfo]="service" />
 				} @empty {
-					<span class="no-services">It's time to add some service</span>
+					<span>It's time to add some service</span>
 				}
 				<app-button class="add-button" label="+ Add Service" (clicked)="openServiceModal()" />
 			}
@@ -25,4 +28,9 @@
 	</div>
 </section>
 
-<app-service-modal [visible]="isServiceModalOpen()" (closeModal)="closeServiceModal()" />
+<app-service-modal
+	[carId]="carId()"
+	[carInfo]="carInfo()!"
+	[visible]="isServiceModalOpen()"
+	(closeModal)="closeServiceModal()"
+/>

@@ -2,6 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import {
 	type ApplicationConfig,
 	isDevMode,
+	LOCALE_ID,
 	provideBrowserGlobalErrorListeners,
 	provideZonelessChangeDetection,
 } from '@angular/core';
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
 		provideRouter(routes, withComponentInputBinding()),
 		provideHttpClient(),
 		provideZonelessChangeDetection(),
+		{ provide: LOCALE_ID, useValue: 'ru-RU' },
 
 		// NgRx
 		provideStore({
