@@ -73,6 +73,7 @@ export class ServiceModal {
 		};
 
 		this.store.dispatch(ServicesActions.addService({ service: newService }));
+		this.onClose();
 	}
 
 	onClose(): void {

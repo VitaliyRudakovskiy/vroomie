@@ -1,1 +1,28 @@
+@use 'mixins' as *;
+@use 'variables' as *;
 
+.card-content {
+	@include flex-column();
+	overflow-wrap: break-word;
+	word-break: break-all;
+	gap: 6px;
+
+	.title {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	.odometer {
+		font-weight: 700;
+		font-size: 16px;
+	}
+
+	.notes {
+		font-size: 14px;
+		color: $gray;
+	}
+
+	.date {
+		font-size: 14px;
+	}
+}
