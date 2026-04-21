@@ -22,7 +22,10 @@
 				} @empty {
 					<span>It's time to add some service</span>
 				}
-				<app-button class="add-button" label="+ Add Service" (clicked)="openServiceModal()" />
+				<div class="buttons">
+					<app-button label="+ Add Many" (clicked)="openManyServicesModal()" />
+					<app-button label="+ Add Service" (clicked)="openServiceModal()" />
+				</div>
 			}
 		</div>
 	</div>
@@ -33,4 +36,9 @@
 	[carInfo]="carInfo()!"
 	[visible]="isServiceModalOpen()"
 	(closeModal)="closeServiceModal()"
+/>
+
+<app-many-services-modal
+	[visible]="isManyServicesModalOpen()"
+	(closeModal)="closeManyServicesModal()"
 />

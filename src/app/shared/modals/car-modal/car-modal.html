@@ -99,8 +99,8 @@
 		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
 		<app-button
 			[label]="selectedCar() ? 'Edit' : 'Add'"
-			(clicked)="onSave()"
 			[disabled]="isSubmitDisabled()"
+			(clicked)="onSave()"
 		/>
 	</div>
 </app-modal-wrapper>

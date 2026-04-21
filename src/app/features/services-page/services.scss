@@ -1,12 +1,19 @@
 @use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
 	@include flex-column();
 	flex: 1;
 }
 
-.add-button {
+.buttons {
+	@include flex-center();
+	justify-content: center;
 	position: fixed;
-	bottom: 24px;
-	right: 14px;
+	background-color: $white;
+	padding: 16px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	gap: 16px;
 }

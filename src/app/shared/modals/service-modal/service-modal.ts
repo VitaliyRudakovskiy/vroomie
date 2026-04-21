@@ -39,8 +39,8 @@ export class ServiceModal {
 		notes: new FormControl(''),
 		odometer: new FormControl('', [
 			Validators.required,
-			Validators.minLength(SERVICE_CONFIG.odometer.min),
-			Validators.maxLength(SERVICE_CONFIG.odometer.max),
+			Validators.minLength(this.config.odometer.min),
+			Validators.maxLength(this.config.odometer.max),
 		]),
 		date: new FormControl('', [Validators.required, dateValidator]),
 	});

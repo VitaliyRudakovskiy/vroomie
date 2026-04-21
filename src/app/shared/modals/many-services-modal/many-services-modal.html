@@ -1,35 +1,10 @@
 <app-modal-wrapper
-	modalTitle="New Service"
+	modalTitle="New Services"
 	[visible]="visible()"
 	[innerPadding]="20"
 	(closeModal)="onClose()"
 >
-	<div [formGroup]="serviceForm">
-		<div class="global-form-field-container">
-			<input
-				id="title"
-				type="text"
-				placeholder="title"
-				formControlName="title"
-				[maxlength]="config.title.max"
-			/>
-			<span class="required-mark">*</span>
-
-			@if (hasValidationError('title')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('title')">
-					@if (serviceForm.controls.title.hasError('required')) {
-						Title is required
-					} @else if (serviceForm.controls.title.hasError('minlength')) {
-						Title must have at least 5 symbols
-					}
-				</p>
-			}
-		</div>
-
-		<div class="global-form-field-container">
-			<input id="notes" type="text" placeholder="some notes" formControlName="notes" />
-		</div>
-
+	<div [formGroup]="form">
 		<div class="global-form-field-container">
 			<input
 				id="odometer"
@@ -43,9 +18,9 @@
 
 			@if (hasValidationError('odometer')) {
 				<p class="global-form-error" [class.visible]="hasValidationError('odometer')">
-					@if (serviceForm.controls.odometer.hasError('required')) {
+					@if (form.controls.odometer.hasError('required')) {
 						Odometer value is required
-					} @else if (serviceForm.controls.odometer.hasError('minlength')) {
+					} @else if (form.controls.odometer.hasError('minlength')) {
 						Odometer value is very low
 					}
 				</p>
@@ -65,7 +40,7 @@
 			<span class="required-mark">*</span>
 
 			@if (hasValidationError('date')) {
-				@let date = serviceForm.controls.date;
+				@let date = form.controls.date;
 				<p class="global-form-error" [class.visible]="hasValidationError('date')">
 					@if (date.hasError('required')) {
 						Date is required
@@ -87,6 +62,6 @@
 
 	<div class="global-form-buttons-end">
 		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
-		<app-button label="Add" [disabled]="!serviceForm.valid" (clicked)="onSave()" />
+		<app-button label="Add" [disabled]="!form.valid" (clicked)="onSave()" />
 	</div>
 </app-modal-wrapper>

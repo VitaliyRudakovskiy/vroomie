@@ -12,3 +12,7 @@ export const SERVICE_CONFIG = {
 		max: 10,
 	},
 };
+
+export const MANY_SERVICES_CONFIG = {
+	...SERVICE_CONFIG,
+};

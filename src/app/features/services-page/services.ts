@@ -2,6 +2,7 @@ import { Component, inject, input, type OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ServiceModal } from '@shared/modals';
+import { ManyServicesModal } from '@shared/modals/many-services-modal/many-services-modal';
 import { Button, Loader } from '@shared/ui';
 import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo } from 'store/car-info/selectors';
@@ -13,7 +14,7 @@ import { ServiceCard } from './components/service-card/service-card';
 	selector: 'app-services',
 	templateUrl: './services.html',
 	styleUrl: './services.scss',
-	imports: [Button, Loader, ServiceModal, ServiceCard],
+	imports: [Button, Loader, ServiceModal, ServiceCard, ManyServicesModal],
 })
 export class Services implements OnInit {
 	private readonly store = inject(Store);
@@ -23,6 +24,7 @@ export class Services implements OnInit {
 	carId = input.required<string>();
 
 	isServiceModalOpen = signal(false);
+	isManyServicesModalOpen = signal(false);
 
 	services = this.store.selectSignal(selectServices);
 	loading = this.store.selectSignal(selectLoading);
@@ -43,5 +45,13 @@ export class Services implements OnInit {
 
 	closeServiceModal(): void {
 		this.isServiceModalOpen.set(false);
+	}
+
+	openManyServicesModal(): void {
+		this.isManyServicesModalOpen.set(true);
+	}
+
+	closeManyServicesModal(): void {
+		this.isManyServicesModalOpen.set(false);
 	}
 }
