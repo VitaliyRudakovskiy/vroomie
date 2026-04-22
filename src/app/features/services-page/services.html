@@ -39,6 +39,8 @@
 />
 
 <app-many-services-modal
+	[carId]="carId()"
+	[carInfo]="carInfo()!"
 	[visible]="isManyServicesModalOpen()"
 	(closeModal)="closeManyServicesModal()"
 />
