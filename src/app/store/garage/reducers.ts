@@ -31,7 +31,7 @@ export const garageReducer = createReducer(
 
 	on(GarageActions.addCarSuccess, (state, { car }) => ({
 		...state,
-		cars: [...state.cars, car],
+		cars: [car, ...state.cars],
 		loading: false,
 	})),
 

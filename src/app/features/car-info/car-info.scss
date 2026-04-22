@@ -2,8 +2,7 @@
 @use 'variables' as *;
 
 :host {
-	@include flex-column();
-	flex: 1;
+	@include host-page();
 }
 
 .full-page-content {

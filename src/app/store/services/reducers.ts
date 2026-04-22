@@ -31,7 +31,7 @@ export const servicesReducer = createReducer(
 
 	on(ServicesActions.addServiceSuccess, (state, { service }) => ({
 		...state,
-		services: [...state.services, service],
+		services: [service, ...state.services],
 		loading: false,
 	})),
 

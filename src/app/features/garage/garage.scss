@@ -1,7 +1,5 @@
 @use 'mixins' as *;
 
 :host {
-	@include flex-column();
-	height: 100vh;
-	overflow: hidden;
+	@include host-page();
 }
