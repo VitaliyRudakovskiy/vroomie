@@ -22,6 +22,8 @@ import { ServicesEffects } from 'store/services/effects';
 import { servicesReducer } from 'store/services/reducers';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
+import { plansReducer } from 'store/plans/reducers';
+import { PlansEffects } from 'store/plans/effects';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -36,8 +38,9 @@ export const appConfig: ApplicationConfig = {
 			garage: garageReducer,
 			carInfo: carInfoReducer,
 			services: servicesReducer,
+			plans: plansReducer,
 		}),
-		provideEffects([GarageEffects, CarInfoEffects, ServicesEffects]),
+		provideEffects([GarageEffects, CarInfoEffects, ServicesEffects, PlansEffects]),
 		provideStoreDevtools({
 			maxAge: 25,
 			logOnly: !isDevMode(),
