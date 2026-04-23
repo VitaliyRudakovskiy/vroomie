@@ -5,6 +5,13 @@
 			<h2>Plans</h2>
 		</div>
 
-		<div class="global-main-content__container"></div>
+		<div class="global-main-content__container">
+			@let car = carInfo();
+			<h3>{{ car?.make }} {{ car?.model }}</h3>
+		</div>
+
+		<div class="buttons">
+			<app-button label="+ Add Plan" (clicked)="openPlanModal()" />
+		</div>
 	</div>
 </section>

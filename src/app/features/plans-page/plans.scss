@@ -1,5 +1,15 @@
 @use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
 	@include host-page();
+}
+
+.buttons {
+	@include flex-center();
+	justify-content: flex-end;
+	background-color: $white;
+	flex-shrink: 0;
+	padding: 16px;
+	gap: 16px;
 }

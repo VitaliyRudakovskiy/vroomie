@@ -17,11 +17,12 @@
 				<div class="full-page-content">
 					<app-general-info [carInfo]="carInfo()!" />
 				</div>
-				<div class="buttons">
-					<app-button label="Plans" fullWidth (clicked)="goToPlans()" />
-					<app-button label="Services" fullWidth (clicked)="goToServices()" />
-				</div>
 			}
+		</div>
+
+		<div class="buttons">
+			<app-button label="Plans" fullWidth (clicked)="goToPlans()" />
+			<app-button label="Services" fullWidth (clicked)="goToServices()" />
 		</div>
 	</div>
 </section>
