@@ -18,12 +18,12 @@ import { CarInfoEffects } from 'store/car-info/effects';
 import { carInfoReducer } from 'store/car-info/reducers';
 import { GarageEffects } from 'store/garage/effects';
 import { garageReducer } from 'store/garage/reducers';
+import { PlansEffects } from 'store/plans/effects';
+import { plansReducer } from 'store/plans/reducers';
 import { ServicesEffects } from 'store/services/effects';
 import { servicesReducer } from 'store/services/reducers';
 import { environment } from '../environment/environment';
 import { routes } from './app.routes';
-import { plansReducer } from 'store/plans/reducers';
-import { PlansEffects } from 'store/plans/effects';
 
 export const appConfig: ApplicationConfig = {
 	providers: [

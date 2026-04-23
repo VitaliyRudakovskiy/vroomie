@@ -1,4 +1,4 @@
-import { Plan } from 'models/plan';
+import type { Plan } from 'models/plan';
 
 export interface PlansState {
 	plans: Plan[];

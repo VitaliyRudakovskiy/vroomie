@@ -1,11 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, input, signal } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ConfirmModal } from '@shared/modals';
 import { Card } from '@shared/ui';
 import type { ServiceRecord } from 'models/service-record';
-import { ConfirmModal } from '@shared/modals';
-import { Store } from '@ngrx/store';
-import { selectLoading } from 'store/services/selectors';
 import { ServicesActions } from 'store/services/actions';
+import { selectLoading } from 'store/services/selectors';
 
 @Component({
 	selector: 'app-service-card',
