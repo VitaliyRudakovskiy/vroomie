@@ -40,6 +40,8 @@
 	max-width: 440px;
 	width: 100%;
 	position: relative;
+	overflow-wrap: break-word;
+	word-break: break-all;
 	opacity: 0;
 	transform: translateY(40px) scale(0.95);
 	box-shadow: 12px 12px 0px 0px $ink;

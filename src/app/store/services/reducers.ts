@@ -40,4 +40,22 @@ export const servicesReducer = createReducer(
 		error,
 		loading: false,
 	})),
+
+	on(ServicesActions.deleteService, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(ServicesActions.deleteServiceSuccess, (state, { serviceId }) => ({
+		...state,
+		services: state.services.filter((service) => service.id !== serviceId),
+		loading: false,
+	})),
+
+	on(ServicesActions.deleteServiceFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
 );

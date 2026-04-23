@@ -11,5 +11,9 @@ export const ServicesActions = createActionGroup({
 		'Add Service': props<{ service: ServiceRecordWithoutId }>(),
 		'Add Service Success': props<{ service: ServiceRecord }>(),
 		'Add Service Failure': props<{ error: string }>(),
+
+		'Delete Service': props<{ serviceId: string }>(),
+		'Delete Service Success': props<{ serviceId: string }>(),
+		'Delete Service Failure': props<{ error: string }>(),
 	},
 });

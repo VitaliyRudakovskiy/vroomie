@@ -4,6 +4,7 @@
 .card-content {
 	@include flex-column();
 	overflow-wrap: break-word;
+	position: relative;
 	word-break: break-all;
 	gap: 6px;
 
@@ -24,5 +25,27 @@
 
 	.date {
 		font-size: 14px;
+	}
+
+	.close-button {
+		@include inline-flex-center();
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: none;
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border: none;
+		outline: none;
+		font-size: 20px;
+		line-height: 1;
+		border-radius: 10px;
+		cursor: pointer;
+
+		&:hover,
+		&:active {
+			box-shadow: 2px 2px 0px 0px $ink;
+		}
 	}
 }

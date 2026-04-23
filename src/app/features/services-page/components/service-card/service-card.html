@@ -8,5 +8,22 @@
 		<span class="date">
 			{{ convertDate(service.date) | date: 'EEE dd.MM.yyyy' : '' : 'ru-RU' }}
 		</span>
+		<button
+			type="button"
+			class="close-button"
+			aria-label="Close modal"
+			(click)="openConfirmDeleteModal()"
+		>
+			✕
+		</button>
 	</div>
 </app-card>
+
+<app-confirm-modal
+	modalTitle="Delete service"
+	[description]="`Are you sure you want to delete '${service.title}'?`"
+	[loading]="deleteLoading()"
+	[visible]="isConfirmModalOpen()"
+	(cancelEvent)="closeConfirmDeleteModal()"
+	(confirm)="deleteCard()"
+/>

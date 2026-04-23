@@ -33,4 +33,16 @@ export class ServicesEffects {
 			),
 		),
 	);
+
+	deleteService$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(ServicesActions.deleteService),
+			mergeMap(({ serviceId }) =>
+				this.servicesService.deleteService(serviceId).pipe(
+					map(() => ServicesActions.deleteServiceSuccess({ serviceId })),
+					catchError((err) => of(ServicesActions.deleteServiceFailure({ error: err.message }))),
+				),
+			),
+		),
+	);
 }
