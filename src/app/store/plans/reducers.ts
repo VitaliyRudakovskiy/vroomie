@@ -22,4 +22,22 @@ export const plansReducer = createReducer(
 		error,
 		loading: false,
 	})),
+
+	on(PlansActions.addPlan, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(PlansActions.addPlanSuccess, (state, { plan }) => ({
+		...state,
+		plans: [plan, ...state.plans],
+		loading: false,
+	})),
+
+	on(PlansActions.addPlanFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
 );

@@ -22,8 +22,8 @@
 				/>
 			}
 
-			@if (hasValidationError('make')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('make')">
+			@if (hasError('make')) {
+				<p class="global-form-error" [class.visible]="hasError('make')">
 					@if (form.controls.make.hasError('required')) {
 						Car make is required
 					} @else if (form.controls.make.hasError('minlength')) {
@@ -43,8 +43,8 @@
 			/>
 			<span class="required-mark">*</span>
 
-			@if (hasValidationError('model')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('model')">
+			@if (hasError('model')) {
+				<p class="global-form-error" [class.visible]="hasError('model')">
 					@if (form.controls.model.hasError('required')) {
 						Car model is required
 					} @else if (form.controls.model.hasError('minlength')) {
@@ -65,8 +65,8 @@
 			/>
 			<span class="required-mark">*</span>
 
-			@if (hasValidationError('currentOdometer')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('currentOdometer')">
+			@if (hasError('currentOdometer')) {
+				<p class="global-form-error" [class.visible]="hasError('currentOdometer')">
 					@if (form.controls.currentOdometer.hasError('required')) {
 						Odometer value is required
 					} @else if (form.controls.currentOdometer.hasError('minlength')) {
@@ -85,8 +85,8 @@
 				[maxlength]="config.vin.max"
 			/>
 
-			@if (hasValidationError('vin')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('vin')">
+			@if (hasError('vin')) {
+				<p class="global-form-error" [class.visible]="hasError('vin')">
 					@if (form.controls.vin.hasError('minlength')) {
 						VIN should have exactly 17 symbols
 					}

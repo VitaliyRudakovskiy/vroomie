@@ -1,3 +1,5 @@
+export type PriorityLevel = 0 | 1 | 2 | 3; // 0 = low, 1 = medium, 2 = high, 3 = critical
+
 export interface Plan {
 	id: string;
 	carId: string;
@@ -6,7 +8,7 @@ export interface Plan {
 	model: string;
 	title: string;
 	notes: string | null;
-	priority: number; // 0 = low, 1 = medium, 2 = high, 3 = critical
+	priority: PriorityLevel;
 	photoUrls: string[] | null;
 	createdAt: number;
 }

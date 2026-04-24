@@ -2,6 +2,7 @@ import { Component, computed, effect, inject, input, output, signal } from '@ang
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
+import { hasValidationError } from '@core/helpers/has-validation-error';
 import { Store } from '@ngrx/store';
 import { CAR_INFO_CONFIG } from '@shared/constants/car-info-config';
 import { AutocompleteDropdown, Button } from '@shared/ui';
@@ -134,9 +135,8 @@ export class CarModal {
 		this.onClose();
 	}
 
-	protected hasValidationError(formControl: keyof typeof this.form.controls): boolean {
-		const control = this.form.controls[formControl];
-		return !!(control?.touched && control?.invalid);
+	protected hasError(control: keyof typeof this.form.controls) {
+		return hasValidationError(this.form, control);
 	}
 
 	private resetForm() {

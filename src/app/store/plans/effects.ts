@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { PlansService } from '@core/services/plans.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, take } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap, take } from 'rxjs';
 import { PlansActions } from './actions';
 
 @Injectable({ providedIn: 'root' })
@@ -17,6 +17,18 @@ export class PlansEffects {
 					take(1),
 					map((plans) => PlansActions.loadPlansSuccess({ plans })),
 					catchError((err) => of(PlansActions.loadPlansFailure({ error: err.message }))),
+				),
+			),
+		),
+	);
+
+	addPlan$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(PlansActions.addPlan),
+			mergeMap(({ plan }) =>
+				this.plansService.addPlan(plan).pipe(
+					map((newPlan) => PlansActions.addPlanSuccess({ plan: newPlan })),
+					catchError((err) => of(PlansActions.addPlanFailure({ error: err.message }))),
 				),
 			),
 		),

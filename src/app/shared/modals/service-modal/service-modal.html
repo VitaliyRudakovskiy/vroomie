@@ -15,8 +15,8 @@
 			/>
 			<span class="required-mark">*</span>
 
-			@if (hasValidationError('title')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('title')">
+			@if (hasError('title')) {
+				<p class="global-form-error" [class.visible]="hasError('title')">
 					@if (serviceForm.controls.title.hasError('required')) {
 						Title is required
 					} @else if (serviceForm.controls.title.hasError('minlength')) {
@@ -41,8 +41,8 @@
 			/>
 			<span class="required-mark">*</span>
 
-			@if (hasValidationError('odometer')) {
-				<p class="global-form-error" [class.visible]="hasValidationError('odometer')">
+			@if (hasError('odometer')) {
+				<p class="global-form-error" [class.visible]="hasError('odometer')">
 					@if (serviceForm.controls.odometer.hasError('required')) {
 						Odometer value is required
 					} @else if (serviceForm.controls.odometer.hasError('minlength')) {
@@ -64,9 +64,9 @@
 			/>
 			<span class="required-mark">*</span>
 
-			@if (hasValidationError('date')) {
+			@if (hasError('date')) {
 				@let date = serviceForm.controls.date;
-				<p class="global-form-error" [class.visible]="hasValidationError('date')">
+				<p class="global-form-error" [class.visible]="hasError('date')">
 					@if (date.hasError('required')) {
 						Date is required
 					} @else if (date.hasError('invalidFormat')) {

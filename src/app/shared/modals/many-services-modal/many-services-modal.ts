@@ -10,6 +10,7 @@ import type { Car } from 'models/car';
 import type { ServiceRecordWithoutId } from 'models/service-record';
 import { ServicesActions } from 'store/services/actions';
 import { ConfirmModal } from '../confirm-modal';
+import { hasValidationError } from '@core/helpers/has-validation-error';
 
 @Component({
 	selector: 'app-many-services-modal',
@@ -46,9 +47,8 @@ export class ManyServicesModal {
 		]),
 	});
 
-	protected hasValidationError(formControl: keyof typeof this.form.controls): boolean {
-		const control = this.form.controls[formControl];
-		return !!(control?.touched && control?.invalid);
+	protected hasError(control: keyof typeof this.form.controls) {
+		return hasValidationError(this.form, control);
 	}
 
 	protected isAddDisabled(): boolean {

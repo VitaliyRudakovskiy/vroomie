@@ -1,4 +1,4 @@
-import { Component, inject, input, type OnInit } from '@angular/core';
+import { Component, inject, input, signal, type OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Button, Loader } from '@shared/ui';
@@ -6,12 +6,13 @@ import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo } from 'store/car-info/selectors';
 import { PlansActions } from 'store/plans/actions';
 import { selectLoading, selectPlans } from 'store/plans/selectors';
+import { PlanModalComponent } from '@shared/modals';
 
 @Component({
 	selector: 'app-plans',
 	templateUrl: './plans.html',
 	styleUrl: './plans.scss',
-	imports: [Button, Loader],
+	imports: [Button, Loader, PlanModalComponent],
 })
 export class Plans implements OnInit {
 	private readonly store = inject(Store);
@@ -20,6 +21,7 @@ export class Plans implements OnInit {
 
 	carId = input.required<string>();
 
+	isPlanModalOpen = signal(false);
 	plans = this.store.selectSignal(selectPlans);
 	loading = this.store.selectSignal(selectLoading);
 	carInfo = this.store.selectSignal(selectCarInfo);
@@ -33,5 +35,11 @@ export class Plans implements OnInit {
 		this.router.navigate(['..'], { relativeTo: this.route });
 	}
 
-	openPlanModal(): void {}
+	openPlanModal(): void {
+		this.isPlanModalOpen.set(true);
+	}
+
+	closePlanModal(): void {
+		this.isPlanModalOpen.set(false);
+	}
 }

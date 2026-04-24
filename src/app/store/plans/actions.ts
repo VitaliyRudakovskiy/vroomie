@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import type { Plan } from 'models/plan';
+import type { Plan, PlanWithoutId } from 'models/plan';
 
 export const PlansActions = createActionGroup({
 	source: 'Plans',
@@ -7,5 +7,9 @@ export const PlansActions = createActionGroup({
 		'Load Plans': props<{ carId: string }>(),
 		'Load Plans Success': props<{ plans: Plan[] }>(),
 		'Load Plans Failure': props<{ error: string }>(),
+
+		'Add Plan': props<{ plan: PlanWithoutId }>(),
+		'Add Plan Success': props<{ plan: Plan }>(),
+		'Add Plan Failure': props<{ error: string }>(),
 	},
 });

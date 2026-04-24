@@ -1,0 +1,38 @@
+<app-modal-wrapper
+	modalTitle="New Plan"
+	[visible]="visible()"
+	[innerPadding]="20"
+	(closeModal)="onClose()"
+>
+	<div [formGroup]="planForm">
+		<div class="global-form-field-container">
+			<input
+				id="title"
+				type="text"
+				placeholder="title"
+				formControlName="title"
+				[maxlength]="config.title.max"
+			/>
+			<span class="required-mark">*</span>
+
+			@if (hasError('title')) {
+				<p class="global-form-error" [class.visible]="hasError('title')">
+					@if (planForm.controls.title.hasError('required')) {
+						Title is required
+					} @else if (planForm.controls.title.hasError('minlength')) {
+						Title must have at least 5 symbols
+					}
+				</p>
+			}
+		</div>
+
+		<div class="global-form-field-container">
+			<input id="notes" type="text" placeholder="some notes" formControlName="notes" />
+		</div>
+	</div>
+
+	<div class="global-form-buttons-end">
+		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
+		<app-button label="Add" [disabled]="!planForm.valid" (clicked)="onSave()" />
+	</div>
+</app-modal-wrapper>

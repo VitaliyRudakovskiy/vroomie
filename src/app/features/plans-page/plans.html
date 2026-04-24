@@ -29,3 +29,10 @@
 		</div>
 	</div>
 </section>
+
+<app-plan-modal
+	[carId]="carId()"
+	[carInfo]="carInfo()!"
+	[visible]="isPlanModalOpen()"
+	(closeModal)="closePlanModal()"
+/>

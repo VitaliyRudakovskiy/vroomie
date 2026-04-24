@@ -2,6 +2,7 @@ import { Component, inject, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { dateValidator } from '@core/helpers/date-validator';
+import { hasValidationError } from '@core/helpers/has-validation-error';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
 import { SERVICE_CONFIG } from '@shared/constants/service-config';
@@ -17,8 +18,8 @@ import { ServicesActions } from 'store/services/actions';
 	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective],
 })
 export class ServiceModal {
-	private readonly userService = inject(UserService);
 	private readonly store = inject(Store);
+	private readonly userService = inject(UserService);
 
 	visible = input.required<boolean>();
 	carId = input.required<string>();
@@ -28,7 +29,7 @@ export class ServiceModal {
 
 	currentUser = this.userService.userProfile;
 
-	protected config = SERVICE_CONFIG;
+	protected readonly config = SERVICE_CONFIG;
 
 	serviceForm = new FormGroup({
 		title: new FormControl('', [
@@ -45,9 +46,8 @@ export class ServiceModal {
 		date: new FormControl('', [Validators.required, dateValidator]),
 	});
 
-	protected hasValidationError(formControl: keyof typeof this.serviceForm.controls): boolean {
-		const control = this.serviceForm.controls[formControl];
-		return !!(control?.touched && control?.invalid);
+	protected hasError(control: keyof typeof this.serviceForm.controls) {
+		return hasValidationError(this.serviceForm, control);
 	}
 
 	onSave(): void {
@@ -61,8 +61,8 @@ export class ServiceModal {
 
 		const newService: ServiceRecordWithoutId = {
 			title,
-			carId: this.carId(),
 			notes: notes ?? '',
+			carId: this.carId(),
 			odometer: Number(odometer),
 			make: this.carInfo()?.make ?? '',
 			model: this.carInfo()?.model ?? '',
