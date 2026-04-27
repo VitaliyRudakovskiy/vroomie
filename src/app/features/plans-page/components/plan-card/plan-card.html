@@ -1,18 +1,20 @@
 @let pl = plan();
 
 <app-card padding="12px" isInteractive (clicked)="clickCard()">
-	<p>{{ pl.title }}</p>
-	<p class="notes">{{ pl.notes }}</p>
-	<div class="priority" [class]="priority().class">{{ priority().label }}</div>
+	<div class="card-content">
+		<p class="title">{{ pl.title }}</p>
+		<p class="notes">{{ pl.notes }}</p>
+		<div class="priority" [class]="priority().class">{{ priority().label }}</div>
 
-	<button
-		type="button"
-		class="close-button"
-		aria-label="Close modal"
-		(click)="openConfirmDeleteModal()"
-	>
-		✕
-	</button>
+		<button
+			type="button"
+			class="close-button"
+			aria-label="Close modal"
+			(click)="openConfirmDeleteModal()"
+		>
+			✕
+		</button>
+	</div>
 </app-card>
 
 <app-confirm-modal

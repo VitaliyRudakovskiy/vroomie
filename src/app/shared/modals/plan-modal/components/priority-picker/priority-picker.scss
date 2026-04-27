@@ -27,10 +27,12 @@
 
 	&.high {
 		color: $priority-high;
+		font-weight: 700;
 	}
 
 	&.critical {
 		color: $priority-critical;
+		font-weight: 700;
 	}
 
 	.toggle-button {

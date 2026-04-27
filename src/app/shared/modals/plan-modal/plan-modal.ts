@@ -13,7 +13,6 @@ import { PriorityPickerComponent } from './components/priority-picker/priority-p
 @Component({
 	selector: 'app-plan-modal',
 	templateUrl: './plan-modal.html',
-	styleUrl: './plan-modal.scss',
 	imports: [ModalWrapper, Button, ReactiveFormsModule, PriorityPickerComponent],
 })
 export class PlanModalComponent {

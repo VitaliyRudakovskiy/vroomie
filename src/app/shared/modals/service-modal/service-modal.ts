@@ -14,7 +14,6 @@ import { ServicesActions } from 'store/services/actions';
 @Component({
 	selector: 'app-service-modal',
 	templateUrl: './service-modal.html',
-	styleUrl: './service-modal.scss',
 	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective],
 })
 export class ServiceModal {

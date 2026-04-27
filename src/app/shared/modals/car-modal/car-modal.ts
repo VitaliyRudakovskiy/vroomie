@@ -13,7 +13,6 @@ import { GarageActions } from 'store/garage/actions';
 @Component({
 	selector: 'app-car-modal',
 	templateUrl: './car-modal.html',
-	styleUrl: './car-modal.scss',
 	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective, AutocompleteDropdown],
 })
 export class CarModal {
