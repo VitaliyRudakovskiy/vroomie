@@ -41,6 +41,24 @@ export const garageReducer = createReducer(
 		loading: false,
 	})),
 
+	on(GarageActions.deleteCar, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(GarageActions.deleteCarSuccess, (state, { carId }) => ({
+		...state,
+		cars: state.cars.filter((c) => c.id !== carId),
+		loading: false,
+	})),
+
+	on(GarageActions.deleteCarFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
+
 	on(GarageActions.updateCar, (state) => ({
 		...state,
 		loading: true,

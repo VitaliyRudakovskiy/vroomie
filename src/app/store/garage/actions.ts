@@ -12,6 +12,10 @@ export const GarageActions = createActionGroup({
 		'Add Car Success': props<{ car: Car }>(),
 		'Add Car Failure': props<{ error: string }>(),
 
+		'Delete Car': props<{ carId: string }>(),
+		'Delete Car Success': props<{ carId: string }>(),
+		'Delete Car Failure': props<{ error: string }>(),
+
 		'Update Car': props<{ carId: string; car: CarFormOnly }>(),
 		'Update Car Success': props<{ car: Car }>(),
 		'Update Car Failure': props<{ error: string }>(),

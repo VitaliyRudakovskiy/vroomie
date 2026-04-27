@@ -9,7 +9,6 @@ import { Button, ModalWrapper } from '@shared/ui';
 })
 export class ConfirmModal {
 	visible = input.required<boolean>();
-
 	modalTitle = input.required<string>();
 	description = input.required<string | string[]>();
 	confirmLabel = input('Yes');

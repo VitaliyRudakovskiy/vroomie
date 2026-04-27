@@ -35,6 +35,18 @@ export class GarageEffects {
 		),
 	);
 
+	deleteCar$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(GarageActions.deleteCar),
+			exhaustMap(({ carId }) =>
+				this.garageService.deleteCar(carId).pipe(
+					map(() => GarageActions.deleteCarSuccess({ carId })),
+					catchError((error) => of(GarageActions.deleteCarFailure({ error: error.message }))),
+				),
+			),
+		),
+	);
+
 	updateCar$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(GarageActions.updateCar),

@@ -3,6 +3,7 @@ import {
 	addDoc,
 	collection,
 	collectionData,
+	deleteDoc,
 	doc,
 	Firestore,
 	updateDoc,
@@ -25,6 +26,11 @@ export class GarageService {
 	addCar(car: CarWithoutId): Observable<Car> {
 		const cars = collection(this.firestore, COLLECTIONS.Cars);
 		return from(addDoc(cars, car)).pipe(map((docRef) => ({ ...car, id: docRef.id })));
+	}
+
+	deleteCar(carId: string): Observable<void> {
+		const carDocRef = doc(this.firestore, COLLECTIONS.Cars, carId);
+		return from(deleteDoc(carDocRef));
 	}
 
 	updateCar(carId: string, car: CarFormOnly): Observable<void> {

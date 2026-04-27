@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import { GarageActions } from 'store/garage/actions';
 import { ServicesActions } from './actions';
 import { initialState } from './state';
 
@@ -56,6 +57,13 @@ export const servicesReducer = createReducer(
 	on(ServicesActions.deleteServiceFailure, (state, { error }) => ({
 		...state,
 		error,
+		loading: false,
+	})),
+
+	// при удалении машины удаляем все сервисы, связанные с этой машиной
+	on(GarageActions.deleteCarSuccess, (state, { carId }) => ({
+		...state,
+		services: state.services.filter((service) => service.carId !== carId),
 		loading: false,
 	})),
 );

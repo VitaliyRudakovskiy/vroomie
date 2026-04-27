@@ -2,12 +2,28 @@
 
 <app-card padding="12px" isInteractive (clicked)="clickCard()">
 	<div class="card-content">
-		<div class="card-content__info">
-			<p class="brand">{{ carInfo.make }} {{ carInfo.model }}</p>
-			<p class="odometer">{{ carInfo.currentOdometer }} km</p>
-			@if (carInfo.vin) {
-				<p class="vin">VIN: {{ carInfo.vin }}</p>
-			}
-		</div>
+		<p class="brand">{{ carInfo.make }} {{ carInfo.model }}</p>
+		<p class="odometer">{{ carInfo.currentOdometer }} km</p>
+		@if (carInfo.vin) {
+			<p class="vin">VIN: {{ carInfo.vin }}</p>
+		}
+
+		<button
+			type="button"
+			class="delete-button"
+			aria-label="Delete modal"
+			(click)="openConfirmDeleteModal()"
+		>
+			✕
+		</button>
 	</div>
 </app-card>
+
+<app-confirm-modal
+	modalTitle="Delete car"
+	[description]="['Are you sure you want to delete car?', carInfo.make]"
+	[loading]="deleteLoading()"
+	[visible]="isDeleteModalOpen()"
+	(cancelEvent)="closeConfirmDeleteModal()"
+	(confirm)="deleteCar()"
+/>
