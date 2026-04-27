@@ -16,9 +16,9 @@ $radius-main: 16px;
 $transition-main: all 0.1s ease-in-out;
 
 /* ===== Plan priority ===== */
-$priority-low: #a3e635;
-$priority-medium: #f5e86e;
-$priority-high: #ff6b6b;
+$priority-low: $color-success;
+$priority-medium: #d8c72b;
+$priority-high: $color-danger;
 $priority-critical: #d12de3;
 
 /* ===== Spinner loader ===== */

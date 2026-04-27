@@ -1,7 +1,7 @@
 <section class="global-page-section">
 	<div class="global-main-content">
 		<div class="global-main-content__header">
-			<app-button label="< Back" variant="secondary" size="sm" (clicked)="goBack()" />
+			<app-button label="&lt; Back" variant="secondary" size="sm" (clicked)="goBack()" />
 			<h2>Plans</h2>
 		</div>
 
@@ -18,7 +18,7 @@
 				<h3>{{ car?.make }} {{ car?.model }}</h3>
 
 				@for (plan of plans(); track plan.id) {
-					<p>{{ plan.title }}</p>
+					<app-plan-card [plan]="plan" />
 				} @empty {
 					<span>It's time to add some plans</span>
 				}

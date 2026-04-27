@@ -11,5 +11,9 @@ export const PlansActions = createActionGroup({
 		'Add Plan': props<{ plan: PlanWithoutId }>(),
 		'Add Plan Success': props<{ plan: Plan }>(),
 		'Add Plan Failure': props<{ error: string }>(),
+
+		'Delete Plan': props<{ planId: string }>(),
+		'Delete Plan Success': props<{ planId: string }>(),
+		'Delete Plan Failure': props<{ error: string }>(),
 	},
 });

@@ -40,4 +40,22 @@ export const plansReducer = createReducer(
 		error,
 		loading: false,
 	})),
+
+	on(PlansActions.deletePlan, (state) => ({
+		...state,
+		loading: true,
+		error: null,
+	})),
+
+	on(PlansActions.deletePlanSuccess, (state, { planId }) => ({
+		...state,
+		plans: state.plans.filter((plan) => plan.id !== planId),
+		loading: false,
+	})),
+
+	on(PlansActions.deletePlanFailure, (state, { error }) => ({
+		...state,
+		error,
+		loading: false,
+	})),
 );

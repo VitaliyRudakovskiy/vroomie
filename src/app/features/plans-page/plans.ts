@@ -7,12 +7,13 @@ import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo } from 'store/car-info/selectors';
 import { PlansActions } from 'store/plans/actions';
 import { selectLoading, selectPlans } from 'store/plans/selectors';
+import { PlanCard } from './components/plan-card/plan-card';
 
 @Component({
 	selector: 'app-plans',
 	templateUrl: './plans.html',
 	styleUrl: './plans.scss',
-	imports: [Button, Loader, PlanModalComponent],
+	imports: [Button, Loader, PlanModalComponent, PlanCard],
 })
 export class Plans implements OnInit {
 	private readonly store = inject(Store);

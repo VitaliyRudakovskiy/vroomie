@@ -33,4 +33,16 @@ export class PlansEffects {
 			),
 		),
 	);
+
+	deletePlan$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(PlansActions.deletePlan),
+			mergeMap(({ planId }) =>
+				this.plansService.deletePlan(planId).pipe(
+					map(() => PlansActions.deletePlanSuccess({ planId })),
+					catchError((err) => of(PlansActions.deletePlanFailure({ error: err.message }))),
+				),
+			),
+		),
+	);
 }

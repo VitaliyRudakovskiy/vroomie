@@ -1,5 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { addDoc, collection, collectionData, Firestore } from '@angular/fire/firestore';
+import {
+	addDoc,
+	collection,
+	collectionData,
+	deleteDoc,
+	doc,
+	Firestore,
+} from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import { plansByCarId } from '@core/api/queries/plans';
 import type { Plan, PlanWithoutId } from 'models/plan';
@@ -18,5 +25,10 @@ export class PlansService {
 	addPlan(plan: PlanWithoutId): Observable<Plan> {
 		const plans = collection(this.firestore, COLLECTIONS.Plans);
 		return from(addDoc(plans, plan)).pipe(map((doc) => ({ ...plan, id: doc.id })));
+	}
+
+	deletePlan(planId: string): Observable<void> {
+		const docRef = doc(this.firestore, COLLECTIONS.Plans, planId);
+		return from(deleteDoc(docRef));
 	}
 }

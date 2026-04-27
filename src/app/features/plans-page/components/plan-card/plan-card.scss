@@ -1,0 +1,49 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.priority {
+	&.priority-0 {
+		color: $priority-low;
+	}
+
+	&.priority-1 {
+		color: $priority-medium;
+	}
+
+	&.priority-2 {
+		color: $priority-high;
+		font-weight: 700;
+	}
+
+	&.priority-3 {
+		color: $priority-critical;
+		font-weight: 900;
+	}
+}
+
+.notes {
+	font-size: 14px;
+	color: $gray;
+}
+
+.close-button {
+	@include inline-flex-center();
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background: none;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	border: none;
+	outline: none;
+	font-size: 20px;
+	line-height: 1;
+	border-radius: 10px;
+	cursor: pointer;
+
+	&:hover,
+	&:active {
+		box-shadow: 2px 2px 0px 0px $ink;
+	}
+}
