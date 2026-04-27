@@ -1,4 +1,12 @@
-import { Component, type ElementRef, effect, inject, signal, viewChild } from '@angular/core';
+import {
+	Component,
+	type ElementRef,
+	effect,
+	inject,
+	type OnInit,
+	signal,
+	viewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { NotificationService } from '@core/notification/notification.service';
@@ -22,7 +30,7 @@ import { lastValueFrom } from 'rxjs';
 	templateUrl: './profile.html',
 	styleUrl: './profile.scss',
 })
-export class Profile {
+export class Profile implements OnInit {
 	private readonly router = inject(Router);
 	private readonly logger = inject(LoggerService);
 	private readonly userService = inject(UserService);
@@ -46,6 +54,26 @@ export class Profile {
 			const avatarData = getUserAvatar(this.currentUser());
 			this.userAvatarDetails.set(avatarData);
 		});
+	}
+
+	ngOnInit(): void {
+		this.notificator.error(
+			'Error',
+			'This is a demo vhe following test account to explore the profile features',
+		);
+		this.notificator.error(
+			'Error',
+			'This is a demo vhe following test account to explore the profile features',
+		);
+		this.notificator.error(
+			'Error',
+			'This is a demo vhe following test account to explore the profile features',
+		);
+
+		this.notificator.error(
+			'Error',
+			'This is a demo vhe following test account to explore the profile features',
+		);
 	}
 
 	async logout(): Promise<void> {

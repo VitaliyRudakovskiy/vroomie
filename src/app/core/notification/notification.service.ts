@@ -9,9 +9,7 @@ export interface Notification {
 	fadingOut?: boolean;
 }
 
-@Injectable({
-	providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class NotificationService {
 	notification = signal<Notification | null>(null);
 	private lastTimeoutId?: number;
@@ -25,9 +23,7 @@ export class NotificationService {
 	}
 
 	hide(): void {
-		if (this.notification()) {
-			this.startFadeOut();
-		}
+		if (this.notification()) this.startFadeOut();
 		clearTimeout(this.lastTimeoutId);
 	}
 
@@ -61,9 +57,7 @@ export class NotificationService {
 
 		setTimeout(() => {
 			this.notification.set(null);
-			if (callback) {
-				callback();
-			}
+			if (callback) callback();
 		}, 100);
 	}
 }
