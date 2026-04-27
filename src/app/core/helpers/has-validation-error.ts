@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import type { FormGroup } from '@angular/forms';
 
 export const hasValidationError = <T extends FormGroup>(
 	form: T,

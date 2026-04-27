@@ -15,6 +15,12 @@ $brutal-shadow-offset: 4px;
 $radius-main: 16px;
 $transition-main: all 0.1s ease-in-out;
 
+/* ===== Plan priority ===== */
+$priority-low: #a3e635;
+$priority-medium: #f5e86e;
+$priority-high: #ff6b6b;
+$priority-critical: #d12de3;
+
 /* ===== Spinner loader ===== */
 $spinner: rgba(255, 255, 255, 0.4);
 $spinner-secondary: rgba(51, 65, 85, 0.3);

@@ -2,6 +2,7 @@ import { Component, inject, input, output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { dateValidator } from '@core/helpers/date-validator';
+import { hasValidationError } from '@core/helpers/has-validation-error';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
 import { MANY_SERVICES_CONFIG } from '@shared/constants/service-config';
@@ -10,7 +11,6 @@ import type { Car } from 'models/car';
 import type { ServiceRecordWithoutId } from 'models/service-record';
 import { ServicesActions } from 'store/services/actions';
 import { ConfirmModal } from '../confirm-modal';
-import { hasValidationError } from '@core/helpers/has-validation-error';
 
 @Component({
 	selector: 'app-many-services-modal',

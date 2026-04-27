@@ -1,12 +1,12 @@
-import { Component, inject, input, signal, type OnInit } from '@angular/core';
+import { Component, inject, input, type OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { PlanModalComponent } from '@shared/modals';
 import { Button, Loader } from '@shared/ui';
 import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo } from 'store/car-info/selectors';
 import { PlansActions } from 'store/plans/actions';
 import { selectLoading, selectPlans } from 'store/plans/selectors';
-import { PlanModalComponent } from '@shared/modals';
 
 @Component({
 	selector: 'app-plans',

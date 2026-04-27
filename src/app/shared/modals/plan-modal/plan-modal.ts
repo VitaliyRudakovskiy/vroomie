@@ -4,16 +4,17 @@ import { hasValidationError } from '@core/helpers/has-validation-error';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
 import { PLAN_CONFIG } from '@shared/constants/plan-config';
-import { ModalWrapper, Button } from '@shared/ui';
-import { Car } from 'models/car';
-import { type PriorityLevel, PlanWithoutId } from 'models/plan';
+import { Button, ModalWrapper } from '@shared/ui';
+import type { Car } from 'models/car';
+import type { PlanWithoutId, PriorityLevel } from 'models/plan';
 import { PlansActions } from 'store/plans/actions';
+import { PriorityPickerComponent } from './components/priority-picker/priority-picker';
 
 @Component({
 	selector: 'app-plan-modal',
 	templateUrl: './plan-modal.html',
 	styleUrl: './plan-modal.scss',
-	imports: [ModalWrapper, Button, ReactiveFormsModule],
+	imports: [ModalWrapper, Button, ReactiveFormsModule, PriorityPickerComponent],
 })
 export class PlanModalComponent {
 	private readonly store = inject(Store);
@@ -36,14 +37,14 @@ export class PlanModalComponent {
 			Validators.maxLength(this.config.title.max),
 		]),
 		notes: new FormControl(''),
-		priority: new FormControl<PriorityLevel>(0, [Validators.required]),
+		priority: new FormControl<PriorityLevel>(0),
 	});
 
 	onSave(): void {
 		if (this.planForm.invalid) return;
 
 		const { title, notes, priority } = this.planForm.value;
-		if (!title || !priority) return;
+		if (!title) return;
 
 		const newPlan: PlanWithoutId = {
 			title,

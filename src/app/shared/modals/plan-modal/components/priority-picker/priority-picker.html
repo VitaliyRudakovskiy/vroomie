@@ -1,0 +1,37 @@
+@let val = value();
+
+<div
+	class="priority-picker"
+	tabindex="0"
+	role="listbox"
+	[attr.aria-disabled]="disabled()"
+	[attr.aria-valuetext]="label()"
+	[class.low]="val === 0"
+	[class.medium]="val === 1"
+	[class.high]="val === 2"
+	[class.critical]="val === 3"
+>
+	<button
+		class="toggle-button"
+		aria-label="Previous priority"
+		type="button"
+		[disabled]="disabled()"
+		(click)="prev()"
+	>
+		&lt;
+	</button>
+
+	<div class="label" aria-live="polite">
+		{{ label() }}
+	</div>
+
+	<button
+		class="toggle-button"
+		aria-label="Next priority"
+		type="button"
+		[disabled]="disabled()"
+		(click)="next()"
+	>
+		&gt;
+	</button>
+</div>
