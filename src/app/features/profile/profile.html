@@ -20,24 +20,16 @@
 				@if (photoLoading()) {
 					<app-loader />
 				}
+
 				@if (avatar?.isImage) {
 					<img class="avatar" [src]="avatar?.details" alt="user avatar" />
-					<div
-						tabindex="-1"
-						role="button"
-						class="overlay delete-mode"
-						(click)="onOpenConfirmModal()"
-					>
-						<img class="icon" src="/assets/icons/delete.svg" alt="delete avatar icon" />
-					</div>
 				} @else {
 					<div class="avatar default-bg">{{ avatar?.details }}</div>
-					<div tabindex="-1" role="button" class="overlay add-mode" (click)="onAddAvatar()">
-						<span class="icon">+</span>
-					</div>
 				}
 
-				<app-button label="Logout" (clicked)="logout()" />
+				<app-button label="Change photo" (clicked)="onAddAvatar()" />
+				<app-button label="Delete photo" variant="secondary" (clicked)="onOpenConfirmModal()" />
+				<app-button label="Logout" variant="danger" (clicked)="logout()" />
 			</div>
 		</div>
 	</div>

@@ -15,7 +15,6 @@ import {
 import { ConfirmModal } from '@shared/modals';
 import { Button, Loader } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
-import type { EditingField } from './types';
 
 @Component({
 	selector: 'app-profile',
@@ -31,13 +30,9 @@ export class Profile {
 	private readonly notificator = inject(NotificationService);
 	private readonly cloudinaryService = inject(CloudinaryService);
 
-	userName = viewChild<ElementRef<HTMLInputElement>>('userName');
 	fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
-	userStatus = viewChild<ElementRef<HTMLInputElement>>('userStatus');
-	userStatusText = viewChild<ElementRef<HTMLInputElement>>('userStatusText');
 
 	currentUser = this.userService.userProfile;
-	editingField = signal<EditingField>(null);
 	userAvatarDetails = signal<UserAvatarDetails | null>(null);
 	photoLoading = signal(false);
 	isConfirmModalOpen = signal(false);
@@ -112,23 +107,6 @@ export class Profile {
 		} finally {
 			this.photoLoading.set(false);
 			filesInput.value = '';
-		}
-	}
-
-	startEditing(field: EditingField): void {
-		this.editingField.set(field);
-
-		setTimeout(() => {
-			if (field === 'name') {
-				this.userName()?.nativeElement.focus();
-			}
-		});
-	}
-
-	stopEditing(field: EditingField): void {
-		this.editingField.set(null);
-		if (!field) {
-			return;
 		}
 	}
 
