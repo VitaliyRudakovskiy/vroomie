@@ -1,47 +1,46 @@
 @let avatar = userAvatarDetails();
 
-<section class="profile-page">
-	<div class="top-section">
-		<div class="avatar-container" [class.loading]="photoLoading()">
-			<input
-				#fileInput
-				class="select-photo-input"
-				type="file"
-				[accept]="AVAILABLE_FORMATS"
-				(change)="onFileSelected($event)"
-			/>
-
-			@if (photoLoading()) {
-				<app-loader />
-			}
-			@if (avatar?.isImage) {
-				<img class="avatar" [src]="avatar?.details" alt="user avatar" />
-				<div tabindex="-1" role="button" class="overlay delete-mode" (click)="onOpenConfirmModal()">
-					<img class="icon" src="/assets/icons/delete.svg" alt="delete avatar icon" />
-				</div>
-			} @else {
-				<div class="avatar default-bg">{{ avatar?.details }}</div>
-				<div tabindex="-1" role="button" class="overlay add-mode" (click)="onAddAvatar()">
-					<span class="icon">+</span>
-				</div>
-			}
+<section class="global-page-section">
+	<div class="global-main-content">
+		<div class="global-main-content__header">
+			<app-button label="&lt; Back" variant="secondary" size="sm" (clicked)="goBack()" />
+			<h2>My profile</h2>
 		</div>
 
-		<div class="profile-info">
-			@if (editingField() === 'name') {
+		<div class="global-main-content__container">
+			<div class="avatar-container" [class.loading]="photoLoading()">
 				<input
-					#userName
-					class="edit-name"
-					(blur)="stopEditing('name')"
-					(keydown.enter)="stopEditing('name')"
+					#fileInput
+					class="select-photo-input"
+					type="file"
+					[accept]="AVAILABLE_FORMATS"
+					(change)="onFileSelected($event)"
 				/>
-			}
+
+				@if (photoLoading()) {
+					<app-loader />
+				}
+				@if (avatar?.isImage) {
+					<img class="avatar" [src]="avatar?.details" alt="user avatar" />
+					<div
+						tabindex="-1"
+						role="button"
+						class="overlay delete-mode"
+						(click)="onOpenConfirmModal()"
+					>
+						<img class="icon" src="/assets/icons/delete.svg" alt="delete avatar icon" />
+					</div>
+				} @else {
+					<div class="avatar default-bg">{{ avatar?.details }}</div>
+					<div tabindex="-1" role="button" class="overlay add-mode" (click)="onAddAvatar()">
+						<span class="icon">+</span>
+					</div>
+				}
+
+				<app-button label="Logout" (clicked)="logout()" />
+			</div>
 		</div>
 	</div>
-
-	<app-button label="Logout" (clicked)="logout()" />
-
-	<app-button label="Save" [loading]="loading()" />
 </section>
 
 <app-confirm-modal

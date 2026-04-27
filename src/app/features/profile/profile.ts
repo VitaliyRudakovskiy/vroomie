@@ -143,4 +143,8 @@ export class Profile {
 	onCloseConfirmModal(): void {
 		this.isConfirmModalOpen.set(false);
 	}
+
+	goBack(): void {
+		this.router.navigate(['garage']);
+	}
 }
