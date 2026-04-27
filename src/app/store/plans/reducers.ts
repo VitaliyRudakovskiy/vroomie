@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { GarageActions } from 'store/garage/actions';
 import { PlansActions } from './actions';
 import { initialState } from './state';
 
@@ -57,13 +56,6 @@ export const plansReducer = createReducer(
 	on(PlansActions.deletePlanFailure, (state, { error }) => ({
 		...state,
 		error,
-		loading: false,
-	})),
-
-	// при удалении машины удаляем все планы, связанные с этой машиной
-	on(GarageActions.deleteCarSuccess, (state, { carId }) => ({
-		...state,
-		plans: state.plans.filter((plan) => plan.carId !== carId),
 		loading: false,
 	})),
 );

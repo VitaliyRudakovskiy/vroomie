@@ -38,7 +38,8 @@ export class PlanCard {
 		this.store.dispatch(PlansActions.deletePlan({ planId }));
 	}
 
-	openConfirmDeleteModal(): void {
+	openConfirmDeleteModal(event: Event): void {
+		event.stopPropagation();
 		this.isDeleteModalOpen.set(true);
 	}
 

@@ -27,7 +27,8 @@ export class ServiceCard {
 
 	clickCard(): void {}
 
-	openConfirmDeleteModal(): void {
+	openConfirmDeleteModal(event: Event): void {
+		event.stopPropagation();
 		this.isConfirmModalOpen.set(true);
 	}
 

@@ -1,11 +1,11 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ConfirmModal } from '@shared/modals';
 import { Card } from '@shared/ui';
 import type { Car as TCar } from 'models/car';
-import { ConfirmModal } from '@shared/modals';
-import { Store } from '@ngrx/store';
-import { selectLoading } from 'store/garage/selectors';
 import { GarageActions } from 'store/garage/actions';
+import { selectLoading } from 'store/garage/selectors';
 
 @Component({
 	selector: 'app-car',
@@ -30,7 +30,8 @@ export class Car {
 		this.router.navigate([id], { relativeTo: this.route });
 	}
 
-	openConfirmDeleteModal(): void {
+	openConfirmDeleteModal(event: Event): void {
+		event.stopPropagation();
 		this.isDeleteModalOpen.set(true);
 	}
 

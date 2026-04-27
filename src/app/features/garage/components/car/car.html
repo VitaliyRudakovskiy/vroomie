@@ -12,7 +12,7 @@
 			type="button"
 			class="delete-button"
 			aria-label="Delete modal"
-			(click)="openConfirmDeleteModal()"
+			(click)="openConfirmDeleteModal($event)"
 		>
 			✕
 		</button>
@@ -21,7 +21,7 @@
 
 <app-confirm-modal
 	modalTitle="Delete car"
-	[description]="['Are you sure you want to delete car?', carInfo.make]"
+	[description]="['Are you sure you want to delete car?', `${carInfo.make} ${carInfo.model}`]"
 	[loading]="deleteLoading()"
 	[visible]="isDeleteModalOpen()"
 	(cancelEvent)="closeConfirmDeleteModal()"
