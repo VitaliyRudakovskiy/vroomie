@@ -3,6 +3,7 @@ import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
 import { CarModal } from '@shared/modals';
 import { Button, Loader } from '@shared/ui';
+import { ProfileButton } from '@shared/ui/profile-button/profile-button';
 import { GarageActions } from 'store/garage/actions';
 import { selectCars, selectLoading } from 'store/garage/selectors';
 import { Car } from './components/car/car';
@@ -11,7 +12,7 @@ import { Car } from './components/car/car';
 	selector: 'app-garage',
 	templateUrl: './garage.html',
 	styleUrl: './garage.scss',
-	imports: [Button, CarModal, Loader, Car],
+	imports: [Button, CarModal, Loader, Car, ProfileButton],
 })
 export class Garage {
 	private readonly store = inject(Store);

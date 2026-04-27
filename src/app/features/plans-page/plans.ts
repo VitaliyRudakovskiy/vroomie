@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PlanModalComponent } from '@shared/modals';
 import { Button, Loader } from '@shared/ui';
+import { ProfileButton } from '@shared/ui/profile-button/profile-button';
 import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo } from 'store/car-info/selectors';
 import { PlansActions } from 'store/plans/actions';
@@ -13,7 +14,7 @@ import { PlanCard } from './components/plan-card/plan-card';
 	selector: 'app-plans',
 	templateUrl: './plans.html',
 	styleUrl: './plans.scss',
-	imports: [Button, Loader, PlanModalComponent, PlanCard],
+	imports: [Button, Loader, PlanModalComponent, PlanCard, ProfileButton],
 })
 export class Plans implements OnInit {
 	private readonly store = inject(Store);

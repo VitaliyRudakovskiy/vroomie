@@ -21,7 +21,9 @@
 		@if (iconBefore()) {
 			<img [src]="`/assets/icons/${iconBefore()}`" [alt]="`Icon before text, ${iconAlt()}`" />
 		}
+
 		{{ label() }}
+
 		@if (iconAfter()) {
 			<img [src]="`/assets/icons/${iconAfter()}`" [alt]="`Icon after text, ${iconAlt()}`" />
 		}

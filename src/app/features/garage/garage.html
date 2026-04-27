@@ -2,7 +2,10 @@
 	<div class="global-main-content">
 		<div class="global-main-content__header">
 			<h2>My cars</h2>
-			<app-button class="add-car-button" label="+ Add car" (clicked)="showCarModal()" />
+			<div class="global-main-content__header__right">
+				<app-button class="add-car-button" label="+ Add car" (clicked)="showCarModal()" />
+				<app-profile-button />
+			</div>
 		</div>
 
 		<div class="global-main-content__container">

@@ -1,0 +1,9 @@
+@let picture = avatar();
+
+<button class="profile-btn" (click)="goToProfile()">
+	@if (picture.isImage) {
+		<img class="avatar" [src]="picture.details" alt="user avatar" />
+	} @else {
+		<div class="avatar">{{ picture.details }}</div>
+	}
+</button>

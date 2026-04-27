@@ -1,0 +1,25 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.profile-btn {
+	@include flex-center();
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border: $brutal-border solid $ink;
+	border-radius: $radius-main;
+	color: $ink;
+	box-shadow: $brutal-shadow-offset $brutal-shadow-offset 0px 0px $ink;
+	cursor: pointer;
+}
+
+.avatar {
+	@include flex-center();
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	border-radius: 14px;
+	object-fit: cover;
+	font-weight: 600;
+	font-size: 14px;
+}

@@ -21,7 +21,11 @@
 
 <app-confirm-modal
 	modalTitle="Delete car"
-	[description]="['Are you sure you want to delete car?', `${carInfo.make} ${carInfo.model}`]"
+	[description]="[
+		'Are you sure you want to delete car?',
+		'This will delete all associated services and plans.',
+		`${carInfo.make} ${carInfo.model}`,
+	]"
 	[loading]="deleteLoading()"
 	[visible]="isDeleteModalOpen()"
 	(cancelEvent)="closeConfirmDeleteModal()"

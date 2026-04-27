@@ -25,8 +25,6 @@ export class PlanModalComponent {
 
 	closeModal = output();
 
-	currentUser = this.userService.userProfile;
-
 	protected readonly config = PLAN_CONFIG;
 
 	planForm = new FormGroup({
@@ -49,7 +47,7 @@ export class PlanModalComponent {
 			title,
 			notes: notes ?? '',
 			carId: this.carId(),
-			ownerId: this.currentUser()?.uid || '',
+			ownerId: this.userService.userProfile()?.uid || '',
 			make: this.carInfo()?.make ?? '',
 			model: this.carInfo()?.model ?? '',
 			priority: priority ?? 0,

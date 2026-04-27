@@ -2,6 +2,7 @@ import { Component, inject, input, type OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Button, Loader } from '@shared/ui';
+import { ProfileButton } from '@shared/ui/profile-button/profile-button';
 import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo, selectCarInfoLoading } from 'store/car-info/selectors';
 import { GeneralInfo } from './components/general-info/general-info';
@@ -10,7 +11,7 @@ import { GeneralInfo } from './components/general-info/general-info';
 	selector: 'app-car-info',
 	templateUrl: './car-info.html',
 	styleUrl: './car-info.scss',
-	imports: [Loader, Button, GeneralInfo],
+	imports: [Loader, Button, GeneralInfo, ProfileButton],
 })
 export class CarInfo implements OnInit {
 	private readonly store = inject(Store);

@@ -26,8 +26,6 @@ export class ServiceModal {
 
 	closeModal = output();
 
-	currentUser = this.userService.userProfile;
-
 	protected readonly config = SERVICE_CONFIG;
 
 	serviceForm = new FormGroup({
@@ -66,7 +64,7 @@ export class ServiceModal {
 			make: this.carInfo()?.make ?? '',
 			model: this.carInfo()?.model ?? '',
 			date: ms,
-			ownerId: this.currentUser()?.uid || '',
+			ownerId: this.userService.userProfile()?.uid || '',
 			photoUrls: null,
 			createdAt: Date.now(),
 		};

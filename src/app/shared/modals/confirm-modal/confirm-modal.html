@@ -1,8 +1,8 @@
 <app-modal-wrapper [visible]="visible()" [modalTitle]="modalTitle()" (closeModal)="onClose()">
 	<div class="description">
 		@if (isDescriptionArray()) {
-			@for (line of description(); track line; let first = $first) {
-				<p [style.margin-bottom.px]="first ? 12 : 0">
+			@for (line of description(); track line; let last = $last) {
+				<p [style.margin-top.px]="last ? 12 : 0">
 					{{ line }}
 				</p>
 			}
