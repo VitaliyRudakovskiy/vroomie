@@ -21,7 +21,7 @@
 
 <app-confirm-modal
 	modalTitle="Delete service"
-	[description]="`Are you sure you want to delete '${service.title}'?`"
+	[description]="['Are you sure you want to delete service?', service.title]"
 	[loading]="deleteLoading()"
 	[visible]="isConfirmModalOpen()"
 	(cancelEvent)="closeConfirmDeleteModal()"

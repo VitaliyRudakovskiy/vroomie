@@ -1,7 +1,6 @@
 <app-modal-wrapper
 	[visible]="visible()"
 	[modalTitle]="selectedCar() ? 'Editing' : 'Adding' + ' car'"
-	[innerPadding]="20"
 	(closeModal)="onClose()"
 >
 	<div [formGroup]="form">

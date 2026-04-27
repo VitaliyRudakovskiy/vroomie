@@ -1,5 +1,15 @@
 <app-modal-wrapper [visible]="visible()" [modalTitle]="modalTitle()" (closeModal)="onClose()">
-	<p class="description">{{ description() }}</p>
+	<div class="description">
+		@if (isDescriptionArray()) {
+			@for (line of description(); track line; let first = $first) {
+				<p [style.margin-bottom.px]="first ? 12 : 0">
+					{{ line }}
+				</p>
+			}
+		} @else {
+			<p>{{ description() }}</p>
+		}
+	</div>
 
 	<div class="global-form-buttons-end">
 		<app-button variant="secondary" [label]="cancelLabel()" (clicked)="onClose()" />

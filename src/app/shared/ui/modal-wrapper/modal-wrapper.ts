@@ -8,7 +8,7 @@ import { Component, input, output } from '@angular/core';
 export class ModalWrapper {
 	visible = input.required<boolean>();
 	modalTitle = input.required<string>();
-	innerPadding = input(32);
+	innerPadding = input(20);
 
 	closeModal = output();
 

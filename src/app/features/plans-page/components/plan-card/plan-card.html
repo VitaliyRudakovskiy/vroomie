@@ -19,7 +19,7 @@
 
 <app-confirm-modal
 	modalTitle="Delete plan"
-	[description]="`Are you sure you want to delete '${pl.title}'?`"
+	[description]="['Are you sure you want to delete plan?', pl.title]"
 	[loading]="deleteLoading()"
 	[visible]="isDeleteModalOpen()"
 	(cancelEvent)="closeConfirmDeleteModal()"

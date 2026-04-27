@@ -1,9 +1,4 @@
-<app-modal-wrapper
-	modalTitle="New Service"
-	[visible]="visible()"
-	[innerPadding]="20"
-	(closeModal)="onClose()"
->
+<app-modal-wrapper modalTitle="New Service" [visible]="visible()" (closeModal)="onClose()">
 	<div [formGroup]="serviceForm">
 		<div class="global-form-field-container">
 			<input

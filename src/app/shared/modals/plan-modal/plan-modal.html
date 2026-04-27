@@ -1,9 +1,4 @@
-<app-modal-wrapper
-	modalTitle="New Plan"
-	[visible]="visible()"
-	[innerPadding]="20"
-	(closeModal)="onClose()"
->
+<app-modal-wrapper modalTitle="New Plan" [visible]="visible()" (closeModal)="onClose()">
 	<div [formGroup]="planForm">
 		<div class="global-form-field-container">
 			<input
