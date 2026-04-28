@@ -1,5 +1,6 @@
 export const environment = {
 	production: false,
+	appLink: 'https://vroomie-ten.vercel.app',
 	firebase: {
 		apiKey: 'AIzaSyAbBA1k6o9wPL7e13PZVC1fNfDZ7VfMRxA',
 		authDomain: 'vroomie-e602e.firebaseapp.com',

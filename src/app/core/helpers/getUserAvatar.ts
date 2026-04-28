@@ -15,9 +15,21 @@ export const getUserAvatar = (user: UserProfile | null): UserAvatarDetails => {
 		};
 	}
 
-	const [name, secondName] = user.displayName.split(' ');
+	const parts = user.displayName.trim().split(/\s+/);
+
+	if (parts.length === 0) {
+		return { isImage: false, details: '?' };
+	}
+
+	if (parts.length === 1) {
+		return {
+			isImage: false,
+			details: parts[0][0].toUpperCase(),
+		};
+	}
+
 	return {
 		isImage: false,
-		details: `${name[0].toUpperCase()}${secondName[0].toUpperCase()}`,
+		details: `${parts[0][0].toUpperCase()}${parts[1][0].toUpperCase()}`,
 	};
 };

@@ -15,10 +15,11 @@ import { ChangeNameModal, ConfirmModal } from '@shared/modals';
 import { Button } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
 import { Avatar } from './components/avatar/avatar';
+import { QrCode } from './components/qr-code/qr-code';
 
 @Component({
 	selector: 'app-profile',
-	imports: [ConfirmModal, Button, Avatar, ChangeNameModal],
+	imports: [ConfirmModal, Button, Avatar, ChangeNameModal, QrCode],
 	templateUrl: './profile.html',
 	styleUrl: './profile.scss',
 })

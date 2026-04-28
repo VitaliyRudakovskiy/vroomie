@@ -1,0 +1,13 @@
+<button class="qr-button" (click)="openQrModal()">
+	<img
+		class="qr-image"
+		src="assets/icons/qrcode.svg"
+		alt="current user qr code for inviting friends"
+	/>
+</button>
+
+<app-qr-code-modal
+	[visible]="isQrModalVisible()"
+	[qrLink]="inviteLink()"
+	(closeModal)="closeQrModal()"
+/>

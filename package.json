@@ -20,6 +20,7 @@
 		"@angular/core": "20.3.18",
 		"@angular/fire": "20.0.1",
 		"@angular/forms": "20.3.18",
+		"angularx-qrcode": "^20.0.0",
 		"@angular/platform-browser": "20.3.18",
 		"@angular/router": "20.3.18",
 		"@ngrx/effects": "^20.1.0",

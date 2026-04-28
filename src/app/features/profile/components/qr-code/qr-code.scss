@@ -1,0 +1,22 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.qr-button {
+	@include flex-center();
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: $brutal-border solid $ink;
+	border-radius: 6px;
+	color: $ink;
+	box-shadow: 2px 2px 0px 0px $ink;
+	cursor: pointer;
+
+	.qr-image {
+		@include flex-center();
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}

@@ -1,0 +1,17 @@
+<app-modal-wrapper modalTitle="Invite Friend" [visible]="visible()" (closeModal)="onClose()">
+	<div class="modal-content">
+		<qrcode
+			errorCorrectionLevel="H"
+			alt="QR code for inviting a friend"
+			title="Scan for inviting a friend"
+			[width]="260"
+			[qrdata]="qrLink()"
+		/>
+		<p class="hint">Scan to add me as a friend</p>
+
+		<div class="buttons">
+			<app-button fullWidth label="Copy" (clicked)="copyInviteLink()" />
+			<app-button fullWidth label="Save" (clicked)="downloadQr()" />
+		</div>
+	</div>
+</app-modal-wrapper>
