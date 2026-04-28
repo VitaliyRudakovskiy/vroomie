@@ -1,6 +1,12 @@
 @let avatar = userAvatar();
 
-<div class="avatar-container" [class.loading]="loading()">
+<div
+	class="avatar-container"
+	[style.width.px]="size()"
+	[style.min-width.px]="size()"
+	[style.height.px]="size()"
+	[class.loading]="loading()"
+>
 	<input
 		#fileInput
 		class="select-photo-input"

@@ -14,6 +14,7 @@ export class Avatar {
 
 	userAvatar = input.required<UserAvatarDetails | null>();
 	loading = input(false);
+	size = input(210);
 
 	fileSelected = output<File>();
 

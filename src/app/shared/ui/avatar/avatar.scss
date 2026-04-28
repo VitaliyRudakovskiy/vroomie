@@ -1,13 +1,8 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
-$avatar-size: 210px;
-
 .avatar-container {
 	position: relative;
-	width: $avatar-size;
-	height: $avatar-size;
-	min-width: $avatar-size;
 	border-radius: 28px;
 
 	&.loading {

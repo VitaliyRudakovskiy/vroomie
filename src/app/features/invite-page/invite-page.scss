@@ -1,0 +1,34 @@
+@use 'mixins' as *;
+
+:host {
+	@include host-page();
+}
+
+.friend-container {
+	@include flex-column();
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+
+	.logo-container {
+		@include flex-center();
+		gap: 12px;
+
+		.logo {
+			width: 56px;
+			height: 56px;
+		}
+	}
+
+	&__name {
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	.buttons {
+		@include flex-center();
+		margin-top: 12px;
+		gap: 12px;
+	}
+}

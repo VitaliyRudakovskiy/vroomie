@@ -1,5 +1,13 @@
 import { effect, Injectable, inject, signal } from '@angular/core';
-import { type DocumentReference, doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import {
+	arrayUnion,
+	type DocumentReference,
+	doc,
+	Firestore,
+	getDoc,
+	setDoc,
+	updateDoc,
+} from '@angular/fire/firestore';
 import { COLLECTIONS } from '@core/api/dbCollections';
 import type { User } from 'firebase/auth';
 import type { UserProfile } from 'models/user-profile';
@@ -61,6 +69,53 @@ export class UserService {
 			this.logger.info(`User profile updated for UID: ${userId}`);
 		} catch (error) {
 			this.logger.error(`Failed to update profile: ${error}`);
+			throw error;
+		}
+	}
+
+	async getProfileById(uid: string): Promise<UserProfile | null> {
+		try {
+			const userRef = this.getUserDocRef(uid);
+			const userSnapshot = await getDoc(userRef);
+
+			if (userSnapshot.exists()) {
+				return userSnapshot.data() as UserProfile;
+			}
+
+			this.logger.debug(`User profile not found for UID: ${uid}`);
+			return null;
+		} catch (error) {
+			this.logger.error(`Error fetching user profile by ID: ${error}`);
+			throw error;
+		}
+	}
+
+	async becomeFriends(friendId: string, myId: string): Promise<void> {
+		const myRef = this.getUserDocRef(myId);
+		const friendRef = this.getUserDocRef(friendId);
+
+		try {
+			await updateDoc(myRef, {
+				friends: arrayUnion(friendId),
+			});
+
+			await updateDoc(friendRef, {
+				friends: arrayUnion(myId),
+			});
+
+			this.userProfile.update((profile) => {
+				if (profile && !profile.friends.includes(friendId)) {
+					return {
+						...profile,
+						friends: [...profile.friends, friendId],
+					};
+				}
+				return profile;
+			});
+
+			this.logger.info(`Friendship established between ${myId} and ${friendId}`);
+		} catch (error) {
+			this.logger.error(`Failed to establish friendship: ${error}`);
 			throw error;
 		}
 	}

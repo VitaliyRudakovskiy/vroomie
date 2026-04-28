@@ -12,9 +12,8 @@ import {
 	MAX_FILE_SIZE_MB,
 } from '@shared/constants/avatar-config';
 import { ChangeNameModal, ConfirmModal } from '@shared/modals';
-import { Button } from '@shared/ui';
+import { Avatar, Button } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
-import { Avatar } from './components/avatar/avatar';
 import { QrCode } from './components/qr-code/qr-code';
 
 @Component({

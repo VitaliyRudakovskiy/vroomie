@@ -1,0 +1,30 @@
+<section class="global-page-section">
+	<div class="global-main-content">
+		<div class="global-main-content__container">
+			@if (isLoadingUser()) {
+				<app-loader
+					description="Loading user data..."
+					[spinnerSize]="64"
+					[spinnerThikness]="7"
+					[withBlur]="false"
+				/>
+			} @else {
+				<div class="friend-container">
+					<div class="logo-container">
+						<img class="logo" src="assets/images/logo.svg" alt="vroomie logo" />
+						<h1>Vroomie</h1>
+					</div>
+
+					<app-avatar [size]="150" [userAvatar]="userAvatarDetails()" />
+					<p class="friend-container__name">{{ initiatorProfile()?.displayName }}</p>
+					<p>Wants to make friend with you</p>
+
+					<div class="buttons">
+						<app-button label="Reject" variant="danger" (clicked)="onReject()" />
+						<app-button label="Confirm" (clicked)="onApprove()" />
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>

@@ -1,5 +1,6 @@
 import type { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { inviteGuard } from './core/guards/invite.guard';
 import { Auth } from './features/auth/auth';
 import { MainLayout } from './layout/main-layout';
 
@@ -33,6 +34,11 @@ export const routes: Routes = [
 			{
 				path: 'profile',
 				loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
+			},
+			{
+				path: 'invite/:initiatorId',
+				canActivate: [inviteGuard],
+				loadComponent: () => import('./features/invite-page/invite-page').then((m) => m.InvitePage),
 			},
 		],
 	},
