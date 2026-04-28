@@ -7,7 +7,7 @@ import { UserService } from '../services/user.service';
 export const inviteGuard: CanActivateFn = (route) => {
 	const userService = inject(UserService);
 	const router = inject(Router);
-	const friendId = route.params.initiatorId;
+	const friendId = route.params['initiatorId'];
 
 	return toObservable(userService.userProfile).pipe(
 		filter((profile) => !!profile),

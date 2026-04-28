@@ -26,6 +26,7 @@
 				"noForEach": "error",
 				"noUselessContinue": "error",
 				"noUselessConstructor": "error",
+				"useLiteralKeys": "off",
 				"noUselessTernary": "warn",
 				"noUselessUndefined": "error",
 				"noUselessUndefinedInitialization": "error",
