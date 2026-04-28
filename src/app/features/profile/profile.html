@@ -20,12 +20,31 @@
 			<p class="username">{{ user?.displayName }}</p>
 
 			<div class="profile-container__buttons">
-				<app-button label="Change photo" (clicked)="onChangePhoto()" />
-				<app-button label="Edit name" (clicked)="openChangeNameModal()" />
-				<app-button label="Logout" variant="danger" (clicked)="logout()" />
+				<app-button
+					label="Change photo"
+					iconBefore="profile/camera.svg"
+					direction="column"
+					size="profile-custom"
+					(clicked)="onChangePhoto()"
+				/>
+				<app-button
+					label="Edit name"
+					iconBefore="profile/edit.svg"
+					direction="column"
+					size="profile-custom"
+					(clicked)="openChangeNameModal()"
+				/>
+				<app-button
+					label="Settings"
+					iconBefore="profile/settings.svg"
+					direction="column"
+					size="profile-custom"
+					(clicked)="goToSettings()"
+				/>
 			</div>
 
 			<p>{{ user?.email }}</p>
+			<p>Friends: {{ friendsCount() }}</p>
 		</div>
 	</div>
 </section>

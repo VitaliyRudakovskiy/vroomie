@@ -5,19 +5,23 @@
 	[class.danger]="variant() === 'danger'"
 	[class.icon-only]="iconOnly() !== null"
 	[class.loading]="loading()"
+	[class.column]="direction() === 'column'"
+	[class.row]="direction() === 'row'"
 	[class.sm]="size() === 'sm'"
 	[class.md]="size() === 'md'"
 	[class.lg]="size() === 'lg'"
+	[class.custom]="size() === 'profile-custom'"
 	[class.full-width]="fullWidth()"
 	[disabled]="disabled() || loading()"
 	[attr.aria-busy]="loading()"
 	[type]="type()"
 	(click)="onClick($event)"
 >
-	<span class="button-main">
+	<p class="button-main">
 		@if (iconOnly()) {
 			<img [src]="`/assets/icons/${iconOnly()}`" [alt]="iconAlt()" />
 		}
+
 		@if (iconBefore()) {
 			<img [src]="`/assets/icons/${iconBefore()}`" [alt]="`Icon before text, ${iconAlt()}`" />
 		}
@@ -27,7 +31,7 @@
 		@if (iconAfter()) {
 			<img [src]="`/assets/icons/${iconAfter()}`" [alt]="`Icon after text, ${iconAlt()}`" />
 		}
-	</span>
+	</p>
 
 	<span class="button-spinner" aria-hidden="true">
 		<span class="spinner"></span>

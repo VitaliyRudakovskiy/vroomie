@@ -1,5 +1,5 @@
 import { booleanAttribute, Component, input, output } from '@angular/core';
-import type { ButtonSize, ButtonType, ButtonVariant, IconSize } from './types';
+import type { ButtonDirection, ButtonSize, ButtonType, ButtonVariant, IconSize } from './types';
 
 @Component({
 	selector: 'app-button',
@@ -11,6 +11,7 @@ export class Button {
 	variant = input<ButtonVariant>('primary');
 	type = input<ButtonType>('button');
 	size = input<ButtonSize>('md');
+	direction = input<ButtonDirection>('row');
 	loading = input(false);
 	fullWidth = input(false, { transform: booleanAttribute });
 	iconBefore = input<string | null>(null);

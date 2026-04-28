@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { NotificationService } from '@core/notification/notification.service';
@@ -39,6 +39,8 @@ export class Profile {
 	isChangeNameModalOpen = signal(false);
 	deleteLoading = signal(false);
 	photoLoading = signal(false);
+
+	friendsCount = computed(() => this.currentUser()?.friends.length);
 
 	constructor() {
 		effect(() => {
@@ -112,6 +114,8 @@ export class Profile {
 			this.photoLoading.set(false);
 		}
 	}
+
+	goToSettings(): void {}
 
 	openChangeNameModal(): void {
 		this.isChangeNameModalOpen.set(true);

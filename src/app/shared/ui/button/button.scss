@@ -1,6 +1,10 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
+:host {
+	user-select: none;
+}
+
 .custom-button {
 	@include inline-flex-center();
 	@include brutal-interactive();
@@ -8,7 +12,6 @@
 	position: relative;
 	appearance: none;
 	outline: none;
-	user-select: none;
 	border: $brutal-border solid $ink;
 	border-radius: $radius-main;
 	color: $ink;
@@ -20,11 +23,20 @@
 	line-height: 1;
 
 	.button-main {
-		@include inline-flex-center();
-		gap: 16px;
 		white-space: normal;
 		word-break: break-word;
 		transition: $transition-main;
+	}
+
+	&.row .button-main {
+		@include inline-flex-center();
+		gap: 16px;
+	}
+
+	&.column .button-main {
+		@include flex-column();
+		align-items: center;
+		gap: 4px;
 	}
 
 	.button-spinner {
@@ -56,6 +68,11 @@
 		all: unset;
 		cursor: pointer;
 		padding: 8px;
+	}
+
+	&.custom {
+		padding: 12px;
+		font-size: 13px;
 	}
 
 	&.md {
