@@ -46,8 +46,8 @@ export class CarModal {
 			Validators.maxLength(this.config.odometer.max),
 		]),
 		vin: new FormControl('', [
-			Validators.minLength(this.config.vin.min),
-			Validators.maxLength(this.config.vin.max),
+			Validators.minLength(this.config.vin.exact),
+			Validators.maxLength(this.config.vin.exact),
 		]),
 	});
 

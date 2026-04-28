@@ -1,0 +1,21 @@
+@let avatar = userAvatar();
+
+<div class="avatar-container" [class.loading]="loading()">
+	<input
+		#fileInput
+		class="select-photo-input"
+		type="file"
+		[accept]="availableFormats"
+		(change)="onFileChange($event)"
+	/>
+
+	@if (loading()) {
+		<app-loader />
+	}
+
+	@if (avatar?.isImage) {
+		<img class="avatar" [src]="avatar?.details" alt="user avatar" />
+	} @else {
+		<div class="avatar">{{ avatar?.details }}</div>
+	}
+</div>

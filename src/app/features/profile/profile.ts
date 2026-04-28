@@ -1,12 +1,4 @@
-import {
-	Component,
-	type ElementRef,
-	effect,
-	inject,
-	type OnInit,
-	signal,
-	viewChild,
-} from '@angular/core';
+import { Component, effect, inject, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { NotificationService } from '@core/notification/notification.service';
@@ -16,21 +8,21 @@ import { LoggerService } from '@core/services/logger.service';
 import { UserService } from '@core/services/user.service';
 import {
 	ALLOWED_IMAGE_FORMATS,
-	IMAGE_ACCEPT_FORMATS_STR,
 	MAX_FILE_SIZE_BYTES,
 	MAX_FILE_SIZE_MB,
 } from '@shared/constants/avatar-config';
-import { ConfirmModal } from '@shared/modals';
-import { Button, Loader } from '@shared/ui';
+import { ChangeNameModal, ConfirmModal } from '@shared/modals';
+import { Button } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
+import { Avatar } from './components/avatar/avatar';
 
 @Component({
 	selector: 'app-profile',
-	imports: [Loader, ConfirmModal, Button],
+	imports: [ConfirmModal, Button, Avatar, ChangeNameModal],
 	templateUrl: './profile.html',
 	styleUrl: './profile.scss',
 })
-export class Profile implements OnInit {
+export class Profile {
 	private readonly router = inject(Router);
 	private readonly logger = inject(LoggerService);
 	private readonly userService = inject(UserService);
@@ -38,42 +30,20 @@ export class Profile implements OnInit {
 	private readonly notificator = inject(NotificationService);
 	private readonly cloudinaryService = inject(CloudinaryService);
 
-	fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+	avatarComponent = viewChild<Avatar>('avatarComponent');
 
 	currentUser = this.userService.userProfile;
 	userAvatarDetails = signal<UserAvatarDetails | null>(null);
-	photoLoading = signal(false);
 	isConfirmModalOpen = signal(false);
+	isChangeNameModalOpen = signal(false);
 	deleteLoading = signal(false);
-	loading = signal(false);
-
-	AVAILABLE_FORMATS = IMAGE_ACCEPT_FORMATS_STR;
+	photoLoading = signal(false);
 
 	constructor() {
 		effect(() => {
 			const avatarData = getUserAvatar(this.currentUser());
 			this.userAvatarDetails.set(avatarData);
 		});
-	}
-
-	ngOnInit(): void {
-		this.notificator.error(
-			'Error',
-			'This is a demo vhe following test account to explore the profile features',
-		);
-		this.notificator.error(
-			'Error',
-			'This is a demo vhe following test account to explore the profile features',
-		);
-		this.notificator.error(
-			'Error',
-			'This is a demo vhe following test account to explore the profile features',
-		);
-
-		this.notificator.error(
-			'Error',
-			'This is a demo vhe following test account to explore the profile features',
-		);
 	}
 
 	async logout(): Promise<void> {
@@ -85,11 +55,25 @@ export class Profile implements OnInit {
 		}
 	}
 
-	async onRemoveAvatar(): Promise<void> {
+	onChangePhoto(): void {
+		if (this.currentUser()?.photoUrl) {
+			this.openConfirmChangeModal();
+			return;
+		} else {
+			this.avatarComponent()?.triggerFileInput();
+		}
+	}
+
+	onFileSelectedFromChild(file: File): void {
+		this.onFileSelected(file);
+	}
+
+	async removeAvatar(): Promise<void> {
 		this.deleteLoading.set(true);
 
 		try {
 			await this.userService.updateUserProfile({ photoUrl: null });
+			this.avatarComponent()?.triggerFileInput();
 		} catch (error) {
 			this.logger.error(`Error while deleting avatar: ${error}`);
 		} finally {
@@ -98,35 +82,26 @@ export class Profile implements OnInit {
 		}
 	}
 
-	async onFileSelected(event: Event): Promise<void> {
-		const filesInput = event.target as HTMLInputElement;
-		if (!filesInput.files?.length) {
-			return;
-		}
+	async onFileSelected(file: File): Promise<void> {
+		if (!file) return;
 
-		const newPhoto = filesInput.files[0];
-
-		if (!ALLOWED_IMAGE_FORMATS.includes(newPhoto.type)) {
+		if (!ALLOWED_IMAGE_FORMATS.includes(file.type)) {
 			this.notificator.error(
 				'Error',
-				`Unsupported format: ${newPhoto.type}. Please use PNG, JPEG, WebP or AVIF.`,
+				`Unsupported format: ${file.type}. Please use PNG, JPEG, WebP or AVIF.`,
 			);
-			filesInput.value = '';
 			return;
 		}
 
-		if (newPhoto.size > MAX_FILE_SIZE_BYTES) {
+		if (file.size > MAX_FILE_SIZE_BYTES) {
 			this.notificator.error('Error', `File is too heavy! Max size is ${MAX_FILE_SIZE_MB}MB.`);
-			filesInput.value = '';
 			return;
 		}
 
 		this.photoLoading.set(true);
 
 		try {
-			const uploadRes = await lastValueFrom(this.cloudinaryService.uploadImage(newPhoto));
-			this.logger.info(`Cloudinary success: ${uploadRes.secure_url}`);
-
+			const uploadRes = await lastValueFrom(this.cloudinaryService.uploadImage(file));
 			await this.userService.updateUserProfile({ photoUrl: uploadRes.secure_url });
 			this.notificator.success('Success', 'Avatar updated!');
 		} catch (err) {
@@ -134,16 +109,15 @@ export class Profile implements OnInit {
 			this.notificator.error('Error', 'Failed to update avatar');
 		} finally {
 			this.photoLoading.set(false);
-			filesInput.value = '';
 		}
 	}
 
-	onAddAvatar(): void {
-		this.fileInput()?.nativeElement.click();
+	openChangeNameModal(): void {
+		this.isChangeNameModalOpen.set(true);
 	}
 
-	onOpenConfirmModal(): void {
-		this.isConfirmModalOpen.set(true);
+	closeChangeNameModal(): void {
+		this.isChangeNameModalOpen.set(false);
 	}
 
 	onCloseConfirmModal(): void {
@@ -152,5 +126,9 @@ export class Profile implements OnInit {
 
 	goBack(): void {
 		this.router.navigate(['garage']);
+	}
+
+	private openConfirmChangeModal(): void {
+		this.isConfirmModalOpen.set(true);
 	}
 }

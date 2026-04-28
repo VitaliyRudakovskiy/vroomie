@@ -4,16 +4,15 @@ import { hasValidationError } from '@core/helpers/has-validation-error';
 import { UserService } from '@core/services/user.service';
 import { Store } from '@ngrx/store';
 import { PLAN_CONFIG } from '@shared/constants/plan-config';
-import { Button, ModalWrapper } from '@shared/ui';
+import { Button, ModalWrapper, PriorityPicker } from '@shared/ui';
 import type { Car } from 'models/car';
 import type { PlanWithoutId, PriorityLevel } from 'models/plan';
 import { PlansActions } from 'store/plans/actions';
-import { PriorityPickerComponent } from './components/priority-picker/priority-picker';
 
 @Component({
 	selector: 'app-plan-modal',
 	templateUrl: './plan-modal.html',
-	imports: [ModalWrapper, Button, ReactiveFormsModule, PriorityPickerComponent],
+	imports: [ModalWrapper, Button, ReactiveFormsModule, PriorityPicker],
 })
 export class PlanModalComponent {
 	private readonly store = inject(Store);

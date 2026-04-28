@@ -1,8 +1,8 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfirmModal } from '@shared/modals';
-import { PRIORITY_OPTIONS } from '@shared/modals/plan-modal/components/priority-picker/options';
 import { Card } from '@shared/ui';
+import { PRIORITY_OPTIONS } from '@shared/ui/priority-picker/options';
 import type { Plan } from 'models/plan';
 import { PlansActions } from 'store/plans/actions';
 import { selectLoading } from 'store/plans/selectors';

@@ -10,12 +10,12 @@ import { PRIORITY_OPTIONS } from './options';
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => PriorityPickerComponent),
+			useExisting: forwardRef(() => PriorityPicker),
 			multi: true,
 		},
 	],
 })
-export class PriorityPickerComponent implements ControlValueAccessor {
+export class PriorityPicker implements ControlValueAccessor {
 	value = signal<PriorityLevel>(0);
 	disabled = signal(false);
 

@@ -15,7 +15,7 @@
 					@if (planForm.controls.title.hasError('required')) {
 						Title is required
 					} @else if (planForm.controls.title.hasError('minlength')) {
-						Title must have at least 5 symbols
+						Title must have at least {{ config.title.min }} symbols
 					}
 				</p>
 			}

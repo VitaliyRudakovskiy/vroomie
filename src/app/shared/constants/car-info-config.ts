@@ -8,8 +8,7 @@ export const CAR_INFO_CONFIG = {
 		max: 50,
 	},
 	vin: {
-		min: 17,
-		max: 17,
+		exact: 17,
 	},
 	odometer: {
 		min: 1,

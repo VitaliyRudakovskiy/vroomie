@@ -1,0 +1,28 @@
+<app-modal-wrapper modalTitle="Change Name" [visible]="visible()" (closeModal)="onClose()">
+	<div [formGroup]="userForm">
+		<div class="global-form-field-container">
+			<input
+				id="displayName"
+				type="text"
+				placeholder="name to display"
+				formControlName="displayName"
+				[maxlength]="config.displayName.max"
+			/>
+
+			@if (hasError('displayName')) {
+				<p class="global-form-error" [class.visible]="hasError('displayName')">
+					@if (userForm.controls.displayName.hasError('required')) {
+						Username is required
+					} @else if (userForm.controls.displayName.hasError('minlength')) {
+						Username must have at least {{ config.displayName.min }} symbols
+					}
+				</p>
+			}
+		</div>
+	</div>
+
+	<div class="global-form-buttons-end">
+		<app-button variant="secondary" label="Cancel" (clicked)="onClose()" />
+		<app-button label="Save" [disabled]="!userForm.valid" (clicked)="onSave()" />
+	</div>
+</app-modal-wrapper>

@@ -1,0 +1,35 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+$avatar-size: 210px;
+
+.avatar-container {
+	position: relative;
+	width: $avatar-size;
+	height: $avatar-size;
+	min-width: $avatar-size;
+	border-radius: 28px;
+
+	&.loading {
+		cursor: wait;
+	}
+
+	.select-photo-input {
+		display: none;
+	}
+
+	.avatar {
+		@include flex-center();
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		border-radius: inherit;
+		font-size: 56px;
+		font-weight: 700;
+		background-color: $color-primary;
+		border: $brutal-border solid $ink;
+		box-shadow: 7px 7px 0px 0px $ink;
+		user-select: none;
+		object-fit: cover;
+	}
+}

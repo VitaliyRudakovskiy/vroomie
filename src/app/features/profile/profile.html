@@ -1,4 +1,4 @@
-@let avatar = userAvatarDetails();
+@let user = currentUser();
 
 <section class="global-page-section">
 	<div class="global-main-content">
@@ -7,39 +7,38 @@
 			<h2>My profile</h2>
 		</div>
 
-		<div class="global-main-content__container">
-			<div class="avatar-container" [class.loading]="photoLoading()">
-				<input
-					#fileInput
-					class="select-photo-input"
-					type="file"
-					[accept]="AVAILABLE_FORMATS"
-					(change)="onFileSelected($event)"
-				/>
+		<div class="global-main-content__container profile-container">
+			<app-avatar
+				#avatarComponent
+				[loading]="photoLoading()"
+				[userAvatar]="userAvatarDetails()"
+				(fileSelected)="onFileSelectedFromChild($event)"
+			/>
 
-				@if (photoLoading()) {
-					<app-loader />
-				}
+			<p class="username">{{ user?.displayName }}</p>
 
-				@if (avatar?.isImage) {
-					<img class="avatar" [src]="avatar?.details" alt="user avatar" />
-				} @else {
-					<div class="avatar default-bg">{{ avatar?.details }}</div>
-				}
-
-				<app-button label="Change photo" (clicked)="onAddAvatar()" />
-				<app-button label="Delete photo" variant="secondary" (clicked)="onOpenConfirmModal()" />
+			<div class="profile-container__buttons">
+				<app-button label="Change photo" (clicked)="onChangePhoto()" />
+				<app-button label="Edit name" (clicked)="openChangeNameModal()" />
 				<app-button label="Logout" variant="danger" (clicked)="logout()" />
 			</div>
+
+			<p>{{ user?.email }}</p>
 		</div>
 	</div>
 </section>
 
 <app-confirm-modal
-	modalTitle="Delete avatar"
-	description="Are you sure you want to delete your profile picture?"
+	modalTitle="Change avatar"
+	description="Your current profile picture will be removed. Continue?"
 	[visible]="isConfirmModalOpen()"
 	[loading]="deleteLoading()"
-	(confirm)="onRemoveAvatar()"
+	(confirm)="removeAvatar()"
 	(cancelEvent)="onCloseConfirmModal()"
+/>
+
+<app-change-name-modal
+	[visible]="isChangeNameModalOpen()"
+	[initialName]="user?.displayName ?? ''"
+	(closeModal)="closeChangeNameModal()"
 />

@@ -26,7 +26,7 @@
 					@if (form.controls.make.hasError('required')) {
 						Car make is required
 					} @else if (form.controls.make.hasError('minlength')) {
-						Car make must have at least 2 symbols
+						Car make must have at least {{ config.make.min }} symbols
 					}
 				</p>
 			}
@@ -47,7 +47,7 @@
 					@if (form.controls.model.hasError('required')) {
 						Car model is required
 					} @else if (form.controls.model.hasError('minlength')) {
-						Car model must have at least 2 symbols
+						Car model must have at least {{ config.model.min }} symbols
 					}
 				</p>
 			}
@@ -81,13 +81,13 @@
 				type="text"
 				placeholder="VIN number"
 				formControlName="vin"
-				[maxlength]="config.vin.max"
+				[maxlength]="config.vin.exact"
 			/>
 
 			@if (hasError('vin')) {
 				<p class="global-form-error" [class.visible]="hasError('vin')">
 					@if (form.controls.vin.hasError('minlength')) {
-						VIN should have exactly 17 symbols
+						VIN should have exactly {{ config.vin.exact }} symbols
 					}
 				</p>
 			}
