@@ -7,19 +7,22 @@
 			<h2>My profile</h2>
 		</div>
 
-		<div class="global-main-content__container profile-container">
+		<div class="global-main-content__container">
 			<app-qr-code class="qr-code" />
 
-			<app-avatar
-				#avatarComponent
-				[loading]="photoLoading()"
-				[userAvatar]="userAvatarDetails()"
-				(fileSelected)="onFileSelectedFromChild($event)"
-			/>
+			<div class="centered-container">
+				<app-avatar
+					#avatarComponent
+					[loading]="photoLoading()"
+					[userAvatar]="userAvatarDetails()"
+					(fileSelected)="onFileSelectedFromChild($event)"
+				/>
 
-			<p class="username">{{ user?.displayName }}</p>
+				<p class="username">{{ user?.displayName }}</p>
+				<p>{{ user?.email }}</p>
+			</div>
 
-			<div class="profile-container__buttons">
+			<div class="buttons">
 				<app-button
 					label="Change photo"
 					iconBefore="profile/camera.svg"
@@ -42,8 +45,6 @@
 					(clicked)="goToSettings()"
 				/>
 			</div>
-
-			<p>{{ user?.email }}</p>
 
 			<app-friends [friends]="friends()" />
 		</div>

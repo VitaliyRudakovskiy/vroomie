@@ -5,23 +5,25 @@
 	@include host-page();
 }
 
-.profile-container {
-	align-items: center;
+.qr-code {
+	position: absolute;
+	top: 0;
+	left: 14px;
+}
 
-	.qr-code {
-		position: absolute;
-		top: 0;
-		left: 14px;
-	}
+.centered-container {
+	@include flex-column();
+	align-items: center;
+	gap: 12px;
 
 	.username {
 		font-size: 20px;
 		font-weight: 700;
 	}
+}
 
-	&__buttons {
-		@include flex-center();
-		justify-content: center;
-		gap: 12px;
-	}
+.buttons {
+	@include flex-center();
+	justify-content: center;
+	gap: 12px;
 }

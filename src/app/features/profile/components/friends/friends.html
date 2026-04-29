@@ -1,5 +1,30 @@
-<div>
-	@for (friend of friends(); track friend) {
-		<p>{{ friend }}</p>
+<div class="friends-container">
+	@if (loading()) {
+		<app-loader
+			relativePosition
+			description="Loading friends..."
+			[spinnerSize]="64"
+			[spinnerThikness]="7"
+			[withBlur]="false"
+		/>
+	} @else {
+		<h3 class="title">Friends</h3>
+
+		@for (friend of profiles(); track friend.uid) {
+			<app-card shadow="4px" padding="8px">
+				<div class="card-content">
+					<app-avatar
+						fontSize="20px"
+						borderRadius="12px"
+						boxShadow="3px"
+						[size]="50"
+						[userAvatar]="getFriendAvatar(friend)"
+					/>
+					<p>{{ friend.displayName }}</p>
+				</div>
+			</app-card>
+		} @empty {
+			<p class="no-friends-text">You can add new friends using qr-code at top left corner!</p>
+		}
 	}
 </div>

@@ -4,10 +4,8 @@
 :host {
 	@include flex-center();
 	justify-content: center;
-	position: absolute;
 	inset: 2px;
 	z-index: 100;
-
 	border-radius: inherit;
 }
 

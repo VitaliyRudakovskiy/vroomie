@@ -8,7 +8,8 @@ import { booleanAttribute, Component, input, output } from '@angular/core';
 export class Card {
 	maxWidth = input('100%');
 	padding = input('24px');
-	isInteractive = input(false, { transform: booleanAttribute });
+  isInteractive = input(false, { transform: booleanAttribute });
+  shadow = input('7px');
 
 	clicked = output();
 

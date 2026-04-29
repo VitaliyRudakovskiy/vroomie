@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { booleanAttribute, Component, input } from '@angular/core';
 
 @Component({
 	selector: 'app-loader',
@@ -7,6 +7,7 @@ import { Component, input } from '@angular/core';
 	host: {
 		'[style.background-color]': "withBlur() ?'rgba(255, 255, 255, 0.3)' : ''",
 		'[style.backdrop-filter]': "withBlur() ? 'blur(4px)' : ''",
+		'[style.position]': "relativePosition() ? 'relative' : 'absolute'",
 	},
 })
 export class Loader {
@@ -14,4 +15,5 @@ export class Loader {
 	spinnerSize = input(40);
 	spinnerThikness = input(5);
 	description = input('');
+	relativePosition = input(false, { transform: booleanAttribute });
 }

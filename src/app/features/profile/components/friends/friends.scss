@@ -1,0 +1,21 @@
+@use 'mixins' as *;
+
+.friends-container {
+	@include flex-column();
+	gap: 8px;
+	position: relative;
+
+	.title {
+		margin-bottom: 12px;
+	}
+
+	.card-content {
+		@include flex-center();
+		gap: 12px;
+	}
+
+	.no-friends-text {
+		font-size: 18px;
+		text-align: center;
+	}
+}

@@ -8,6 +8,11 @@ import { Loader } from '@shared/ui';
 	templateUrl: './avatar.html',
 	styleUrl: './avatar.scss',
 	imports: [Loader],
+	host: {
+		'[style.--initials-size]': 'fontSize()',
+		'[style.--border-radius]': 'borderRadius()',
+		'[style.--box-shadow]': 'boxShadow()',
+	},
 })
 export class Avatar {
 	fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
@@ -15,6 +20,9 @@ export class Avatar {
 	userAvatar = input.required<UserAvatarDetails | null>();
 	loading = input(false);
 	size = input(210);
+	fontSize = input('56px');
+	borderRadius = input('28px');
+	boxShadow = input('7px');
 
 	fileSelected = output<File>();
 
