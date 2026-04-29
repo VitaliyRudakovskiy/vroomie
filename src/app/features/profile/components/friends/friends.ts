@@ -1,9 +1,9 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
+import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { LoggerService } from '@core/services/logger.service';
 import { UserService } from '@core/services/user.service';
-import { UserProfile } from 'models/user-profile';
-import { Loader, Card, Avatar } from '@shared/ui';
-import { getUserAvatar, UserAvatarDetails } from '@core/helpers/getUserAvatar';
+import { Avatar, Card, Loader } from '@shared/ui';
+import type { UserProfile } from 'models/user-profile';
 
 @Component({
 	selector: 'app-friends',
