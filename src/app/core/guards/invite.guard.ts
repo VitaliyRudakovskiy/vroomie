@@ -13,7 +13,8 @@ export const inviteGuard: CanActivateFn = (route) => {
 		filter((profile) => !!profile),
 		take(1),
 		map((profile) => {
-			if (profile?.uid === friendId) return router.parseUrl('/profile');
+			if (profile?.uid === friendId || profile.friends?.includes(friendId))
+				return router.parseUrl('/profile');
 			return true;
 		}),
 	);

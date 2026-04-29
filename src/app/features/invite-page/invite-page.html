@@ -15,14 +15,27 @@
 						<h1>Vroomie</h1>
 					</div>
 
-					<app-avatar [size]="150" [userAvatar]="userAvatarDetails()" />
-					<p class="friend-container__name">{{ initiatorProfile()?.displayName }}</p>
-					<p>Wants to make friend with you</p>
+					@if (initiatorProfile()) {
+						<app-avatar [size]="150" [userAvatar]="userAvatarDetails()" />
+						<p class="friend-container__name">{{ initiatorProfile()?.displayName }}</p>
+						<p>Wants to make friend with you</p>
 
-					<div class="buttons">
-						<app-button label="Reject" variant="danger" (clicked)="onReject()" />
-						<app-button label="Confirm" (clicked)="onApprove()" />
-					</div>
+						<div class="buttons">
+							<app-button label="Reject" variant="danger" (clicked)="onReject()" />
+							<app-button label="Confirm" (clicked)="onApprove()" />
+						</div>
+					} @else {
+						<div class="not-found-container">
+							<img
+								class="not-found-container__image"
+								src="assets/icons/no-user.svg"
+								alt="user not found"
+							/>
+							<p class="not-found-container__text">Invitation link is not active</p>
+							<p>Try to scan or copy it again</p>
+							<app-button label="Home" (clicked)="onReject()" />
+						</div>
+					}
 				</div>
 			}
 		</div>

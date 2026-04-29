@@ -83,7 +83,7 @@ export class UserService {
 			}
 
 			this.logger.debug(`User profile not found for UID: ${uid}`);
-			return null;
+			throw new Error('No user');
 		} catch (error) {
 			this.logger.error(`Error fetching user profile by ID: ${error}`);
 			throw error;

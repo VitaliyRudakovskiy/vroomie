@@ -14,11 +14,12 @@ import {
 import { ChangeNameModal, ConfirmModal } from '@shared/modals';
 import { Avatar, Button } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
+import { Friends } from './components/friends/friends';
 import { QrCode } from './components/qr-code/qr-code';
 
 @Component({
 	selector: 'app-profile',
-	imports: [ConfirmModal, Button, Avatar, ChangeNameModal, QrCode],
+	imports: [ConfirmModal, Button, Avatar, ChangeNameModal, QrCode, Friends],
 	templateUrl: './profile.html',
 	styleUrl: './profile.scss',
 })
@@ -39,7 +40,7 @@ export class Profile {
 	deleteLoading = signal(false);
 	photoLoading = signal(false);
 
-	friendsCount = computed(() => this.currentUser()?.friends.length);
+	friends = computed(() => this.currentUser()?.friends ?? []);
 
 	constructor() {
 		effect(() => {

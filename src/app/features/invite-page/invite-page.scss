@@ -1,4 +1,5 @@
 @use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
 	@include host-page();
@@ -30,5 +31,23 @@
 		@include flex-center();
 		margin-top: 12px;
 		gap: 12px;
+	}
+}
+
+.not-found-container {
+	@include flex-column();
+	align-items: center;
+	margin-top: 20px;
+	gap: 16px;
+
+	&__image {
+		width: 100px;
+		height: 100px;
+	}
+
+	&__text {
+		font-weight: 700;
+		color: $color-danger;
+		font-size: 18px;
 	}
 }

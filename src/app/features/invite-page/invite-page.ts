@@ -19,19 +19,12 @@ export class InvitePage implements OnInit {
 
 	initiatorId = input.required<string>();
 
-	// TODO: если профиль не найден, выкидывать ошибку
-
 	initiatorProfile = signal<UserProfile | null>(null);
 	userAvatarDetails = signal<UserAvatarDetails | null>(null);
 	isLoadingUser = signal(false);
 	currentUser = this.userService.userProfile;
 
 	constructor() {
-		effect(() => {
-			const profile = this.currentUser();
-			console.log(profile);
-		});
-
 		effect(() => {
 			const avatarData = getUserAvatar(this.currentUser());
 			this.userAvatarDetails.set(avatarData);
@@ -71,6 +64,8 @@ export class InvitePage implements OnInit {
 		try {
 			const profile = await this.userService.getProfileById(id);
 			if (profile) this.initiatorProfile.set(profile);
+		} catch {
+			this.initiatorProfile.set(null);
 		} finally {
 			this.isLoadingUser.set(false);
 		}
