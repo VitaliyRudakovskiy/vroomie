@@ -5,7 +5,7 @@ import { LocalStorageService } from '@core/services/local-storage.service';
 import { filter, map, take } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = (_route, state) => {
 	const router = inject(Router);
 	const authService = inject(AuthService);
 	const localStorageService = inject(LocalStorageService);
@@ -17,7 +17,7 @@ export const authGuard: CanActivateFn = () => {
 		map(() => {
 			if (authService.currentUser()) return true;
 
-			const attemptedUrl = router.url;
+			const attemptedUrl = state.url;
 			localStorageService.save('pending-invite', attemptedUrl);
 
 			router.navigate(['/auth']);
