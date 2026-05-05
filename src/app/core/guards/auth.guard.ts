@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { type CanActivateFn, Router } from '@angular/router';
+import { LocalStorageService } from '@core/services/local-storage.service';
 import { filter, map, take } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '@core/services/local-storage.service';
 
 export const authGuard: CanActivateFn = () => {
 	const router = inject(Router);

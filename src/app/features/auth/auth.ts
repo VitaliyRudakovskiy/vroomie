@@ -3,10 +3,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { NotificationService } from '@core/notification/notification.service';
 import { AuthService } from '@core/services/auth.service';
+import { LocalStorageService } from '@core/services/local-storage.service';
 import { LoggerService } from '@core/services/logger.service';
 import { Button, Card } from '@shared/ui';
 import { getErrorMessage } from './helpers/getAuthErrorMessage';
-import { LocalStorageService } from '@core/services/local-storage.service';
 
 @Component({
 	selector: 'app-auth',
