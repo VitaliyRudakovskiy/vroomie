@@ -26,7 +26,7 @@ export class InvitePage implements OnInit {
 
 	constructor() {
 		effect(() => {
-			const avatarData = getUserAvatar(this.currentUser());
+			const avatarData = getUserAvatar(this.initiatorProfile());
 			this.userAvatarDetails.set(avatarData);
 		});
 	}
