@@ -6,6 +6,7 @@ import { AuthService } from '@core/services/auth.service';
 import { LoggerService } from '@core/services/logger.service';
 import { Button, Card } from '@shared/ui';
 import { getErrorMessage } from './helpers/getAuthErrorMessage';
+import { LocalStorageService } from '@core/services/local-storage.service';
 
 @Component({
 	selector: 'app-auth',
@@ -18,6 +19,7 @@ export class Auth {
 	private readonly logger = inject(LoggerService);
 	private readonly authService = inject(AuthService);
 	private readonly notificator = inject(NotificationService);
+	private readonly localStorageService = inject(LocalStorageService);
 
 	loading = signal(false);
 	isLoginForm = signal(true);
@@ -68,6 +70,7 @@ export class Auth {
 		try {
 			this.loading.set(true);
 			await callMethod(email, password);
+			if (this.checkInvitationLinks()) return;
 			this.router.navigate(['']);
 		} catch (err: unknown) {
 			this.logger.error(`Auth error: ${err}`);
@@ -81,6 +84,7 @@ export class Auth {
 	async loginWithGoogle(): Promise<void> {
 		try {
 			await this.authService.loginWithGoogle();
+			if (this.checkInvitationLinks()) return;
 			this.router.navigate(['']);
 		} catch (err: unknown) {
 			this.logger.error(`Auth error with Google: ${err}`);
@@ -95,6 +99,19 @@ export class Auth {
 
 	togglePassword(): void {
 		this.isPasswordVisible.update((v) => !v);
+	}
+
+	private checkInvitationLinks(): boolean {
+		const key = 'pending-invite';
+		const pendingLink = this.localStorageService.get(key);
+
+		if (pendingLink) {
+			this.localStorageService.remove(key);
+			this.router.navigateByUrl(pendingLink);
+			return true;
+		}
+
+		return false;
 	}
 
 	private showAuthError(err: unknown): void {
