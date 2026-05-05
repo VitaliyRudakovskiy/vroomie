@@ -8,14 +8,12 @@
 			<p class="vin">VIN: {{ carInfo.vin }}</p>
 		}
 
-		<button
-			type="button"
-			class="delete-button"
-			aria-label="Delete modal"
-			(click)="openConfirmDeleteModal($event)"
-		>
-			✕
-		</button>
+		<app-cross-button
+			hoverText="Delete car"
+			top="0"
+			right="0"
+			(clicked)="openConfirmDeleteModal($event)"
+		/>
 	</div>
 </app-card>
 

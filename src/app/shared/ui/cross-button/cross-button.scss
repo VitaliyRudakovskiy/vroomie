@@ -1,0 +1,29 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+	position: absolute;
+	top: var(--top);
+	right: var(--right);
+}
+
+.cross-button {
+	@include inline-flex-center();
+	background: none;
+	width: var(--size);
+	height: var(--size);
+	padding: 0;
+	border: none;
+	outline: none;
+	user-select: none;
+	font-size: 18px;
+	line-height: 1;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: $transition-main;
+
+	&:hover,
+	&:active {
+		box-shadow: 2px 2px 0px 0px $ink;
+	}
+}

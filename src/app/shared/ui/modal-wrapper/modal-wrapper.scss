@@ -49,30 +49,6 @@
 		transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
 		opacity 0.3s;
 	animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-	.close-button {
-		@include inline-flex-center();
-		position: absolute;
-		top: 16px;
-		right: 16px;
-		background: none;
-		width: 32px;
-		height: 32px;
-		padding: 0;
-		border: none;
-		outline: none;
-		user-select: none;
-		font-size: 20px;
-		line-height: 1;
-		border-radius: 10px;
-		cursor: pointer;
-		transition: $transition-main;
-
-		&:hover,
-		&:active {
-			box-shadow: 2px 2px 0px 0px $ink;
-		}
-	}
 }
 
 h3 {

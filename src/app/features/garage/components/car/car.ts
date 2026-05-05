@@ -2,7 +2,7 @@ import { Component, inject, input, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ConfirmModal } from '@shared/modals';
-import { Card } from '@shared/ui';
+import { Card, CrossButton } from '@shared/ui';
 import type { Car as TCar } from 'models/car';
 import { GarageActions } from 'store/garage/actions';
 import { selectLoading } from 'store/garage/selectors';
@@ -11,7 +11,7 @@ import { selectLoading } from 'store/garage/selectors';
 	selector: 'app-car',
 	templateUrl: './car.html',
 	styleUrl: './car.scss',
-	imports: [Card, ConfirmModal],
+	imports: [Card, ConfirmModal, CrossButton],
 })
 export class Car {
 	private readonly store = inject(Store);

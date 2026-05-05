@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, inject, input, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfirmModal } from '@shared/modals';
-import { Card } from '@shared/ui';
+import { Card, CrossButton } from '@shared/ui';
 import type { ServiceRecord } from 'models/service-record';
 import { ServicesActions } from 'store/services/actions';
 import { selectLoading } from 'store/services/selectors';
@@ -11,7 +11,7 @@ import { selectLoading } from 'store/services/selectors';
 	selector: 'app-service-card',
 	templateUrl: './service-card.html',
 	styleUrl: './service-card.scss',
-	imports: [Card, DatePipe, ConfirmModal],
+	imports: [Card, DatePipe, ConfirmModal, CrossButton],
 })
 export class ServiceCard {
 	private readonly store = inject(Store);

@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfirmModal } from '@shared/modals';
-import { Card } from '@shared/ui';
+import { Card, CrossButton } from '@shared/ui';
 import { PRIORITY_OPTIONS } from '@shared/ui/priority-picker/options';
 import type { Plan } from 'models/plan';
 import { PlansActions } from 'store/plans/actions';
@@ -11,7 +11,7 @@ import { selectLoading } from 'store/plans/selectors';
 	selector: 'app-plan-card',
 	templateUrl: './plan-card.html',
 	styleUrl: './plan-card.scss',
-	imports: [Card, ConfirmModal],
+	imports: [Card, ConfirmModal, CrossButton],
 })
 export class PlanCard {
 	private readonly store = inject(Store);

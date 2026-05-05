@@ -1,9 +1,11 @@
 import { Component, input, output } from '@angular/core';
+import { CrossButton } from '../cross-button';
 
 @Component({
 	selector: 'app-modal-wrapper',
 	templateUrl: './modal-wrapper.html',
 	styleUrl: './modal-wrapper.scss',
+	imports: [CrossButton],
 })
 export class ModalWrapper {
 	visible = input.required<boolean>();
@@ -12,7 +14,7 @@ export class ModalWrapper {
 
 	closeModal = output();
 
-	onClose(): void {
+	onClose(_e: Event): void {
 		this.closeModal.emit();
 	}
 }
