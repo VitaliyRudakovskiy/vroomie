@@ -8,8 +8,24 @@
 			</div>
 		</div>
 
-		<div class="global-main-content__container"></div>
+		<div class="global-main-content__container">
+			<p>User: {{ currentUser()?.displayName }} ({{ currentUser()?.email }})</p>
+		</div>
 
 		<app-button label="Logout" (clicked)="logout()" />
+		<app-button label="Delete account" variant="danger" (clicked)="openDeleteAccountModal()" />
 	</div>
 </section>
+
+<app-confirm-modal
+	modalTitle="Delete account"
+	[description]="[
+		'Are you sure you want to delete account?',
+		'This will permanently delete all your cars, services and plans.',
+		`This action can't be undone.`,
+	]"
+	[visible]="isDeleteAccountModalOpen()"
+	[loading]="deleteLoading()"
+	(cancelEvent)="closeDeleteAccountModal()"
+	(confirm)="deleteAccount()"
+/>

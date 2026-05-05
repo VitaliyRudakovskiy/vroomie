@@ -6,3 +6,4 @@ export * from './cross-button';
 export * from './loader';
 export * from './modal-wrapper';
 export * from './priority-picker';
+export * from './profile-button';

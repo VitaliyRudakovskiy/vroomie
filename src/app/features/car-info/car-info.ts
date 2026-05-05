@@ -1,8 +1,7 @@
 import { Component, inject, input, type OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Button, Loader } from '@shared/ui';
-import { ProfileButton } from '@shared/ui/profile-button/profile-button';
+import { Button, Loader, ProfileButton } from '@shared/ui';
 import { CarInfoActions } from 'store/car-info/actions';
 import { selectCarInfo, selectCarInfoLoading } from 'store/car-info/selectors';
 import { GeneralInfo } from './components/general-info/general-info';
