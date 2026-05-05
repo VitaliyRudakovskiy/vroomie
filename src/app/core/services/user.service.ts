@@ -1,5 +1,6 @@
 import { effect, Injectable, inject, signal } from '@angular/core';
 import {
+	arrayRemove,
 	arrayUnion,
 	type DocumentReference,
 	doc,
@@ -116,6 +117,36 @@ export class UserService {
 			this.logger.info(`Friendship established between ${myId} and ${friendId}`);
 		} catch (error) {
 			this.logger.error(`Failed to establish friendship: ${error}`);
+			throw error;
+		}
+	}
+
+	async removeFriend(friendId: string, myId: string): Promise<void> {
+		const myRef = this.getUserDocRef(myId);
+		const friendRef = this.getUserDocRef(friendId);
+
+		try {
+			await updateDoc(myRef, {
+				friends: arrayRemove(friendId),
+			});
+
+			await updateDoc(friendRef, {
+				friends: arrayRemove(myId),
+			});
+
+			this.userProfile.update((profile) => {
+				if (profile?.friends.includes(friendId)) {
+					return {
+						...profile,
+						friends: profile.friends.filter((id) => id !== friendId),
+					};
+				}
+				return profile;
+			});
+
+			this.logger.info(`Friendship removed between ${myId} and ${friendId}`);
+		} catch (error) {
+			this.logger.error(`Failed to remove friendship: ${error}`);
 			throw error;
 		}
 	}

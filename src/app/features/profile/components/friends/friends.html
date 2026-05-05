@@ -21,6 +21,13 @@
 						[userAvatar]="getFriendAvatar(friend)"
 					/>
 					<p>{{ friend.displayName }}</p>
+					<app-cross-button
+						hoverText="Delete car"
+						top="50%"
+						right="16px"
+						centered
+						(clicked)="openConfirmDeleteModal($event, friend)"
+					/>
 				</div>
 			</app-card>
 		} @empty {
@@ -28,3 +35,11 @@
 		}
 	}
 </div>
+
+<app-confirm-modal
+	modalTitle="Delete friend"
+	[description]="`Are you sure you want to delete '${chosenFriend()?.displayName}' from friends?`"
+	[visible]="isDeleteModalOpen()"
+	(cancelEvent)="closeConfirmDeleteModal()"
+	(confirm)="deleteFriend()"
+/>
