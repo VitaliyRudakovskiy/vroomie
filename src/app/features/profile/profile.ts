@@ -2,7 +2,6 @@ import { Component, computed, effect, inject, signal, viewChild } from '@angular
 import { Router } from '@angular/router';
 import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
 import { NotificationService } from '@core/notification/notification.service';
-import { AuthService } from '@core/services/auth.service';
 import { CloudinaryService } from '@core/services/cloudinary.service';
 import { LoggerService } from '@core/services/logger.service';
 import { UserService } from '@core/services/user.service';
@@ -27,7 +26,6 @@ export class Profile {
 	private readonly router = inject(Router);
 	private readonly logger = inject(LoggerService);
 	private readonly userService = inject(UserService);
-	private readonly authService = inject(AuthService);
 	private readonly notificator = inject(NotificationService);
 	private readonly cloudinaryService = inject(CloudinaryService);
 
@@ -47,15 +45,6 @@ export class Profile {
 			const avatarData = getUserAvatar(this.currentUser());
 			this.userAvatarDetails.set(avatarData);
 		});
-	}
-
-	async logout(): Promise<void> {
-		try {
-			await this.authService.logout();
-			this.router.navigate(['auth']);
-		} catch (err) {
-			console.error('Logout failed', err);
-		}
 	}
 
 	onChangePhoto(): void {
@@ -115,8 +104,6 @@ export class Profile {
 		}
 	}
 
-	goToSettings(): void {}
-
 	openChangeNameModal(): void {
 		this.isChangeNameModalOpen.set(true);
 	}
@@ -127,6 +114,10 @@ export class Profile {
 
 	onCloseConfirmModal(): void {
 		this.isConfirmModalOpen.set(false);
+	}
+
+	goToSettings(): void {
+		this.router.navigate(['profile/settings']);
 	}
 
 	goBack(): void {

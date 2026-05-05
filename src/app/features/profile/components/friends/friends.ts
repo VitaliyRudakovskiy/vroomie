@@ -23,7 +23,14 @@ export class Friends {
 	constructor() {
 		effect(() => {
 			const ids = this.friends();
-			if (ids.length > 0) this.loadFriendsProfiles(ids);
+
+			if (ids.length === 0) {
+				this.profiles.set([]);
+				this.loading.set(false);
+				return;
+			}
+
+			this.loadFriendsProfiles(ids);
 		});
 	}
 

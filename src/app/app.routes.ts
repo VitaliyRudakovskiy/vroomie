@@ -36,6 +36,10 @@ export const routes: Routes = [
 				loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
 			},
 			{
+				path: 'profile/settings',
+				loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
+			},
+			{
 				path: 'invite/:initiatorId',
 				canActivate: [inviteGuard],
 				loadComponent: () => import('./features/invite-page/invite-page').then((m) => m.InvitePage),

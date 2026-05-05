@@ -1,0 +1,15 @@
+<section class="global-page-section">
+	<div class="global-main-content">
+		<div class="global-main-content__header">
+			<app-button label="&lt; Back" variant="secondary" size="sm" (clicked)="goBack()" />
+			<div class="global-main-content__header__right">
+				<h2>Settings</h2>
+				<app-profile-button />
+			</div>
+		</div>
+
+		<div class="global-main-content__container"></div>
+
+		<app-button label="Logout" (clicked)="logout()" />
+	</div>
+</section>
