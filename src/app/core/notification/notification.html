@@ -65,8 +65,14 @@
 			<span class="message">{{ notification.message }}</span>
 		</div>
 
-		<button type="button" class="close-button" aria-label="Close notification" (click)="close()">
-			✕
-		</button>
+		<app-cross-button
+			hoverText="Close notification"
+			top="50%"
+			right="10px"
+			size="24px"
+			borderRadius="6px"
+			centered
+			(clicked)="close($event)"
+		/>
 	</div>
 }

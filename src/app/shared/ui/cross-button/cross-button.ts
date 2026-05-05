@@ -9,6 +9,7 @@ import { booleanAttribute, Component, input, output } from '@angular/core';
 		'[style.--right]': 'right()',
 		'[style.--size]': 'size()',
 		'[style.--border-radius]': 'borderRadius()',
+		'[style.transform]': 'centered() ? "translateY(-50%)" : "none"',
 	},
 })
 export class CrossButton {
