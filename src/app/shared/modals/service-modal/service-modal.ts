@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OnlyNumbersDirective } from '@core/directives/onlyNumbers';
 import { dateValidator } from '@core/helpers/date-validator';
@@ -10,11 +10,13 @@ import { Button, ModalWrapper } from '@shared/ui';
 import type { Car } from 'models/car';
 import type { ServiceRecordWithoutId } from 'models/service-record';
 import { ServicesActions } from 'store/services/actions';
+import { ConfirmModal } from '../confirm-modal';
+import { GarageActions } from 'store/garage/actions';
 
 @Component({
 	selector: 'app-service-modal',
 	templateUrl: './service-modal.html',
-	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective],
+	imports: [ModalWrapper, ReactiveFormsModule, Button, OnlyNumbersDirective, ConfirmModal],
 })
 export class ServiceModal {
 	private readonly store = inject(Store);
@@ -23,6 +25,8 @@ export class ServiceModal {
 	visible = input.required<boolean>();
 	carId = input.required<string>();
 	carInfo = input.required<Car>();
+
+	isOdometerMoreThanCurrent = signal(false);
 
 	closeModal = output();
 
@@ -53,6 +57,56 @@ export class ServiceModal {
 		const { title, notes, odometer, date } = this.serviceForm.value;
 		if (!title || !odometer || !date) return;
 
+		if (Number(odometer) > this.carInfo().currentOdometer) {
+			this.isOdometerMoreThanCurrent.set(true);
+			return;
+		}
+
+		this.finishSavingService(title, odometer, date, notes ?? '');
+	}
+
+	onClose(): void {
+		this.serviceForm.reset();
+		this.closeModal.emit();
+	}
+
+	closeUpdateOdometerModal(): void {
+		this.isOdometerMoreThanCurrent.set(false);
+	}
+
+	updateOdometer(): void {
+		const car = this.carInfo();
+
+		this.store.dispatch(
+			GarageActions.updateCar({
+				carId: this.carId(),
+				car: {
+					make: car.make,
+					model: car.model,
+					currentOdometer: Number(this.serviceForm.value.odometer),
+					vin: car.vin,
+				},
+			}),
+		);
+
+		this.isOdometerMoreThanCurrent.set(false);
+		const { title, notes, odometer, date } = this.serviceForm.value;
+		if (!title || !odometer || !date) return;
+
+		this.finishSavingService(title, odometer, date, notes ?? '');
+	}
+
+	onFormatDate(): void {
+		let value = this.serviceForm.controls.date.value || '';
+		value = value.replace(/\D/g, '');
+
+		if (value.length > 2) value = `${value.slice(0, 2)}.${value.slice(2)}`;
+		if (value.length > 5) value = `${value.slice(0, 5)}.${value.slice(5)}`;
+
+		this.serviceForm.controls.date.setValue(value, { emitEvent: false });
+	}
+
+	private finishSavingService(title: string, odometer: string, date: string, notes: string): void {
 		const [day, month, year] = date.split('.').map(Number);
 		const ms = new Date(year, month - 1, day).getTime();
 
@@ -71,20 +125,5 @@ export class ServiceModal {
 
 		this.store.dispatch(ServicesActions.addService({ service: newService }));
 		this.onClose();
-	}
-
-	onClose(): void {
-		this.serviceForm.reset();
-		this.closeModal.emit();
-	}
-
-	onFormatDate(): void {
-		let value = this.serviceForm.controls.date.value || '';
-		value = value.replace(/\D/g, '');
-
-		if (value.length > 2) value = `${value.slice(0, 2)}.${value.slice(2)}`;
-		if (value.length > 5) value = `${value.slice(0, 5)}.${value.slice(5)}`;
-
-		this.serviceForm.controls.date.setValue(value, { emitEvent: false });
 	}
 }

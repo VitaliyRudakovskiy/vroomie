@@ -1,5 +1,6 @@
 import { Component, computed, input, output } from '@angular/core';
 import { Button, ModalWrapper } from '@shared/ui';
+import type { ButtonVariant } from '@shared/ui/button/types';
 
 @Component({
 	selector: 'app-confirm-modal',
@@ -11,6 +12,7 @@ export class ConfirmModal {
 	visible = input.required<boolean>();
 	modalTitle = input.required<string>();
 	description = input.required<string | string[]>();
+	confirmButtonVariant = input<ButtonVariant>('danger');
 	confirmLabel = input('Yes');
 	cancelLabel = input('Cancel');
 	loading = input(false);

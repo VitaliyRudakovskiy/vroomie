@@ -2,9 +2,7 @@
 	<div class="description">
 		@if (isDescriptionArray()) {
 			@for (line of description(); track line; let last = $last) {
-				<p [style.margin-top.px]="last ? 12 : 0">
-					{{ line }}
-				</p>
+				<p [style.margin-top.px]="last ? 12 : 0">{{ line }}</p>
 			}
 		} @else {
 			<p>{{ description() }}</p>
@@ -14,7 +12,7 @@
 	<div class="global-form-buttons-end">
 		<app-button variant="secondary" [label]="cancelLabel()" (clicked)="onClose()" />
 		<app-button
-			variant="danger"
+			[variant]="confirmButtonVariant()"
 			[label]="confirmLabel()"
 			[loading]="loading()"
 			(clicked)="onApply()"

@@ -85,3 +85,15 @@
 		<app-button label="Add" [disabled]="!serviceForm.valid" (clicked)="onSave()" />
 	</div>
 </app-modal-wrapper>
+
+<app-confirm-modal
+	modalTitle="Update odometer"
+	confirmButtonVariant="primary"
+	[description]="[
+		'The odometer value of the service is higher than the current car odometer. Do you want to update it?',
+		`From ${carInfo().currentOdometer} to ${serviceForm.controls.odometer.value}?`,
+	]"
+	[visible]="isOdometerMoreThanCurrent()"
+	(cancelEvent)="closeUpdateOdometerModal()"
+	(confirm)="updateOdometer()"
+/>
