@@ -9,9 +9,9 @@ import { SERVICE_CONFIG } from '@shared/constants/service-config';
 import { Button, ModalWrapper } from '@shared/ui';
 import type { Car } from 'models/car';
 import type { ServiceRecordWithoutId } from 'models/service-record';
+import { GarageActions } from 'store/garage/actions';
 import { ServicesActions } from 'store/services/actions';
 import { ConfirmModal } from '../confirm-modal';
-import { GarageActions } from 'store/garage/actions';
 
 @Component({
 	selector: 'app-service-modal',
