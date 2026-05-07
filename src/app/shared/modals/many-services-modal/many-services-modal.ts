@@ -9,6 +9,7 @@ import { MANY_SERVICES_CONFIG } from '@shared/constants/service-config';
 import { Button, ModalWrapper } from '@shared/ui';
 import type { Car } from 'models/car';
 import type { ServiceRecordWithoutId } from 'models/service-record';
+import { GarageActions } from 'store/garage/actions';
 import { ServicesActions } from 'store/services/actions';
 import { ConfirmModal } from '../confirm-modal';
 
@@ -30,6 +31,7 @@ export class ManyServicesModal {
 
 	serviceList = signal<string[]>([]);
 	isConfirmCloseModalOpen = signal(false);
+	isOdometerMoreThanCurrent = signal(false);
 
 	protected config = MANY_SERVICES_CONFIG;
 
@@ -61,38 +63,15 @@ export class ManyServicesModal {
 	}
 
 	onSave(): void {
-		const list = [...this.serviceList()];
-		const { title, odometer, date } = this.form.value;
+		const { odometer, date } = this.form.value;
 		if (!odometer || !date) return;
 
-		if (title?.trim()) list.push(title.trim());
-		if (list.length === 0) return;
-
-		const [day, month, year] = date.split('.').map(Number);
-		const ms = new Date(year, month - 1, day).getTime();
-
-		const commonData = {
-			carId: this.carId(),
-			odometer: Number(odometer),
-			make: this.carInfo()?.make ?? '',
-			model: this.carInfo()?.model ?? '',
-			date: ms,
-			ownerId: this.userService.userProfile()?.uid || '',
-			photoUrls: null,
-			createdAt: Date.now(),
-		};
-
-		for (const serviceTitle of list) {
-			const newService: ServiceRecordWithoutId = {
-				...commonData,
-				title: serviceTitle,
-				notes: '',
-			};
-
-			this.store.dispatch(ServicesActions.addService({ service: newService }));
+		if (Number(odometer) > this.carInfo().currentOdometer) {
+			this.isOdometerMoreThanCurrent.set(true);
+			return;
 		}
 
-		this.resetAndClose();
+		this.finishSavingServices();
 	}
 
 	onFormatDate(): void {
@@ -122,6 +101,30 @@ export class ManyServicesModal {
 		this.isConfirmCloseModalOpen.set(false);
 	}
 
+	closeUpdateOdometerModal(): void {
+		this.isOdometerMoreThanCurrent.set(false);
+	}
+
+	updateOdometer(): void {
+		const car = this.carInfo();
+		const newOdometer = Number(this.form.value.odometer);
+
+		this.store.dispatch(
+			GarageActions.updateCar({
+				carId: this.carId(),
+				car: {
+					make: car.make,
+					model: car.model,
+					currentOdometer: newOdometer,
+					vin: car.vin,
+				},
+			}),
+		);
+
+		this.isOdometerMoreThanCurrent.set(false);
+		this.finishSavingServices();
+	}
+
 	onClose(): void {
 		if (this.serviceList().length > 0) {
 			this.openConfirmCloseModal();
@@ -134,6 +137,47 @@ export class ManyServicesModal {
 	onConfirmCloseServiceModal(): void {
 		if (this.isConfirmCloseModalOpen()) this.closeConfirmCloseModal();
 		this.resetAndClose();
+	}
+
+	private finishSavingServices(): void {
+		const { odometer, date } = this.form.value;
+		if (!odometer || !date) return;
+
+		const list = this.getNewServiceTitles();
+		if (list.length === 0) return;
+
+		const [day, month, year] = date.split('.').map(Number);
+		const ms = new Date(year, month - 1, day).getTime();
+
+		const commonData = {
+			carId: this.carId(),
+			odometer: Number(odometer),
+			make: this.carInfo()?.make ?? '',
+			model: this.carInfo()?.model ?? '',
+			date: ms,
+			ownerId: this.userService.userProfile()?.uid || '',
+			photoUrls: null,
+			createdAt: Date.now(),
+		};
+
+		for (const serviceTitle of list) {
+			const newService: ServiceRecordWithoutId = {
+				...commonData,
+				title: serviceTitle,
+				notes: '',
+			};
+
+			this.store.dispatch(ServicesActions.addService({ service: newService }));
+		}
+
+		this.resetAndClose();
+	}
+
+	private getNewServiceTitles(): string[] {
+		const list = [...this.serviceList()];
+		const { title } = this.form.value;
+		if (title?.trim()) list.push(title.trim());
+		return list;
 	}
 
 	private resetAndClose(): void {

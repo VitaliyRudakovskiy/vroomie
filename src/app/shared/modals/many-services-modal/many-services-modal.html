@@ -101,3 +101,15 @@
 	(confirm)="onConfirmCloseServiceModal()"
 	(cancelEvent)="closeConfirmCloseModal()"
 />
+
+<app-confirm-modal
+	modalTitle="Update odometer"
+	confirmButtonVariant="primary"
+	[description]="[
+		'The odometer value of services is higher than the current car odometer. Do you want to update it?',
+		`From ${carInfo().currentOdometer} to ${form.controls.odometer.value}?`,
+	]"
+	[visible]="isOdometerMoreThanCurrent()"
+	(cancelEvent)="closeUpdateOdometerModal()"
+	(confirm)="updateOdometer()"
+/>
