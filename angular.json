@@ -81,10 +81,7 @@
 					"defaultConfiguration": "development"
 				},
 				"test": {
-					"builder": "@angular/build:unit-test",
-					"options": {
-						"runner": "vitest"
-					}
+					"builder": "@analogjs/vitest-angular:test"
 				},
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",

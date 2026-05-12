@@ -20,24 +20,29 @@
 		"@angular/core": "20.3.18",
 		"@angular/fire": "20.0.1",
 		"@angular/forms": "20.3.18",
-		"angularx-qrcode": "^20.0.0",
 		"@angular/platform-browser": "20.3.18",
 		"@angular/router": "20.3.18",
 		"@ngrx/effects": "^20.1.0",
 		"@ngrx/store": "^20.1.0",
 		"@ngrx/store-devtools": "^20.1.0",
+		"angularx-qrcode": "^20.0.0",
 		"firebase": "11.10.0",
 		"rxjs": "~7.8.0",
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
+		"@analogjs/vite-plugin-angular": "^2.5.0",
+		"@analogjs/vitest-angular": "^2.5.0",
 		"@angular/build": "20.3.18",
 		"@angular/cli": "20.3.18",
 		"@angular/compiler-cli": "20.3.18",
 		"@biomejs/biome": "^2.4.10",
-		"jsdom": "^29.0.1",
+		"@vitest/coverage-v8": "^4.1.6",
+		"jsdom": "^22.0.0",
 		"prettier": "^3.8.1",
 		"typescript": "5.8.2",
-		"vitest": "^3.1.1"
+		"vite": "^7.0.0",
+		"vite-tsconfig-paths": "^4.2.0",
+		"vitest": "^4.0.0"
 	}
 }
