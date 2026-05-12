@@ -7,6 +7,7 @@
 		"build": "ng build",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
+		"test:coverage": "ng test --coverage",
 		"check": "biome check ./src",
 		"check:fix": "biome check --write --unsafe ./src && prettier --write \"src/**/*.html\"",
 		"format": "biome format --write ./src && prettier --write \"src/**/*.html\"",

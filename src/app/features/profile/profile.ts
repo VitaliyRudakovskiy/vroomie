@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
+import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/get-user-avatar';
 import { NotificationService } from '@core/notification/notification.service';
 import { CloudinaryService } from '@core/services/cloudinary.service';
 import { LoggerService } from '@core/services/logger.service';

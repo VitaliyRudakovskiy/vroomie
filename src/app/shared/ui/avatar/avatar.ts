@@ -1,5 +1,5 @@
 import { Component, type ElementRef, input, output, viewChild } from '@angular/core';
-import type { UserAvatarDetails } from '@core/helpers/getUserAvatar';
+import type { UserAvatarDetails } from '@core/helpers/get-user-avatar';
 import { IMAGE_ACCEPT_FORMATS_STR } from '@shared/constants/avatar-config';
 import { Loader } from '@shared/ui';
 

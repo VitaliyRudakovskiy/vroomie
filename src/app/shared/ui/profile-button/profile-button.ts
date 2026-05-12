@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { getUserAvatar } from '@core/helpers/getUserAvatar';
+import { getUserAvatar } from '@core/helpers/get-user-avatar';
 import { UserService } from '@core/services/user.service';
 
 @Component({

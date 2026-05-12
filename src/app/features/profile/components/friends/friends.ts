@@ -1,5 +1,5 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
-import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
+import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/get-user-avatar';
 import { NotificationService } from '@core/notification/notification.service';
 import { LoggerService } from '@core/services/logger.service';
 import { UserService } from '@core/services/user.service';

@@ -1,6 +1,6 @@
 import { Component, effect, inject, input, type OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/getUserAvatar';
+import { getUserAvatar, type UserAvatarDetails } from '@core/helpers/get-user-avatar';
 import { NotificationService } from '@core/notification/notification.service';
 import { UserService } from '@core/services/user.service';
 import { Avatar, Button, Loader } from '@shared/ui';
